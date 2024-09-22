@@ -12,3 +12,6 @@ This repository is meant to be used throughout the semester to help you organize
 - Srihasa Penchikala
 - Sritha Bhupatiraju
 Japleen Kaur.
+Shreya Mahesh
+Sritha Bhupatiraju
+Japleen Kaur.
