@@ -1,4 +1,4 @@
-package com.example.a2340project;
+package com.example.a2340project.views;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.a2340project.R;
 
 public class MainActivity extends AppCompatActivity {
 
