@@ -9,9 +9,10 @@ This repository is meant to be used throughout the semester to help you organize
 - `SOLID_GRASP` This directory will be used later in the semester for your group assignments related to SOLID/GRASP.
 - `Code Smell` This directory will be used later in the semester for your group assignments related to Code Smells.
 
+  
 - Srihasa Penchikala
-Japleen Kaur.
-Shreya Mahesh
-Sritha Bhupatiraju
-Japleen Kaur.
-Trisha Nittala
+- Japleen Kaur
+- Shreya Mahesh
+- Sritha Bhupatiraju
+- Trisha Nittala
+- Archita Manasvi
