@@ -28,6 +28,15 @@
         android:testOnly="true"
         android:theme="@style/Theme._2340Project" >
         <activity
+            android:name="com.example.a2340project.views.HomeScreen"
+            android:exported="false" />
+        <activity
+            android:name="com.example.a2340project.views.NewAccount"
+            android:exported="false" />
+        <activity
+            android:name="com.example.a2340project.views.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.a2340project.views.MainActivity"
             android:exported="true" >
             <intent-filter>

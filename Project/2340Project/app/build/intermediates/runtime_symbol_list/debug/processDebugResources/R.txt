@@ -3228,6 +3228,10 @@ int id coordinator 0x7f080081
 int id cos 0x7f080082
 int id counterclockwise 0x7f080083
 int id cradle 0x7f080084
+int id create_account_button 0x7f0801fb
+int id create_button 0x7f0801fc
+int id create_email 0x7f0801fd
+int id create_password 0x7f0801fe
 int id currentState 0x7f080085
 int id custom 0x7f080086
 int id customPanel 0x7f080087
@@ -3305,6 +3309,7 @@ int id group_divider 0x7f0800cd
 int id grouping 0x7f0800ce
 int id groups 0x7f0800cf
 int id header_title 0x7f0800d0
+int id hello_world_text 0x7f0801f8
 int id hide_ime_id 0x7f0800d1
 int id hideable 0x7f0800d2
 int id home 0x7f0800d3
@@ -3338,9 +3343,9 @@ int id linear 0x7f0800ee
 int id listMode 0x7f0800ef
 int id list_item 0x7f0800f0
 int id login_button 0x7f0801f6
-int id login_screen 0x7f0801f9
 int id m3_side_sheet 0x7f0800f1
 int id main 0x7f0800f2
+int id main_button 0x7f0801fa
 int id marquee 0x7f0800f3
 int id masked 0x7f0800f4
 int id match_constraint 0x7f0800f5
@@ -3714,8 +3719,10 @@ int layout abc_search_dropdown_item_icons_2line 0x7f0b0018
 int layout abc_search_view 0x7f0b0019
 int layout abc_select_dialog_material 0x7f0b001a
 int layout abc_tooltip 0x7f0b001b
+int layout activity_home_screen 0x7f0b006f
 int layout activity_login 0x7f0b006d
 int layout activity_main 0x7f0b001c
+int layout activity_new_account 0x7f0b006e
 int layout custom_dialog 0x7f0b001d
 int layout design_bottom_navigation_item 0x7f0b001e
 int layout design_bottom_sheet_dialog 0x7f0b001f

@@ -3229,6 +3229,10 @@ id coordinator
 id cos
 id counterclockwise
 id cradle
+id create_account_button
+id create_button
+id create_email
+id create_password
 id currentState
 id custom
 id customPanel
@@ -3306,6 +3310,7 @@ id group_divider
 id grouping
 id groups
 id header_title
+id hello_world_text
 id hide_ime_id
 id hideable
 id home
@@ -3339,9 +3344,9 @@ id linear
 id listMode
 id list_item
 id login_button
-id login_screen
 id m3_side_sheet
 id main
+id main_button
 id marquee
 id masked
 id match_constraint
@@ -3715,8 +3720,10 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_home_screen
 layout activity_login
 layout activity_main
+layout activity_new_account
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
