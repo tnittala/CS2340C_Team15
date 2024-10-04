@@ -4,12 +4,15 @@ color black
 color white
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+id bottom_navigation
 id create_account_button
 id create_button
 id create_email
 id create_password
+id dashboard
 id email
 id hello_world_text
+id home
 id login_button
 id main
 id main_button
@@ -18,6 +21,7 @@ layout activity_home_screen
 layout activity_login
 layout activity_main
 layout activity_new_account
+menu nav_menu
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name

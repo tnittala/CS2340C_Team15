@@ -28,5 +28,20 @@ public class HomeScreen extends AppCompatActivity {
             return insets;
         });
 
+        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.home) {
+                    // Navigate to HomeActivity
+                    return true;
+                } else if (item.getItemId() == R.id.main) {
+                    startActivity(new Intent(HomeScreen.this, MainActivity.class));
+                    return true;
+                }
+                return true;
+            }
+        });
     }
 }
