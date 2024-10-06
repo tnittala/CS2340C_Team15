@@ -56,7 +56,7 @@ public class DiningEstablishment extends AppCompatActivity {
         logisticsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DiningEstablishment.this, TravelCommunity.class);
+                Intent intent = new Intent(DiningEstablishment.this, Logistics.class);
                 startActivity(intent);
             }
         });
