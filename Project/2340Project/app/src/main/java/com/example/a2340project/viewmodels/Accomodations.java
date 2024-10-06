@@ -1,5 +1,6 @@
 package com.example.a2340project.viewmodels;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -10,13 +11,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.a2340project.R;
 
-public class TravelCommunity extends AppCompatActivity {
+public class Accomodations extends AppCompatActivity {
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_travel_community);
+        setContentView(R.layout.activity_accommodations);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
