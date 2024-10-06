@@ -13,7 +13,13 @@
         android:theme="@style/Theme._2340Project"
         tools:targetApi="31">
         <activity
-            android:name=".viewmodels.TravelCommunity"
+            android:name=".views.HomeScreen"
+            android:exported="false" />
+        <activity
+            android:name=".views.NewAccount"
+            android:exported="false" />
+        <activity
+            android:name=".views.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".views.MainActivity"
