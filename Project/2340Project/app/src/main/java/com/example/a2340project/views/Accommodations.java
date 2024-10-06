@@ -34,10 +34,26 @@ public class Accommodations extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.home) {
-                    // Navigate to HomeActivity
+                    startActivity(new Intent(Accommodations.this, HomeScreen.class));
                     return true;
-                } else if (item.getItemId() == R.id.main) {
-                    startActivity(new Intent(Accommodations.this, MainActivity.class));
+                }
+                else if (item.getItemId() == R.id.Logistics) {
+                    startActivity(new Intent(Accommodations.this, Logistics.class));
+                    return true;
+                }
+                else if (item.getItemId() == R.id.Destination) {
+                    startActivity(new Intent(Accommodations.this, Logistics.class));
+                    return true;
+                }
+                else if (item.getItemId() == R.id.Diningestablishment) {
+                    startActivity(new Intent(Accommodations.this, DiningEstablishment.class));
+                    return true;
+                }
+                else if (item.getItemId() == R.id.Accommodations) {
+                    return true;
+                }
+                else if (item.getItemId() == R.id.Travelcommunity) {
+                    startActivity(new Intent(Accommodations.this, TravelCommunity.class));
                     return true;
                 }
                 return true;
