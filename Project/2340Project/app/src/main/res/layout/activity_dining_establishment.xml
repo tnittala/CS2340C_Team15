@@ -1,18 +1,18 @@
-x<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.TravelCommunity">
+    tools:context=".views.DiningEstablishment">
 
     <TextView
         android:id="@+id/communitytitle"
         android:layout_width="0dp"
         android:layout_height="84dp"
         android:background="#000000"
-        android:text="Travel Community"
+        android:text="Dining Establishment"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="30dp"
