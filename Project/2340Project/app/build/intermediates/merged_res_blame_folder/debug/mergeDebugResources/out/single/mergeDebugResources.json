@@ -4,8 +4,24 @@
         "source": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-main-33:\\mipmap-mdpi\\ic_launcher.webp"
     },
     {
+        "merged": "com.example.a2340project.app-debug-31:/layout_activity_dining_establishment.xml.flat",
+        "source": "com.example.a2340project.app-main-33:/layout/activity_dining_establishment.xml"
+    },
+    {
         "merged": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-debug-31:\\xml_backup_rules.xml.flat",
         "source": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-main-33:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "com.example.a2340project.app-debug-31:/layout_activity_new_account.xml.flat",
+        "source": "com.example.a2340project.app-main-33:/layout/activity_new_account.xml"
+    },
+    {
+        "merged": "com.example.a2340project.app-debug-31:/layout_activity_travel_community.xml.flat",
+        "source": "com.example.a2340project.app-main-33:/layout/activity_travel_community.xml"
+    },
+    {
+        "merged": "com.example.a2340project.app-debug-31:/layout_activity_destination.xml.flat",
+        "source": "com.example.a2340project.app-main-33:/layout/activity_destination.xml"
     },
     {
         "merged": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-debug-31:\\layout_activity_destination.xml.flat",
@@ -14,6 +30,10 @@
     {
         "merged": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-debug-31:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-main-33:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.a2340project.app-debug-31:/layout_activity_main.xml.flat",
+        "source": "com.example.a2340project.app-main-33:/layout/activity_main.xml"
     },
     {
         "merged": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-debug-31:\\drawable_ic_launcher_background.xml.flat",
@@ -26,6 +46,10 @@
     {
         "merged": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-debug-31:\\drawable_ic_launcher_foreground.xml.flat",
         "source": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-main-33:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.a2340project.app-debug-31:/layout_activity_accommodations.xml.flat",
+        "source": "com.example.a2340project.app-main-33:/layout/activity_accommodations.xml"
     },
     {
         "merged": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-debug-31:\\mipmap-xhdpi_ic_launcher.webp.flat",
@@ -60,6 +84,10 @@
         "source": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-main-33:\\drawable\\home.png"
     },
     {
+        "merged": "com.example.a2340project.app-debug-31:/layout_activity_logistics.xml.flat",
+        "source": "com.example.a2340project.app-main-33:/layout/activity_logistics.xml"
+    },
+    {
         "merged": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-debug-31:\\layout_activity_main.xml.flat",
         "source": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-main-33:\\layout\\activity_main.xml"
     },
@@ -74,6 +102,10 @@
     {
         "merged": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-debug-31:\\drawable_accommodations.png.flat",
         "source": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-main-33:\\drawable\\accommodations.png"
+    },
+    {
+        "merged": "com.example.a2340project.app-debug-31:/layout_activity_home_screen.xml.flat",
+        "source": "com.example.a2340project.app-main-33:/layout/activity_home_screen.xml"
     },
     {
         "merged": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-debug-31:\\mipmap-mdpi_ic_launcher_round.webp.flat",
@@ -94,10 +126,6 @@
     {
         "merged": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-debug-31:\\layout_activity_dining_establishment.xml.flat",
         "source": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-main-33:\\layout\\activity_dining_establishment.xml"
-    },
-    {
-        "merged": "com.example.a2340project.app-debug-31:/menu_nav_menu.xml.flat",
-        "source": "com.example.a2340project.app-main-33:/menu/nav_menu.xml"
     },
     {
         "merged": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-debug-31:\\mipmap-hdpi_ic_launcher.webp.flat",

@@ -27,37 +27,5 @@ public class Destination extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        BottomNavigationView bottomNaView = findViewById(R.id.bottom_navigation);
-
-        bottomNaView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.home) {
-                    startActivity(new Intent(Destination.this, HomeScreen.class));
-                    return true;
-                }
-                else if (item.getItemId() == R.id.Logistics) {
-                    startActivity(new Intent(Destination.this, Logistics.class));
-                    return true;
-                }
-                else if (item.getItemId() == R.id.Destination) {
-                    return true;
-                }
-                else if (item.getItemId() == R.id.Diningestablishment) {
-                    startActivity(new Intent(Destination.this, DiningEstablishment.class));
-                    return true;
-                }
-                else if (item.getItemId() == R.id.Accommodations) {
-                    startActivity(new Intent(Destination.this, Accommodations.class));
-                    return true;
-                }
-                else if (item.getItemId() == R.id.Travelcommunity) {
-                    startActivity(new Intent(Destination.this, TravelCommunity.class));
-                    return true;
-                }
-                return true;
-            }
-        });
     }
 }
