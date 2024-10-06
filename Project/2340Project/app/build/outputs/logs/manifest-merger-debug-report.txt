@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:2:1-35:12
+ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:2:1-50:12
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\tnitt\.gradle\caches\transforms-4\af0154a9064a003e9bba165a6ef9d017\transformed\material-1.12.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\tnitt\.gradle\caches\transforms-4\5985c5af3da74b285998d90c9ba4ff3a\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat-resources:1.7.0] C:\Users\tnitt\.gradle\caches\transforms-4\6f934661ac7d01c20e680bb152b08fd3\transformed\appcompat-resources-1.7.0\AndroidManifest.xml:2:1-7:12
@@ -56,8 +56,8 @@ MERGED from [androidx.annotation:annotation-experimental:1.4.0] C:\Users\tnitt\.
 	xmlns:android
 		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:5:5-33:19
-INJECTED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:5:5-33:19
+ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:5:5-48:19
+INJECTED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:5:5-48:19
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\tnitt\.gradle\caches\transforms-4\af0154a9064a003e9bba165a6ef9d017\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\tnitt\.gradle\caches\transforms-4\af0154a9064a003e9bba165a6ef9d017\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\tnitt\.gradle\caches\transforms-4\5985c5af3da74b285998d90c9ba4ff3a\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -96,40 +96,70 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\tn
 		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:13:9-50
 	android:dataExtractionRules
 		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:7:9-65
-activity#com.example.a2340project.views.HomeScreen
+activity#com.example.a2340project.views.Destination
 ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:15:9-17:40
 	android:exported
 		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:17:13-37
 	android:name
-		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:16:13-45
-activity#com.example.a2340project.views.NewAccount
+		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:16:13-46
+activity#com.example.a2340project.views.Accommodations
 ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:18:9-20:40
 	android:exported
 		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:20:13-37
 	android:name
-		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:19:13-45
-activity#com.example.a2340project.views.LoginActivity
+		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:19:13-49
+activity#com.example.a2340project.views.DiningEstablishment
 ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:21:9-23:40
 	android:exported
 		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:23:13-37
 	android:name
-		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:22:13-48
-activity#com.example.a2340project.views.MainActivity
-ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:24:9-32:20
+		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:22:13-54
+activity#com.example.a2340project.views.TravelCommunity
+ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:24:9-26:40
 	android:exported
-		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:26:13-36
+		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:26:13-37
 	android:name
-		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:25:13-47
+		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:25:13-50
+activity#com.example.a2340project.views.Logistics
+ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:27:9-29:40
+	android:exported
+		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:29:13-37
+	android:name
+		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:28:13-44
+activity#com.example.a2340project.views.HomeScreen
+ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:30:9-32:40
+	android:exported
+		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:32:13-37
+	android:name
+		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:31:13-45
+activity#com.example.a2340project.views.NewAccount
+ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:33:9-35:40
+	android:exported
+		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:35:13-37
+	android:name
+		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:34:13-45
+activity#com.example.a2340project.views.LoginActivity
+ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:36:9-38:40
+	android:exported
+		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:38:13-37
+	android:name
+		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:37:13-48
+activity#com.example.a2340project.views.MainActivity
+ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:39:9-47:20
+	android:exported
+		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:41:13-36
+	android:name
+		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:40:13-47
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:27:13-31:29
+ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:42:13-46:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:28:17-69
+ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:43:17-69
 	android:name
-		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:28:25-66
+		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:43:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:30:17-77
+ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:45:17-77
 	android:name
-		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:30:27-74
+		ADDED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml:45:27-74
 uses-sdk
 INJECTED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\AndroidManifest.xml

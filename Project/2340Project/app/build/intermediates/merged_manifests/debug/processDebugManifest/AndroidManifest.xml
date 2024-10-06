@@ -28,6 +28,21 @@
         android:testOnly="true"
         android:theme="@style/Theme._2340Project" >
         <activity
+            android:name="com.example.a2340project.views.Destination"
+            android:exported="false" />
+        <activity
+            android:name="com.example.a2340project.views.Accommodations"
+            android:exported="false" />
+        <activity
+            android:name="com.example.a2340project.views.DiningEstablishment"
+            android:exported="false" />
+        <activity
+            android:name="com.example.a2340project.views.TravelCommunity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.a2340project.views.Logistics"
+            android:exported="false" />
+        <activity
             android:name="com.example.a2340project.views.HomeScreen"
             android:exported="false" />
         <activity

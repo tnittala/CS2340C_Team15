@@ -2985,6 +2985,7 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable accommodations
 drawable avd_hide_password
 drawable avd_show_password
 drawable btn_checkbox_checked_mtrl
@@ -2995,11 +2996,15 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable community
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable destinations
+drawable dining
+drawable home
 drawable ic_arrow_back_black_24
 drawable ic_call_answer
 drawable ic_call_answer_low
@@ -3097,10 +3102,14 @@ drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 id ALT
+id Accommodations
 id BOTTOM_END
 id BOTTOM_START
 id CTRL
+id Destination
+id Diningestablishment
 id FUNCTION
+id Logistics
 id META
 id NO_DEBUG
 id SHIFT
@@ -3110,6 +3119,7 @@ id SHOW_PROGRESS
 id SYM
 id TOP_END
 id TOP_START
+id Travelcommunity
 id accelerate
 id accessibility_action_clickable_span
 id accessibility_custom_action_0
@@ -3144,6 +3154,7 @@ id accessibility_custom_action_6
 id accessibility_custom_action_7
 id accessibility_custom_action_8
 id accessibility_custom_action_9
+id accomodationstitle
 id actionDown
 id actionDownUp
 id actionUp
@@ -3218,6 +3229,7 @@ id clip_vertical
 id clockwise
 id closest
 id collapseActionView
+id communitytitle
 id compress
 id confirm_button
 id constraint
@@ -3238,7 +3250,6 @@ id currentState
 id custom
 id customPanel
 id cut
-id dashboard
 id date_picker_actions
 id decelerate
 id decelerateAndComplete
@@ -3348,7 +3359,6 @@ id list_item
 id login_button
 id m3_side_sheet
 id main
-id main_button
 id marquee
 id masked
 id match_constraint
@@ -3464,6 +3474,7 @@ id postLayout
 id pressed
 id progress_circular
 id progress_horizontal
+id quitButton
 id radio
 id ratio
 id rectangles
@@ -3526,6 +3537,7 @@ id src_in
 id src_over
 id standard
 id start
+id startButton
 id startHorizontal
 id startToEnd
 id startVertical
@@ -3599,6 +3611,7 @@ id view_tree_saved_state_registry_owner
 id view_tree_view_model_store_owner
 id visible
 id visible_removing_fragment_view_tag
+id welcomeTextView
 id west
 id withText
 id with_icon
@@ -3722,10 +3735,15 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_accommodations
+layout activity_destination
+layout activity_dining_establishment
 layout activity_home_screen
 layout activity_login
+layout activity_logistics
 layout activity_main
 layout activity_new_account
+layout activity_travel_community
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog

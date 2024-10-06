@@ -34,10 +34,26 @@ public class TravelCommunity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.home) {
-                    // Navigate to HomeActivity
+                    startActivity(new Intent(TravelCommunity.this, HomeScreen.class));
                     return true;
-                } else if (item.getItemId() == R.id.main) {
-                    startActivity(new Intent(TravelCommunity.this, MainActivity.class));
+                }
+                else if (item.getItemId() == R.id.Logistics) {
+                    startActivity(new Intent(TravelCommunity.this, Logistics.class));
+                    return true;
+                }
+                else if (item.getItemId() == R.id.Destination) {
+                    startActivity(new Intent(TravelCommunity.this, Destination.class));
+                    return true;
+                }
+                else if (item.getItemId() == R.id.Diningestablishment) {
+                    startActivity(new Intent(TravelCommunity.this, DiningEstablishment.class));
+                    return true;
+                }
+                else if (item.getItemId() == R.id.Accommodations) {
+                    startActivity(new Intent(TravelCommunity.this, Accommodations.class));
+                    return true;
+                }
+                else if (item.getItemId() == R.id.Travelcommunity) {
                     return true;
                 }
                 return true;

@@ -2,6 +2,7 @@ package com.example.a2340project.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
@@ -34,10 +35,26 @@ public class DiningEstablishment extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.home) {
-                    // Navigate to HomeActivity
+                    startActivity(new Intent(DiningEstablishment.this, HomeScreen.class));
                     return true;
-                } else if (item.getItemId() == R.id.main) {
-                    startActivity(new Intent(DiningEstablishment.this, MainActivity.class));
+                }
+                else if (item.getItemId() == R.id.Logistics) {
+                    startActivity(new Intent(DiningEstablishment.this, Logistics.class));
+                    return true;
+                }
+                else if (item.getItemId() == R.id.Destination) {
+                    startActivity(new Intent(DiningEstablishment.this, Destination.class));
+                    return true;
+                }
+                else if (item.getItemId() == R.id.Diningestablishment) {
+                    return true;
+                }
+                else if (item.getItemId() == R.id.Accommodations) {
+                    startActivity(new Intent(DiningEstablishment.this, Accommodations.class));
+                    return true;
+                }
+                else if (item.getItemId() == R.id.Travelcommunity) {
+                    startActivity(new Intent(DiningEstablishment.this, Accommodations.class));
                     return true;
                 }
                 return true;
