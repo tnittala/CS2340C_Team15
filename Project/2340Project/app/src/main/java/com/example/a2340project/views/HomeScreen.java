@@ -28,40 +28,5 @@ public class HomeScreen extends AppCompatActivity {
             return insets;
         });
 
-        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
-
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.home) {
-                    // Navigate to HomeActivity
-                    return true;
-                } else if (item.getItemId() == R.id.main) {
-                    startActivity(new Intent(HomeScreen.this, MainActivity.class));
-                    return true;
-                }
-                else if (item.getItemId() == R.id.Logistics) {
-                    startActivity(new Intent(HomeScreen.this, Logistics.class));
-                    return true;
-                }
-                else if (item.getItemId() == R.id.Destination) {
-                    startActivity(new Intent(HomeScreen.this, Destination.class));
-                    return true;
-                }
-                else if (item.getItemId() == R.id.Diningestablishment) {
-                    startActivity(new Intent(HomeScreen.this, DiningEstablishment.class));
-                    return true;
-                }
-                else if (item.getItemId() == R.id.Accommodations) {
-                    startActivity(new Intent(HomeScreen.this, Accommodations.class));
-                    return true;
-                }
-                else if (item.getItemId() == R.id.Travelcommunity) {
-                    startActivity(new Intent(HomeScreen.this, TravelCommunity.class));
-                    return true;
-                }
-                return true;
-            }
-        });
     }
 }

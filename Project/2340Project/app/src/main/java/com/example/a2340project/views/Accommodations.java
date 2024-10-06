@@ -28,37 +28,6 @@ public class Accommodations extends AppCompatActivity {
             return insets;
         });
 
-        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
-
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.home) {
-                    startActivity(new Intent(Accommodations.this, HomeScreen.class));
-                    return true;
-                }
-                else if (item.getItemId() == R.id.Logistics) {
-                    startActivity(new Intent(Accommodations.this, Logistics.class));
-                    return true;
-                }
-                else if (item.getItemId() == R.id.Destination) {
-                    startActivity(new Intent(Accommodations.this, Logistics.class));
-                    return true;
-                }
-                else if (item.getItemId() == R.id.Diningestablishment) {
-                    startActivity(new Intent(Accommodations.this, DiningEstablishment.class));
-                    return true;
-                }
-                else if (item.getItemId() == R.id.Accommodations) {
-                    return true;
-                }
-                else if (item.getItemId() == R.id.Travelcommunity) {
-                    startActivity(new Intent(Accommodations.this, TravelCommunity.class));
-                    return true;
-                }
-                return true;
-            }
-        });
     }
 
 }

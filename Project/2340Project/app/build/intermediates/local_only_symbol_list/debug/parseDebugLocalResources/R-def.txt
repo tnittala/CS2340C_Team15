@@ -9,13 +9,7 @@ drawable dining
 drawable home
 drawable ic_launcher_background
 drawable ic_launcher_foreground
-id Accommodations
-id Destination
-id Diningestablishment
-id Logistics
-id Travelcommunity
 id accomodationstitle
-id bottom_navigation
 id communitytitle
 id create_account_button
 id create_button
@@ -23,7 +17,6 @@ id create_email
 id create_password
 id email
 id hello_world_text
-id home
 id login_button
 id main
 id password
@@ -39,7 +32,6 @@ layout activity_logistics
 layout activity_main
 layout activity_new_account
 layout activity_travel_community
-menu nav_menu
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name

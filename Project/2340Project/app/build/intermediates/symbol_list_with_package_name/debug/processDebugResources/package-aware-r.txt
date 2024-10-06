@@ -3102,14 +3102,10 @@ drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 id ALT
-id Accommodations
 id BOTTOM_END
 id BOTTOM_START
 id CTRL
-id Destination
-id Diningestablishment
 id FUNCTION
-id Logistics
 id META
 id NO_DEBUG
 id SHIFT
@@ -3119,7 +3115,6 @@ id SHOW_PROGRESS
 id SYM
 id TOP_END
 id TOP_START
-id Travelcommunity
 id accelerate
 id accessibility_action_clickable_span
 id accessibility_custom_action_0
@@ -3201,7 +3196,6 @@ id beginning
 id bestChoice
 id blocking
 id bottom
-id bottom_navigation
 id bounce
 id bounceBoth
 id bounceEnd
@@ -3823,7 +3817,6 @@ layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
-menu nav_menu
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
