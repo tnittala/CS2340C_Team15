@@ -3101,14 +3101,10 @@ int drawable test_level_drawable 0x7f0700e4
 int drawable tooltip_frame_dark 0x7f0700e5
 int drawable tooltip_frame_light 0x7f0700e6
 int id ALT 0x7f080000
-int id Accommodations 0x7f080206
 int id BOTTOM_END 0x7f080001
 int id BOTTOM_START 0x7f080002
 int id CTRL 0x7f080003
-int id Destination 0x7f08020d
-int id Diningestablishment 0x7f08020e
 int id FUNCTION 0x7f080004
-int id Logistics 0x7f08020f
 int id META 0x7f080005
 int id NO_DEBUG 0x7f080006
 int id SHIFT 0x7f080007
@@ -3118,7 +3114,6 @@ int id SHOW_PROGRESS 0x7f08000a
 int id SYM 0x7f08000b
 int id TOP_END 0x7f08000c
 int id TOP_START 0x7f08000d
-int id Travelcommunity 0x7f080210
 int id accelerate 0x7f08000e
 int id accessibility_action_clickable_span 0x7f08000f
 int id accessibility_custom_action_0 0x7f080010
@@ -3200,7 +3195,6 @@ int id beginning 0x7f08005a
 int id bestChoice 0x7f08005b
 int id blocking 0x7f08005c
 int id bottom 0x7f08005d
-int id bottom_navigation 0x7f080204
 int id bounce 0x7f08005e
 int id bounceBoth 0x7f08005f
 int id bounceEnd 0x7f080060
@@ -3822,7 +3816,6 @@ int layout select_dialog_item_material 0x7f0b006b
 int layout select_dialog_multichoice_material 0x7f0b006c
 int layout select_dialog_singlechoice_material 0x7f0b006d
 int layout support_simple_spinner_dropdown_item 0x7f0b006e
-int menu nav_menu 0x7f0d0000
 int mipmap ic_launcher 0x7f0e0000
 int mipmap ic_launcher_round 0x7f0e0001
 int plurals mtrl_badge_content_description 0x7f0f0000
