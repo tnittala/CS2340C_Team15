@@ -1,4 +1,4 @@
-package com.example.a2340project.viewmodels;
+package com.example.a2340project.views;
 
 import android.os.Bundle;
 
