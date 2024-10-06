@@ -10,8 +10,8 @@
         android:icon="@drawable/ic_launcher_foreground"/>
 
     <item
-        android:id="@+id/main"
-        android:title="Main"
+        android:id="@+id/Accommodations"
+        android:title="Accommodations"
         android:icon="@drawable/ic_launcher_foreground"/>
 
     <item
