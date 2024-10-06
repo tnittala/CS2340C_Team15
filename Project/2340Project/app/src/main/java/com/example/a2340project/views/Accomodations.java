@@ -1,8 +1,7 @@
-package com.example.a2340project.viewmodels;
+package com.example.a2340project.views;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
