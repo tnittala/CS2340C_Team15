@@ -40,6 +40,26 @@ public class HomeScreen extends AppCompatActivity {
                     startActivity(new Intent(HomeScreen.this, MainActivity.class));
                     return true;
                 }
+                else if (item.getItemId() == R.id.Logistics) {
+                    startActivity(new Intent(HomeScreen.this, Logistics.class));
+                    return true;
+                }
+                else if (item.getItemId() == R.id.Destination) {
+                    startActivity(new Intent(HomeScreen.this, Destination.class));
+                    return true;
+                }
+                else if (item.getItemId() == R.id.Diningestablishment) {
+                    startActivity(new Intent(HomeScreen.this, DiningEstablishment.class));
+                    return true;
+                }
+                else if (item.getItemId() == R.id.Accommodations) {
+                    startActivity(new Intent(HomeScreen.this, Accommodations.class));
+                    return true;
+                }
+                else if (item.getItemId() == R.id.Travelcommunity) {
+                    startActivity(new Intent(HomeScreen.this, TravelCommunity.class));
+                    return true;
+                }
                 return true;
             }
         });
