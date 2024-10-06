@@ -25,6 +25,11 @@
           <theme>@style/Theme._2340Project</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_travel_community.xml">
+        <config>
+          <theme>@style/Theme._2340Project</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/nav_menu.xml">
         <config>
           <theme>@style/Theme._2340Project</theme>
@@ -36,10 +41,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bde707e5-5e37-4c4b-879a-3ea1cc4231ff" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/a2340project/viewmodels/TravelCommunity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/a2340project/views/TravelCommunity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_travel_community.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_travel_community.xml" afterDir="false" />
-    </list>
+    <list default="true" id="bde707e5-5e37-4c4b-879a-3ea1cc4231ff" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,6 +106,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "srihasap"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/tnittala/CS2340C_Team15.git",
+    "accountId": "bce6a18a-d6cd-46d1-9369-f258fd05c7da"
+  }
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -128,7 +142,7 @@
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "Srihasa",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/tnitt/Desktop/CS 2340/CS2340_C_Team15/Project/2340Project",
+    "last_opened_file_path": "/Users/srihasapenchikala/Documents/GitHub/CS2340C_Team15/Project/2340Project",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
@@ -215,5 +229,16 @@
       <updated>1727641223553</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/a2340project/views/TravelCommunity.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
