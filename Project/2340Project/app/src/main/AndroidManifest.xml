@@ -13,6 +13,21 @@
         android:theme="@style/Theme._2340Project"
         tools:targetApi="31">
         <activity
+            android:name=".views.Destination"
+            android:exported="false" />
+        <activity
+            android:name=".views.Accommodations"
+            android:exported="false" />
+        <activity
+            android:name=".views.DiningEstablishment"
+            android:exported="false" />
+        <activity
+            android:name=".views.TravelCommunity"
+            android:exported="false" />
+        <activity
+            android:name=".views.Logistics"
+            android:exported="false" />
+        <activity
             android:name=".views.HomeScreen"
             android:exported="false" />
         <activity
