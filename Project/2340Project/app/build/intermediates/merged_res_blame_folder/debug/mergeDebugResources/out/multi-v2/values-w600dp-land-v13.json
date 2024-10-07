@@ -4,7 +4,7 @@
             "outputFile": "com.example.a2340project.app-mergeDebugResources-29:/values-w600dp-land-v13/values-w600dp-land-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\tnitt\\.gradle\\caches\\transforms-4\\af0154a9064a003e9bba165a6ef9d017\\transformed\\material-1.12.0\\res\\values-w600dp-land-v13\\values-w600dp-land-v13.xml",
+                    "source": "/Users/srihasapenchikala/.gradle/caches/transforms-4/af0154a9064a003e9bba165a6ef9d017/transformed/material-1.12.0/res/values-w600dp-land-v13/values-w600dp-land-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
