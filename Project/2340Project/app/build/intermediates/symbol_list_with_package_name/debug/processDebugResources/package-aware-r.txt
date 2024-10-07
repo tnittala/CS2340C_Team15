@@ -3026,6 +3026,8 @@ drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_search_black_24
 drawable indeterminate_static
+drawable logistics
+drawable logo
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
 drawable m3_bottom_sheet_drag_handle
@@ -3149,7 +3151,8 @@ id accessibility_custom_action_6
 id accessibility_custom_action_7
 id accessibility_custom_action_8
 id accessibility_custom_action_9
-id accomodationstitle
+id accommodationsButton
+id accommodationsTitle
 id actionDown
 id actionDownUp
 id actionUp
@@ -3223,7 +3226,8 @@ id clip_vertical
 id clockwise
 id closest
 id collapseActionView
-id communitytitle
+id communityButton
+id communityTitle
 id compress
 id confirm_button
 id constraint
@@ -3244,6 +3248,7 @@ id currentState
 id custom
 id customPanel
 id cut
+id dashboard
 id date_picker_actions
 id decelerate
 id decelerateAndComplete
@@ -3256,8 +3261,12 @@ id design_menu_item_action_area
 id design_menu_item_action_area_stub
 id design_menu_item_text
 id design_navigation_view
+id destinationTitle
+id destinationsButton
 id dialog_button
 id dimensions
+id diningButton
+id diningTitle
 id direct
 id disableHome
 id disableIntraAutoTransition
@@ -3317,11 +3326,12 @@ id group_divider
 id grouping
 id groups
 id header_title
-id hello_world_text
 id hide_ime_id
 id hideable
 id home
 id homeAsUp
+id homeButton
+id homescreenTitle
 id honorRequest
 id horizontal_only
 id icon
@@ -3351,6 +3361,9 @@ id linear
 id listMode
 id list_item
 id login_button
+id logisticsButton
+id logisticsTitle
+id logoImage
 id m3_side_sheet
 id main
 id marquee
