@@ -30,7 +30,7 @@ public class NewAccount extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewAccount.this, HomeScreen.class);
+                Intent intent = new Intent(NewAccount.this, Logistics.class);
                 startActivity(intent);
             }
         });
