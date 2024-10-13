@@ -76,6 +76,10 @@
         "source": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-main-44:\\mipmap-mdpi\\ic_launcher_round.webp"
     },
     {
+        "merged": "com.example.a2340project.app-debug-42:/layout_activity_new_account.xml.flat",
+        "source": "com.example.a2340project.app-main-44:/layout/activity_new_account.xml"
+    },
+    {
         "merged": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-debug-42:\\xml_backup_rules.xml.flat",
         "source": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-main-44:\\xml\\backup_rules.xml"
     },
@@ -98,10 +102,6 @@
     {
         "merged": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-debug-42:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-main-44:\\mipmap-anydpi-v26\\ic_launcher.xml"
-    },
-    {
-        "merged": "com.example.a2340project.app-debug-42:/layout_activity_login.xml.flat",
-        "source": "com.example.a2340project.app-main-44:/layout/activity_login.xml"
     },
     {
         "merged": "C:\\Users\\tnitt\\.gradle\\daemon\\8.7\\com.example.a2340project.app-debug-42:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
