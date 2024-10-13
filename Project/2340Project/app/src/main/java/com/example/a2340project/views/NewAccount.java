@@ -51,6 +51,14 @@ public class NewAccount extends AppCompatActivity {
             public void onClick(View v) {
                 String email = email_view.getText().toString();
                 String password = password_view.getText().toString();
+                if (email.isEmpty()) {
+                    Toast.makeText(NewAccount.this, "Enter email", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (password.isEmpty()) {
+                    Toast.makeText(NewAccount.this, "Enter password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
