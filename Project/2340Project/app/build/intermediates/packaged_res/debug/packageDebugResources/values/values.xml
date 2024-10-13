@@ -3,6 +3,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">2340Project</string>
+    <string name="gcm_defaultSenderId" translatable="false">276760716032</string>
+    <string name="google_api_key" translatable="false">AIzaSyA3GeJYZoyZYMdN4ilMf7GA6p47srlEer8</string>
+    <string name="google_app_id" translatable="false">1:276760716032:android:81a4a9041e398a7245c9e5</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyA3GeJYZoyZYMdN4ilMf7GA6p47srlEer8</string>
+    <string name="google_storage_bucket" translatable="false">wandersyncdatabase.appspot.com</string>
+    <string name="project_id" translatable="false">wandersyncdatabase</string>
     <style name="Base.Theme._2340Project" parent="Theme.Material3.DayNight.NoActionBar">
         
         
