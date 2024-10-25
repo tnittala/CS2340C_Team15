@@ -55,7 +55,7 @@ public class HomeScreen extends AppCompatActivity {
         logisticsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeScreen.this, TravelCommunity.class);
+                Intent intent = new Intent(HomeScreen.this, Logistics.class);
                 startActivity(intent);
             }
         });

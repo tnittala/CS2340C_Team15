@@ -55,7 +55,7 @@ public class Logistics extends AppCompatActivity {
         logisticsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Logistics.this, TravelCommunity.class);
+                Intent intent = new Intent(Logistics.this, Logistics.class);
                 startActivity(intent);
             }
         });
