@@ -1,45 +1,45 @@
-com.example.a2340project.app-lifecycle-viewmodel-2.6.2-0 C:\Users\tnitt\.gradle\caches\transforms-4\1aaac895c16753ad004c9b5a65139a1c\transformed\lifecycle-viewmodel-2.6.2\res
-com.example.a2340project.app-emoji2-views-helper-1.3.0-1 C:\Users\tnitt\.gradle\caches\transforms-4\1c19eb901c7ac8e5877a097fd1cbcc8f\transformed\emoji2-views-helper-1.3.0\res
-com.example.a2340project.app-appcompat-resources-1.7.0-2 C:\Users\tnitt\.gradle\caches\transforms-4\228a46052c41021b8a2e9004de9c5d66\transformed\appcompat-resources-1.7.0\res
-com.example.a2340project.app-play-services-auth-20.7.0-3 C:\Users\tnitt\.gradle\caches\transforms-4\253bab522a8f401bfd1c92713b445ba1\transformed\play-services-auth-20.7.0\res
-com.example.a2340project.app-firebase-common-21.0.0-4 C:\Users\tnitt\.gradle\caches\transforms-4\307ce562255fca224ec15d6b79096be8\transformed\firebase-common-21.0.0\res
-com.example.a2340project.app-constraintlayout-2.1.4-5 C:\Users\tnitt\.gradle\caches\transforms-4\5e09205f321e2c3e63443fb5884a8a68\transformed\constraintlayout-2.1.4\res
-com.example.a2340project.app-profileinstaller-1.3.1-6 C:\Users\tnitt\.gradle\caches\transforms-4\62b939ea571d344d9a9deb4df0cf8edf\transformed\profileinstaller-1.3.1\res
-com.example.a2340project.app-savedstate-1.2.1-7 C:\Users\tnitt\.gradle\caches\transforms-4\6433eda051b7149062a24e52524458d1\transformed\savedstate-1.2.1\res
-com.example.a2340project.app-lifecycle-runtime-2.6.2-8 C:\Users\tnitt\.gradle\caches\transforms-4\6808c73a98189d984a6c2c030720251a\transformed\lifecycle-runtime-2.6.2\res
-com.example.a2340project.app-core-runtime-2.2.0-9 C:\Users\tnitt\.gradle\caches\transforms-4\68f9d82ed011d8dc7a79c03a42d30e2e\transformed\core-runtime-2.2.0\res
-com.example.a2340project.app-viewpager2-1.0.0-10 C:\Users\tnitt\.gradle\caches\transforms-4\6a0d2bac4e15e0ece73d35cc46ca5cbb\transformed\viewpager2-1.0.0\res
-com.example.a2340project.app-lifecycle-livedata-core-2.6.2-11 C:\Users\tnitt\.gradle\caches\transforms-4\6f79fa79b3cfbe0dd568334694bfd27a\transformed\lifecycle-livedata-core-2.6.2\res
-com.example.a2340project.app-core-1.13.0-12 C:\Users\tnitt\.gradle\caches\transforms-4\700e9a17bb7683183a43820721dc070b\transformed\core-1.13.0\res
-com.example.a2340project.app-fragment-1.5.4-13 C:\Users\tnitt\.gradle\caches\transforms-4\75a7690917234147914ed989bab607d4\transformed\fragment-1.5.4\res
-com.example.a2340project.app-drawerlayout-1.1.1-14 C:\Users\tnitt\.gradle\caches\transforms-4\7fa7831c4b424a30c83c8445b490df63\transformed\drawerlayout-1.1.1\res
-com.example.a2340project.app-recyclerview-1.1.0-15 C:\Users\tnitt\.gradle\caches\transforms-4\8683e59759200b85a20f261046e72d19\transformed\recyclerview-1.1.0\res
-com.example.a2340project.app-play-services-basement-18.4.0-16 C:\Users\tnitt\.gradle\caches\transforms-4\897e01ffab7b2cf6e0c5a8a1588f54de\transformed\play-services-basement-18.4.0\res
-com.example.a2340project.app-startup-runtime-1.1.1-17 C:\Users\tnitt\.gradle\caches\transforms-4\8b67c9765c5a1372ca75fb5825cb4f73\transformed\startup-runtime-1.1.1\res
-com.example.a2340project.app-lifecycle-viewmodel-savedstate-2.6.2-18 C:\Users\tnitt\.gradle\caches\transforms-4\9ad3fe93e4e60730c00a215b80705164\transformed\lifecycle-viewmodel-savedstate-2.6.2\res
-com.example.a2340project.app-annotation-experimental-1.4.0-19 C:\Users\tnitt\.gradle\caches\transforms-4\abae7a6a5fb70b720cbd4a0b49f6f22e\transformed\annotation-experimental-1.4.0\res
-com.example.a2340project.app-coordinatorlayout-1.1.0-20 C:\Users\tnitt\.gradle\caches\transforms-4\b26244dacc75d00a6502f424323c2bd3\transformed\coordinatorlayout-1.1.0\res
-com.example.a2340project.app-ads-adservices-1.0.0-beta05-21 C:\Users\tnitt\.gradle\caches\transforms-4\b2cc716e50394f41f735dfc0bf5f068e\transformed\ads-adservices-1.0.0-beta05\res
-com.example.a2340project.app-ads-adservices-java-1.0.0-beta05-22 C:\Users\tnitt\.gradle\caches\transforms-4\b33ea961750363b5859c479bbf7c54c5\transformed\ads-adservices-java-1.0.0-beta05\res
-com.example.a2340project.app-credentials-1.2.0-rc01-23 C:\Users\tnitt\.gradle\caches\transforms-4\b68b5dafdff27de1bb0453ec46348a33\transformed\credentials-1.2.0-rc01\res
-com.example.a2340project.app-lifecycle-livedata-2.6.2-24 C:\Users\tnitt\.gradle\caches\transforms-4\bf33d802ea6a61f35b43ed91509f81ab\transformed\lifecycle-livedata-2.6.2\res
-com.example.a2340project.app-lifecycle-process-2.6.2-25 C:\Users\tnitt\.gradle\caches\transforms-4\c0e85ff22190cd69114fe95d265f4e1c\transformed\lifecycle-process-2.6.2\res
-com.example.a2340project.app-emoji2-1.3.0-26 C:\Users\tnitt\.gradle\caches\transforms-4\cfa78a74b8adf25196ceb52179a3a8d7\transformed\emoji2-1.3.0\res
-com.example.a2340project.app-browser-1.4.0-27 C:\Users\tnitt\.gradle\caches\transforms-4\d03676a6a411a6ab67039f84c791b49a\transformed\browser-1.4.0\res
-com.example.a2340project.app-activity-1.9.1-28 C:\Users\tnitt\.gradle\caches\transforms-4\d88676b5d0a9a889485ff40f82b95db8\transformed\activity-1.9.1\res
-com.example.a2340project.app-play-services-base-18.5.0-29 C:\Users\tnitt\.gradle\caches\transforms-4\e2935189d98067aba61595111ebb611d\transformed\play-services-base-18.5.0\res
-com.example.a2340project.app-material-1.12.0-30 C:\Users\tnitt\.gradle\caches\transforms-4\e35a63ef79c05ea3cedb3d09ba5b88ee\transformed\material-1.12.0\res
-com.example.a2340project.app-play-services-measurement-api-22.1.2-31 C:\Users\tnitt\.gradle\caches\transforms-4\f31542b2495601814950325864df0499\transformed\play-services-measurement-api-22.1.2\res
-com.example.a2340project.app-credentials-play-services-auth-1.2.0-rc01-32 C:\Users\tnitt\.gradle\caches\transforms-4\fa69fa9317e55b2e6d19cbddbb818a84\transformed\credentials-play-services-auth-1.2.0-rc01\res
-com.example.a2340project.app-transition-1.5.0-33 C:\Users\tnitt\.gradle\caches\transforms-4\fee9b6dfae3dd5f84161366a2a5b6e2b\transformed\transition-1.5.0\res
-com.example.a2340project.app-cardview-1.0.0-34 C:\Users\tnitt\.gradle\caches\transforms-4\ff0a84311947a22f22e62166c8b510d8\transformed\cardview-1.0.0\res
-com.example.a2340project.app-appcompat-1.7.0-35 C:\Users\tnitt\.gradle\caches\transforms-4\ff210c543300e907252dc6ac207dc9da\transformed\appcompat-1.7.0\res
-com.example.a2340project.app-core-ktx-1.13.0-36 C:\Users\tnitt\.gradle\caches\transforms-4\ff72ddf316db1b1c308b6c0848703629\transformed\core-ktx-1.13.0\res
-com.example.a2340project.app-pngs-37 C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\build\generated\res\pngs\debug
-com.example.a2340project.app-res-38 C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\build\generated\res\processDebugGoogleServices
-com.example.a2340project.app-resValues-39 C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\build\generated\res\resValues\debug
-com.example.a2340project.app-packageDebugResources-40 C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
-com.example.a2340project.app-packageDebugResources-41 C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
-com.example.a2340project.app-debug-42 C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\build\intermediates\merged_res\debug\mergeDebugResources
-com.example.a2340project.app-debug-43 C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\debug\res
-com.example.a2340project.app-main-44 C:\Users\tnitt\Desktop\CS 2340\CS2340_C_Team15\Project\2340Project\app\src\main\res
+com.example.a2340project.app-lifecycle-viewmodel-2.6.2-0 /Users/jkaur/.gradle/caches/transforms-4/1aaac895c16753ad004c9b5a65139a1c/transformed/lifecycle-viewmodel-2.6.2/res
+com.example.a2340project.app-emoji2-views-helper-1.3.0-1 /Users/jkaur/.gradle/caches/transforms-4/1c19eb901c7ac8e5877a097fd1cbcc8f/transformed/emoji2-views-helper-1.3.0/res
+com.example.a2340project.app-appcompat-resources-1.7.0-2 /Users/jkaur/.gradle/caches/transforms-4/228a46052c41021b8a2e9004de9c5d66/transformed/appcompat-resources-1.7.0/res
+com.example.a2340project.app-play-services-auth-20.7.0-3 /Users/jkaur/.gradle/caches/transforms-4/253bab522a8f401bfd1c92713b445ba1/transformed/play-services-auth-20.7.0/res
+com.example.a2340project.app-firebase-common-21.0.0-4 /Users/jkaur/.gradle/caches/transforms-4/307ce562255fca224ec15d6b79096be8/transformed/firebase-common-21.0.0/res
+com.example.a2340project.app-constraintlayout-2.1.4-5 /Users/jkaur/.gradle/caches/transforms-4/5e09205f321e2c3e63443fb5884a8a68/transformed/constraintlayout-2.1.4/res
+com.example.a2340project.app-profileinstaller-1.3.1-6 /Users/jkaur/.gradle/caches/transforms-4/62b939ea571d344d9a9deb4df0cf8edf/transformed/profileinstaller-1.3.1/res
+com.example.a2340project.app-savedstate-1.2.1-7 /Users/jkaur/.gradle/caches/transforms-4/6433eda051b7149062a24e52524458d1/transformed/savedstate-1.2.1/res
+com.example.a2340project.app-lifecycle-runtime-2.6.2-8 /Users/jkaur/.gradle/caches/transforms-4/6808c73a98189d984a6c2c030720251a/transformed/lifecycle-runtime-2.6.2/res
+com.example.a2340project.app-core-runtime-2.2.0-9 /Users/jkaur/.gradle/caches/transforms-4/68f9d82ed011d8dc7a79c03a42d30e2e/transformed/core-runtime-2.2.0/res
+com.example.a2340project.app-viewpager2-1.0.0-10 /Users/jkaur/.gradle/caches/transforms-4/6a0d2bac4e15e0ece73d35cc46ca5cbb/transformed/viewpager2-1.0.0/res
+com.example.a2340project.app-lifecycle-livedata-core-2.6.2-11 /Users/jkaur/.gradle/caches/transforms-4/6f79fa79b3cfbe0dd568334694bfd27a/transformed/lifecycle-livedata-core-2.6.2/res
+com.example.a2340project.app-core-1.13.0-12 /Users/jkaur/.gradle/caches/transforms-4/700e9a17bb7683183a43820721dc070b/transformed/core-1.13.0/res
+com.example.a2340project.app-fragment-1.5.4-13 /Users/jkaur/.gradle/caches/transforms-4/75a7690917234147914ed989bab607d4/transformed/fragment-1.5.4/res
+com.example.a2340project.app-drawerlayout-1.1.1-14 /Users/jkaur/.gradle/caches/transforms-4/7fa7831c4b424a30c83c8445b490df63/transformed/drawerlayout-1.1.1/res
+com.example.a2340project.app-recyclerview-1.1.0-15 /Users/jkaur/.gradle/caches/transforms-4/8683e59759200b85a20f261046e72d19/transformed/recyclerview-1.1.0/res
+com.example.a2340project.app-play-services-basement-18.4.0-16 /Users/jkaur/.gradle/caches/transforms-4/897e01ffab7b2cf6e0c5a8a1588f54de/transformed/play-services-basement-18.4.0/res
+com.example.a2340project.app-startup-runtime-1.1.1-17 /Users/jkaur/.gradle/caches/transforms-4/8b67c9765c5a1372ca75fb5825cb4f73/transformed/startup-runtime-1.1.1/res
+com.example.a2340project.app-lifecycle-viewmodel-savedstate-2.6.2-18 /Users/jkaur/.gradle/caches/transforms-4/9ad3fe93e4e60730c00a215b80705164/transformed/lifecycle-viewmodel-savedstate-2.6.2/res
+com.example.a2340project.app-annotation-experimental-1.4.0-19 /Users/jkaur/.gradle/caches/transforms-4/abae7a6a5fb70b720cbd4a0b49f6f22e/transformed/annotation-experimental-1.4.0/res
+com.example.a2340project.app-coordinatorlayout-1.1.0-20 /Users/jkaur/.gradle/caches/transforms-4/b26244dacc75d00a6502f424323c2bd3/transformed/coordinatorlayout-1.1.0/res
+com.example.a2340project.app-ads-adservices-1.0.0-beta05-21 /Users/jkaur/.gradle/caches/transforms-4/b2cc716e50394f41f735dfc0bf5f068e/transformed/ads-adservices-1.0.0-beta05/res
+com.example.a2340project.app-ads-adservices-java-1.0.0-beta05-22 /Users/jkaur/.gradle/caches/transforms-4/b33ea961750363b5859c479bbf7c54c5/transformed/ads-adservices-java-1.0.0-beta05/res
+com.example.a2340project.app-credentials-1.2.0-rc01-23 /Users/jkaur/.gradle/caches/transforms-4/b68b5dafdff27de1bb0453ec46348a33/transformed/credentials-1.2.0-rc01/res
+com.example.a2340project.app-lifecycle-livedata-2.6.2-24 /Users/jkaur/.gradle/caches/transforms-4/bf33d802ea6a61f35b43ed91509f81ab/transformed/lifecycle-livedata-2.6.2/res
+com.example.a2340project.app-lifecycle-process-2.6.2-25 /Users/jkaur/.gradle/caches/transforms-4/c0e85ff22190cd69114fe95d265f4e1c/transformed/lifecycle-process-2.6.2/res
+com.example.a2340project.app-emoji2-1.3.0-26 /Users/jkaur/.gradle/caches/transforms-4/cfa78a74b8adf25196ceb52179a3a8d7/transformed/emoji2-1.3.0/res
+com.example.a2340project.app-browser-1.4.0-27 /Users/jkaur/.gradle/caches/transforms-4/d03676a6a411a6ab67039f84c791b49a/transformed/browser-1.4.0/res
+com.example.a2340project.app-activity-1.9.1-28 /Users/jkaur/.gradle/caches/transforms-4/d88676b5d0a9a889485ff40f82b95db8/transformed/activity-1.9.1/res
+com.example.a2340project.app-play-services-base-18.5.0-29 /Users/jkaur/.gradle/caches/transforms-4/e2935189d98067aba61595111ebb611d/transformed/play-services-base-18.5.0/res
+com.example.a2340project.app-material-1.12.0-30 /Users/jkaur/.gradle/caches/transforms-4/e35a63ef79c05ea3cedb3d09ba5b88ee/transformed/material-1.12.0/res
+com.example.a2340project.app-play-services-measurement-api-22.1.2-31 /Users/jkaur/.gradle/caches/transforms-4/f31542b2495601814950325864df0499/transformed/play-services-measurement-api-22.1.2/res
+com.example.a2340project.app-credentials-play-services-auth-1.2.0-rc01-32 /Users/jkaur/.gradle/caches/transforms-4/fa69fa9317e55b2e6d19cbddbb818a84/transformed/credentials-play-services-auth-1.2.0-rc01/res
+com.example.a2340project.app-transition-1.5.0-33 /Users/jkaur/.gradle/caches/transforms-4/fee9b6dfae3dd5f84161366a2a5b6e2b/transformed/transition-1.5.0/res
+com.example.a2340project.app-cardview-1.0.0-34 /Users/jkaur/.gradle/caches/transforms-4/ff0a84311947a22f22e62166c8b510d8/transformed/cardview-1.0.0/res
+com.example.a2340project.app-appcompat-1.7.0-35 /Users/jkaur/.gradle/caches/transforms-4/ff210c543300e907252dc6ac207dc9da/transformed/appcompat-1.7.0/res
+com.example.a2340project.app-core-ktx-1.13.0-36 /Users/jkaur/.gradle/caches/transforms-4/ff72ddf316db1b1c308b6c0848703629/transformed/core-ktx-1.13.0/res
+com.example.a2340project.app-pngs-37 /Users/jkaur/AndroidStudioProjects/2340ProjectJapleen/CS2340C_Team15/Project/2340Project/app/build/generated/res/pngs/debug
+com.example.a2340project.app-res-38 /Users/jkaur/AndroidStudioProjects/2340ProjectJapleen/CS2340C_Team15/Project/2340Project/app/build/generated/res/processDebugGoogleServices
+com.example.a2340project.app-resValues-39 /Users/jkaur/AndroidStudioProjects/2340ProjectJapleen/CS2340C_Team15/Project/2340Project/app/build/generated/res/resValues/debug
+com.example.a2340project.app-packageDebugResources-40 /Users/jkaur/AndroidStudioProjects/2340ProjectJapleen/CS2340C_Team15/Project/2340Project/app/build/intermediates/incremental/debug/packageDebugResources/merged.dir
+com.example.a2340project.app-packageDebugResources-41 /Users/jkaur/AndroidStudioProjects/2340ProjectJapleen/CS2340C_Team15/Project/2340Project/app/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
+com.example.a2340project.app-debug-42 /Users/jkaur/AndroidStudioProjects/2340ProjectJapleen/CS2340C_Team15/Project/2340Project/app/build/intermediates/merged_res/debug/mergeDebugResources
+com.example.a2340project.app-debug-43 /Users/jkaur/AndroidStudioProjects/2340ProjectJapleen/CS2340C_Team15/Project/2340Project/app/src/debug/res
+com.example.a2340project.app-main-44 /Users/jkaur/AndroidStudioProjects/2340ProjectJapleen/CS2340C_Team15/Project/2340Project/app/src/main/res

@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.a2340project.R;
+import com.github.mikephil.charting.charts.BarChart;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -29,6 +30,9 @@ public class Logistics extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        BarChart barchart = findViewById(R.id.barChart);
+        
 
         // home button
         ImageButton homeBtn = findViewById(R.id.homeButton);
