@@ -3,6 +3,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import android.graphics.Color;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,8 +13,10 @@ import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 
 import com.example.a2340project.views.Destination;
+import com.example.a2340project.views.Logistics;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
 import com.example.a2340project.views.LoginActivity;
-
 
 
 import java.text.SimpleDateFormat;
@@ -65,6 +69,36 @@ public class ExampleUnitTest {
             durationCalc.setText("");  // Leave duration empty
             durationCalc.setText("");
 
+
+    private Logistics logisticsActivity =  new Logistics();
+
+
+    @Test
+    public void testGraphTripsEntries() {
+        logisticsActivity.graphTrips();
+
+        BarData barData = logisticsActivity.barChart.getData();
+        BarDataSet dataSet = (BarDataSet) barData.getDataSetByIndex(0);
+
+        // Verify the number of entries
+        assertEquals(2, dataSet.getEntryCount());
+
+        // Verify the values of the entries
+        assertEquals(4, dataSet.getEntryForIndex(0).getY(), 0);
+        assertEquals(3, dataSet.getEntryForIndex(1).getY(), 0);
+
+        // Verify the colors
+        assertEquals(Color.RED, dataSet.getColor(0));
+        assertEquals(Color.BLUE, dataSet.getColor(1));
+    }
+
+
+    private Destination destinationActivity;
+    private MockEditText startDateCalc;
+    private MockEditText endDateCalc;
+    private MockEditText durationCalc;
+    private MockTextView resultText;
+
             // Act
             destinationActivity.calculateVacationTime();
 
@@ -72,7 +106,7 @@ public class ExampleUnitTest {
             assertEquals("9", durationCalc.getText());
             assertEquals("9 days", resultText.getText());
         }
-         
+
 
     @Before
     public void setUp() throws NoSuchFieldException, IllegalAccessException {
@@ -210,6 +244,7 @@ public class ExampleUnitTest {
             assertTrue(destination.isValidDate(validDate));
         }
 
+
         @Test
         public void testIsValidDateWithInvalidDate() {
             String invalidDate = "13/01/24";  // Invalid month
@@ -234,3 +269,4 @@ public class ExampleUnitTest {
         // Mock class for TextView to simulate getText() and setText()
         private static class MockTextView {
             private String text = "";
+

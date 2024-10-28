@@ -37,12 +37,10 @@ import java.util.ArrayList;
 
 public class Logistics extends AppCompatActivity {
 
-    private TripViewModel tripViewModel;
-    private NotesAdapter notesAdapter;
-    private String tripId = "exampleTripId"; // Replace this with the actual trip ID if available
-    private BarChart barChart;
 
-    private void graphTrips() {
+    public BarChart barChart;
+
+    public void graphTrips() {
         ArrayList<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0, 4));
         entries.add(new BarEntry(1, 3));
