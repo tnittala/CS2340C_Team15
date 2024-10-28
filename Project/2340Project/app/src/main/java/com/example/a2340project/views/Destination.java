@@ -2,14 +2,11 @@ package com.example.a2340project.views;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,8 +21,6 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 import com.example.a2340project.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.Calendar;
 import java.util.List;
@@ -35,29 +30,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import java.util.ArrayList;
-import java.util.List;
 
-// For UI components
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class Destination extends AppCompatActivity {
 
-    private EditText locationInput, startDateInput, endDateInput;
+    private EditText locationInput;
+    private EditText startDateInput;
+    private EditText endDateInput;
     private LinearLayout formLayout;
     private GridLayout destinationList;
 
-    private EditText startDateCalc, endDateCalc, durationCalc;
+    private EditText startDateCalc;
+    private EditText endDateCalc;
+    private EditText durationCalc;
     private TextView resultText;
     private LinearLayout formLayout2;
     private LinearLayout formLayout3;
@@ -155,7 +143,8 @@ public class Destination extends AppCompatActivity {
         locationView.setLayoutParams(locationParams);
 
         TextView daysView = new TextView(this);
-        long days = calculateDaysBetween(log.getStartDate(), log.getEndDate(), new SimpleDateFormat("MM/dd/yy"));
+        long days = calculateDaysBetween(log.getStartDate(), log.getEndDate(),
+                new SimpleDateFormat("MM/dd/yy"));
         daysView.setText(days + " days planned");
         daysView.setPadding(8, 8, 8, 8);
         daysView.setTextSize(16);
@@ -251,11 +240,13 @@ public class Destination extends AppCompatActivity {
             return;
         }
         if (startDate.compareTo(endDate) > 0) {
-            Toast.makeText(this, "Start date must be before end date", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Start date must be before end date",
+                    Toast.LENGTH_SHORT).show();
             return;
         }
         if (!isValidDate(startDate) || !isValidDate(endDate)) {
-            Toast.makeText(this, "Invalid date format! Use MM/DD/YYYY", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Invalid date format! Use MM/DD/YYYY",
+                    Toast.LENGTH_SHORT).show();
             return;
         }
         TravelLog log = new TravelLog(location, startDate, endDate);
@@ -281,12 +272,18 @@ public class Destination extends AppCompatActivity {
     }
 
     private void setupNavigationButtons() {
-        findViewById(R.id.homeButton).setOnClickListener(view -> startActivity(new Intent(this, HomeScreen.class)));
-        findViewById(R.id.destinationsButton).setOnClickListener(view -> startActivity(new Intent(this, Destination.class)));
-        findViewById(R.id.logisticsButton).setOnClickListener(view -> startActivity(new Intent(this, Logistics.class)));
-        findViewById(R.id.diningButton).setOnClickListener(view -> startActivity(new Intent(this, DiningEstablishment.class)));
-        findViewById(R.id.accommodationsButton).setOnClickListener(view -> startActivity(new Intent(this, Accommodations.class)));
-        findViewById(R.id.communityButton).setOnClickListener(view -> startActivity(new Intent(this, TravelCommunity.class)));
+        findViewById(R.id.homeButton).setOnClickListener(view ->
+                startActivity(new Intent(this, HomeScreen.class)));
+        findViewById(R.id.destinationsButton).setOnClickListener(view ->
+                startActivity(new Intent(this, Destination.class)));
+        findViewById(R.id.logisticsButton).setOnClickListener(view ->
+                startActivity(new Intent(this, Logistics.class)));
+        findViewById(R.id.diningButton).setOnClickListener(view ->
+                startActivity(new Intent(this, DiningEstablishment.class)));
+        findViewById(R.id.accommodationsButton).setOnClickListener(view ->
+                startActivity(new Intent(this, Accommodations.class)));
+        findViewById(R.id.communityButton).setOnClickListener(view ->
+                startActivity(new Intent(this, TravelCommunity.class)));
     }
 
     private void showDatePicker(EditText dateInput) {
@@ -316,13 +313,20 @@ public class Destination extends AppCompatActivity {
         sdf.setLenient(false);
 
         int filledFields = 0;
-        if (!startDateStr.isEmpty()) filledFields++;
-        if (!endDateStr.isEmpty()) filledFields++;
-        if (!durationStr.isEmpty()) filledFields++;
+        if (!startDateStr.isEmpty()) {
+            filledFields++;
+        }
+        if (!endDateStr.isEmpty()) {
+            filledFields++;
+        }
+        if (!durationStr.isEmpty()) {
+            filledFields++;
+        }
 
         // Ensure that at least two fields are filled
         if (filledFields < 2) {
-            Toast.makeText(this, "Please enter at least two fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter at least two fields",
+                    Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -330,7 +334,8 @@ public class Destination extends AppCompatActivity {
             if (startDateStr.isEmpty()) {
                 // Calculate start date based on end date and duration
                 if (!isValidDate(endDateStr)) {
-                    Toast.makeText(this, "Invalid end date format. Use MM/dd/yy", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Invalid end date format. Use MM/dd/yy",
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Date endDate = sdf.parse(endDateStr);
@@ -344,7 +349,8 @@ public class Destination extends AppCompatActivity {
             } else if (endDateStr.isEmpty()) {
                 // Calculate end date based on start date and duration
                 if (!isValidDate(startDateStr)) {
-                    Toast.makeText(this, "Invalid start date format. Use MM/dd/yy", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Invalid start date format. Use MM/dd/yy",
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Date startDate = sdf.parse(startDateStr);
@@ -358,14 +364,16 @@ public class Destination extends AppCompatActivity {
             } else if (durationStr.isEmpty()) {
                 // Calculate duration based on start and end dates
                 if (!isValidDate(startDateStr) || !isValidDate(endDateStr)) {
-                    Toast.makeText(this, "Invalid date format. Use MM/dd/yy", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Invalid date format. Use MM/dd/yy",
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Date startDate = sdf.parse(startDateStr);
                 Date endDate = sdf.parse(endDateStr);
                 long diffInMillis = endDate.getTime() - startDate.getTime();
                 if (diffInMillis < 0) {
-                    Toast.makeText(this, "End date must be after start date", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "End date must be after start date",
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
                 long duration = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
@@ -386,7 +394,8 @@ public class Destination extends AppCompatActivity {
 
         } catch (ParseException | NumberFormatException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Invalid input. Please check the dates and duration", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Invalid input. Please check the dates and duration",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -423,15 +432,18 @@ public class Destination extends AppCompatActivity {
         VacationTime vacationTime = new VacationTime(startDate, endDate, duration);
 
         // Define the database path where this entry will be saved
-        DatabaseReference vacationRef = database.child("users").child(userId).child("vacationTimes");
+        DatabaseReference vacationRef =
+                database.child("users").child(userId).child("vacationTimes");
 
         // Push the vacation time data to the database
         vacationRef.push().setValue(vacationTime)
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(this, "Vacation time saved successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Vacation time saved successfully",
+                            Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Failed to save vacation time", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Failed to save vacation time",
+                            Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 });
     }
