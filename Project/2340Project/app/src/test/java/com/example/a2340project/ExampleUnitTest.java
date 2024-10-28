@@ -5,12 +5,23 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 
 import com.example.a2340project.views.Destination;
 import com.example.a2340project.views.LoginActivity;
+
+
+import com.example.a2340project.model.FirebaseDatabaseSingleton;
+
+/**
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ */
+//@RunWith(AndroidJUnit4.class)
 
 public class ExampleUnitTest {
 
@@ -53,6 +64,16 @@ public class ExampleUnitTest {
     }
 
     @Test
+
+    public void singleton_isCorrect() {
+
+        FirebaseDatabaseSingleton instance1 = FirebaseDatabaseSingleton.getInstance();
+        FirebaseDatabaseSingleton instance2 = FirebaseDatabaseSingleton.getInstance();
+
+        // Check if both instances are the same
+        assertEquals(instance1, instance2);
+    }
+
     public void testCalculateVacationTimeWithEndDateAndDuration() {
         startDateCalc.setText("");
         endDateCalc.setText("10/10/24");
