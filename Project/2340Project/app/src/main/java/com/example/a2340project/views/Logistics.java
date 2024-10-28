@@ -3,26 +3,37 @@ package com.example.a2340project.views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2340project.R;
-import com.example.a2340project.model.User;
+import com.example.a2340project.model.Note;
 import com.example.a2340project.viewmodels.TripViewModel;
+import com.example.a2340project.views.NotesAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Logistics extends AppCompatActivity {
 
-    private TripViewModel tripViewModel;  // New ViewModel field for handling Firebase interactions
-    private String tripId = "exampleTripId"; // Placeholder for the actual trip ID
+    private TripViewModel tripViewModel;
+    private NotesAdapter notesAdapter;
+    private String tripId = "exampleTripId"; // Replace this with the actual trip ID if available
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,18 +41,36 @@ public class Logistics extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_logistics);
 
-        // Setting up window insets as per original code
+        // Set up window insets for edge-to-edge display
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // Initialize TripViewModel
+        // Initialize the TripViewModel
         tripViewModel = new ViewModelProvider(this).get(TripViewModel.class);
 
-        // Set up the invite button listener
-        findViewById(R.id.inviteButton).setOnClickListener(view -> openInviteDialog());
+        // Set up RecyclerView for displaying notes
+        RecyclerView notesRecyclerView = findViewById(R.id.notesRecyclerView);
+        notesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        notesAdapter = new NotesAdapter(new ArrayList<>()); // Start with an empty list
+        notesRecyclerView.setAdapter(notesAdapter);
+
+        // Observe notes LiveData from ViewModel and update the adapter
+        tripViewModel.getNotes().observe(this, new Observer<List<Note>>() {
+            @Override
+            public void onChanged(List<Note> notes) {
+                notesAdapter.setNotes(notes);
+            }
+        });
+
+        // Fetch notes for the specified trip
+        tripViewModel.fetchNotes(tripId);
+
+        // Set up Add Note button listener
+        Button addNoteButton = findViewById(R.id.addNoteButton);
+        addNoteButton.setOnClickListener(view -> openAddNoteDialog());
 
         // Original button listeners remain unchanged
         ImageButton homeBtn = findViewById(R.id.homeButton);
@@ -99,41 +128,31 @@ public class Logistics extends AppCompatActivity {
         });
     }
 
-    // New method to open a dialog for inviting a collaborator
-    private void openInviteDialog() {
+    // Method to open the Add Note dialog
+    private void openAddNoteDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Invite Collaborator");
+        builder.setTitle("Add Note");
 
-        // Set up the input field for email entry
         final EditText input = new EditText(this);
-        input.setHint("Enter collaborator's email");
+        input.setHint("Enter your note");
         builder.setView(input);
 
-        // Configure "Invite" button in the dialog
-        builder.setPositiveButton("Invite", (dialog, which) -> {
-            String email = input.getText().toString().trim();
-            if (!email.isEmpty()) {
-                inviteCollaborator(email);
+        builder.setPositiveButton("Add", (dialog, which) -> {
+            String content = input.getText().toString().trim();
+            if (!content.isEmpty()) {
+                // Retrieve the current user ID (ensure user is authenticated)
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                // Create a new Note object
+                Note note = new Note(null, userId, content, System.currentTimeMillis());
+                // Add the note to the trip
+                tripViewModel.addNoteToTrip(tripId, note);
+                Toast.makeText(this, "Note added", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please enter a note", Toast.LENGTH_SHORT).show();
             }
         });
 
-        // Configure "Cancel" button in the dialog
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-
         builder.show();
-    }
-
-    // New method to handle collaborator invitation using TripViewModel
-    private void inviteCollaborator(String email) {
-        // Creating a User object for the invited collaborator
-        User user = new User("generatedUserId", email, "collaborator"); // Replace "generatedUserId" with actual user ID logic
-
-        // Add the collaborator to the trip using ViewModel
-        tripViewModel.addContributor(tripId, user);
-
-        // Display a confirmation message
-        Toast.makeText(this, "Invitation sent", Toast.LENGTH_SHORT).show();
     }
 }
