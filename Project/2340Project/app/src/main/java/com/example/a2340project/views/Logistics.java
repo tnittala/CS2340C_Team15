@@ -31,9 +31,9 @@ import java.util.ArrayList;
 
 public class Logistics extends AppCompatActivity {
 
-    private BarChart barChart;
+    public BarChart barChart;
 
-    private void graphTrips() {
+    public void graphTrips() {
         ArrayList<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0, 4));
         entries.add(new BarEntry(1, 3));

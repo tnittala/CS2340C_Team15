@@ -1,15 +1,42 @@
 package com.example.a2340project;
 import static org.junit.Assert.assertEquals;
 
+import android.graphics.Color;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
 import com.example.a2340project.views.Destination;
-
+import com.example.a2340project.views.Logistics;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
 
 
 public class ExampleUnitTest {
+
+    private Logistics logisticsActivity =  new Logistics();
+
+
+    @Test
+    public void testGraphTripsEntries() {
+        logisticsActivity.graphTrips();
+
+        BarData barData = logisticsActivity.barChart.getData();
+        BarDataSet dataSet = (BarDataSet) barData.getDataSetByIndex(0);
+
+        // Verify the number of entries
+        assertEquals(2, dataSet.getEntryCount());
+
+        // Verify the values of the entries
+        assertEquals(4, dataSet.getEntryForIndex(0).getY(), 0);
+        assertEquals(3, dataSet.getEntryForIndex(1).getY(), 0);
+
+        // Verify the colors
+        assertEquals(Color.RED, dataSet.getColor(0));
+        assertEquals(Color.BLUE, dataSet.getColor(1));
+    }
+
 
     private Destination destinationActivity;
     private MockEditText startDateCalc;
@@ -97,4 +124,5 @@ public class ExampleUnitTest {
             return this.text;
         }
     }
+
 }
