@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
@@ -123,9 +124,6 @@ public class Destination extends AppCompatActivity {
             finish();
             return;
         }
-
-        //displayVacationTimes();
-
         displayTravelLogs();
         setupNavigationButtons();
     }
@@ -168,8 +166,17 @@ public class Destination extends AppCompatActivity {
         rowLayout.addView(daysView);
 
         destinationList.addView(rowLayout);
-    }
+        View divider = new View(this);
+        LinearLayout.LayoutParams dividerParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                8
+        );
+        dividerParams.setMargins(0, 16, 0, 16);
+        divider.setLayoutParams(dividerParams);
+        divider.setBackgroundColor(Color.BLACK);
 
+        destinationList.addView(divider);
+    }
 
     private void toggleFormVisibility() {
         if (formLayout.getVisibility() == View.GONE) {
@@ -216,7 +223,6 @@ public class Destination extends AppCompatActivity {
         }
     }
 
-
     private long calculateDaysBetween(String startDate, String endDate, SimpleDateFormat sdf) {
         try {
             long startMillis = sdf.parse(startDate).getTime();
@@ -241,15 +247,19 @@ public class Destination extends AppCompatActivity {
     }
 
     private void saveTravelLog() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String userId = currentUser.getUid();
         String location = locationInput.getText().toString();
         String startDate = startDateInput.getText().toString();
         String endDate = endDateInput.getText().toString();
-
+        if (currentUser == null) {
+            Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (location.isEmpty() || startDate.isEmpty() || endDate.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
-
         if (startDate.compareTo(endDate) > 0) {
             Toast.makeText(this, "Start date must be before end date", Toast.LENGTH_SHORT).show();
             return;
@@ -259,9 +269,17 @@ public class Destination extends AppCompatActivity {
             return;
         }
         TravelLog log = new TravelLog(location, startDate, endDate);
+        DatabaseReference travelLog = database.child("users").child(userId).child("logTravel");
         TravelLogStorage.getInstance().addTravelLog(log);
         addLogToGrid(log);
-        Toast.makeText(this, "Travel log saved!", Toast.LENGTH_SHORT).show();
+        travelLog.push().setValue(log)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(this, "Travel log saved successfully", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Failed to save travel log", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                });
         clearForm();
         formLayout.setVisibility(View.GONE);
     }
@@ -382,7 +400,6 @@ public class Destination extends AppCompatActivity {
         }
     }
 
-
     private void toggleResultVisibility(boolean showResult) {
         if (showResult) {
             findViewById(R.id.logTravelButton).setVisibility(View.VISIBLE);
@@ -397,7 +414,6 @@ public class Destination extends AppCompatActivity {
             formLayout3.setVisibility(View.GONE);
         }
     }
-
 
     private void saveVacationToDatabase() {
         // Get the current user ID
@@ -429,32 +445,6 @@ public class Destination extends AppCompatActivity {
                     e.printStackTrace();
                 });
     }
-
-
-//    private void saveVacationToDatabase() {
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-////
-//        // Reference to the user's vacationTimes collection
-//        CollectionReference vacationTimesRef = db.collection("users")
-//                .document(userId)
-//                .collection("vacationTimes");
-//
-//        // Add the vacationTime object to the collection
-//        vacationTimesRef.add(vacationTime)
-//                .addOnSuccessListener(documentReference -> {
-//                    // Set the vacationId (document ID) in the object (optional)
-//                    vacationTime.setVacationId(documentReference.getId());
-//                    // Optionally update the document to include the vacationId
-//                    documentReference.update("vacationId", vacationTime.getVacationId());
-//
-//                    showAlert("Success", "Vacation time saved successfully.");
-//                })
-//                .addOnFailureListener(e -> {
-//                    showAlert("Database Error", "Failed to save vacation time.");
-//                    e.printStackTrace();
-//                });
-//    }
 
     private void showAlert(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
