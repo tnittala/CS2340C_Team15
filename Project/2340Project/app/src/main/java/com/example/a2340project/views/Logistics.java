@@ -1,8 +1,10 @@
 package com.example.a2340project.views;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -16,11 +18,33 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.a2340project.R;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.example.a2340project.model.User;
 import com.example.a2340project.viewmodels.TripViewModel;
 
+import java.util.ArrayList;
+
 public class Logistics extends AppCompatActivity {
 
+    private BarChart barChart;
+
+    private void graphTrips() {
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        entries.add(new BarEntry(0, 4));
+        entries.add(new BarEntry(1, 3));
+
+        BarDataSet dataSet = new BarDataSet(entries, "Trip Days");
+        dataSet.setColors(Color.RED, Color.BLUE);
+        BarData barData = new BarData(dataSet);
+        barChart.setData(barData);
+        barChart.invalidate(); //this refreshes the chart
+
+    }
     private TripViewModel tripViewModel;  // New ViewModel field for handling Firebase interactions
     private String tripId = "exampleTripId"; // Placeholder for the actual trip ID
 
@@ -37,6 +61,17 @@ public class Logistics extends AppCompatActivity {
             return insets;
         });
 
+        Button graphButton = findViewById(R.id.button_tripgraph);
+        barChart = findViewById(R.id.barChart);
+
+        graphButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                graphTrips();
+            }
+        });
+
+        // home button
         // Initialize TripViewModel
         tripViewModel = new ViewModelProvider(this).get(TripViewModel.class);
 
