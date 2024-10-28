@@ -87,10 +87,9 @@ public class Logistics extends AppCompatActivity {
         // Set up RecyclerView for displaying notes
         RecyclerView notesRecyclerView = findViewById(R.id.notesRecyclerView);
         notesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        notesAdapter = new NotesAdapter(new ArrayList<>()); // Start with an empty list
+        NotesAdapter notesAdapter = new NotesAdapter(new ArrayList<>());
         notesRecyclerView.setAdapter(notesAdapter);
 
-        // Observe notes LiveData from ViewModel and update the adapter
         tripViewModel.getNotes().observe(this, new Observer<List<Note>>() {
             @Override
             public void onChanged(List<Note> notes) {
@@ -98,7 +97,6 @@ public class Logistics extends AppCompatActivity {
             }
         });
 
-        // Fetch notes for the specified trip
         tripViewModel.fetchNotes(tripId);
 
         // Set up Add Note button listener
