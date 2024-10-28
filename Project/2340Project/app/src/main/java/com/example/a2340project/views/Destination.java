@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.Date;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,11 +31,41 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import java.util.ArrayList;
+import java.util.List;
+
+// For UI components
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.appcompat.app.AlertDialog;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
 public class Destination extends AppCompatActivity {
 
     private EditText locationInput, startDateInput, endDateInput;
     private LinearLayout formLayout;
     private GridLayout destinationList;
+
+    private EditText startDateCalc, endDateCalc, durationCalc;
+    private TextView resultText;
+    private LinearLayout formLayout2;
+    private LinearLayout formLayout3;
+    private FirebaseAuth auth;
+    private FirebaseFirestore db;
+    private String userId;
+
+
+    private DatabaseReference database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +78,15 @@ public class Destination extends AppCompatActivity {
         endDateInput = findViewById(R.id.endDateInput);
         formLayout = findViewById(R.id.formLayout);
         destinationList = findViewById(R.id.destinationList);  // Get reference to the GridLayout
+
+        startDateCalc = findViewById(R.id.startDate);
+        endDateCalc = findViewById(R.id.endDate);
+        formLayout2 = findViewById(R.id.formLayout2);
+        durationCalc = findViewById(R.id.duration);
+        formLayout3 = findViewById(R.id.formLayout3);
+        resultText = findViewById(R.id.resultText);
+
+        database = FirebaseDatabase.getInstance().getReference();
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (view, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -62,6 +102,30 @@ public class Destination extends AppCompatActivity {
             formLayout.setVisibility(View.GONE);
             clearForm();
         });
+
+        startDateCalc.setOnClickListener(v -> showDatePicker(startDateCalc));
+        endDateCalc.setOnClickListener(v -> showDatePicker(endDateCalc));
+        findViewById(R.id.calculateVacationTime).setOnClickListener(v -> toggleForm2Visibility());
+        findViewById(R.id.resetButton).setOnClickListener(v -> resetView());
+        findViewById(R.id.calculate).setOnClickListener(v -> calculateVacationTime());
+        // Initialize FirebaseAuth and Firestore
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        FirebaseUser currentUser = auth.getCurrentUser();
+
+        if (currentUser != null) {
+            userId = currentUser.getUid();
+        } else {
+            // Handle user not logged in
+            showAlert("Authentication Required", "Please log in to continue.");
+            startActivity(new Intent(Destination.this, LoginActivity.class));
+            finish();
+            return;
+        }
+
+        //displayVacationTimes();
+
         displayTravelLogs();
         setupNavigationButtons();
     }
@@ -137,6 +201,21 @@ public class Destination extends AppCompatActivity {
             destinationList.addView(daysView);
         }
     }
+    private void toggleForm2Visibility() {
+        if (formLayout2.getVisibility() == View.GONE) {
+            formLayout2.setVisibility(View.VISIBLE);
+        } else {
+            formLayout2.setVisibility(View.GONE);
+        }
+    }
+    private void toggleForm3Visibility() {
+        if (formLayout3.getVisibility() == View.GONE) {
+            formLayout3.setVisibility(View.VISIBLE);
+        } else {
+            formLayout3.setVisibility(View.GONE);
+        }
+    }
+
 
     private long calculateDaysBetween(String startDate, String endDate, SimpleDateFormat sdf) {
         try {
@@ -217,6 +296,192 @@ public class Destination extends AppCompatActivity {
                 }, year, month, day);
 
         datePickerDialog.show();
+    }
+
+    private void calculateVacationTime() {
+        // Get the user input from EditTexts
+        String startDateStr = startDateCalc.getText().toString();
+        String endDateStr = endDateCalc.getText().toString();
+        String durationStr = durationCalc.getText().toString();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
+        sdf.setLenient(false);
+
+        int filledFields = 0;
+        if (!startDateStr.isEmpty()) filledFields++;
+        if (!endDateStr.isEmpty()) filledFields++;
+        if (!durationStr.isEmpty()) filledFields++;
+
+        // Ensure that at least two fields are filled
+        if (filledFields < 2) {
+            Toast.makeText(this, "Please enter at least two fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        try {
+            if (startDateStr.isEmpty()) {
+                // Calculate start date based on end date and duration
+                if (!isValidDate(endDateStr)) {
+                    Toast.makeText(this, "Invalid end date format. Use MM/dd/yy", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Date endDate = sdf.parse(endDateStr);
+                int duration = Integer.parseInt(durationStr);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(endDate);
+                cal.add(Calendar.DAY_OF_YEAR, -duration);
+                startDateStr = sdf.format(cal.getTime());
+                startDateCalc.setText(startDateStr);
+
+            } else if (endDateStr.isEmpty()) {
+                // Calculate end date based on start date and duration
+                if (!isValidDate(startDateStr)) {
+                    Toast.makeText(this, "Invalid start date format. Use MM/dd/yy", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Date startDate = sdf.parse(startDateStr);
+                int duration = Integer.parseInt(durationStr);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(startDate);
+                cal.add(Calendar.DAY_OF_YEAR, duration);
+                endDateStr = sdf.format(cal.getTime());
+                endDateCalc.setText(endDateStr);
+
+            } else if (durationStr.isEmpty()) {
+                // Calculate duration based on start and end dates
+                if (!isValidDate(startDateStr) || !isValidDate(endDateStr)) {
+                    Toast.makeText(this, "Invalid date format. Use MM/dd/yy", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Date startDate = sdf.parse(startDateStr);
+                Date endDate = sdf.parse(endDateStr);
+                long diffInMillis = endDate.getTime() - startDate.getTime();
+                if (diffInMillis < 0) {
+                    Toast.makeText(this, "End date must be after start date", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                long duration = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+                durationStr = String.valueOf(duration);
+                durationCalc.setText(durationStr);
+            }
+
+            // After calculation, update the resultText with the calculated days
+            resultText.setText(durationStr + " days");
+
+            saveVacationToDatabase();
+
+            // Display the result container and hide other UI elements if needed
+            toggleResultVisibility(true);
+
+            // Optionally, show any other layout if necessary (like formLayout3)
+            formLayout3.setVisibility(View.VISIBLE);
+
+        } catch (ParseException | NumberFormatException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Invalid input. Please check the dates and duration", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    private void toggleResultVisibility(boolean showResult) {
+        if (showResult) {
+            findViewById(R.id.logTravelButton).setVisibility(View.VISIBLE);
+            findViewById(R.id.calculateVacationTime).setVisibility(View.VISIBLE);
+            destinationList.setVisibility(View.VISIBLE);
+            formLayout3.setVisibility(View.VISIBLE);
+            formLayout2.setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.logTravelButton).setVisibility(View.VISIBLE);
+            findViewById(R.id.calculateVacationTime).setVisibility(View.VISIBLE);
+            destinationList.setVisibility(View.VISIBLE);
+            formLayout3.setVisibility(View.GONE);
+        }
+    }
+
+
+    private void saveVacationToDatabase() {
+        // Get the current user ID
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null) {
+            Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String userId = currentUser.getUid();
+
+        // Retrieve input values
+        String startDate = startDateCalc.getText().toString();
+        String endDate = endDateCalc.getText().toString();
+        String duration = durationCalc.getText().toString();
+
+        // Create a VacationTime object
+        VacationTime vacationTime = new VacationTime(startDate, endDate, duration);
+
+        // Define the database path where this entry will be saved
+        DatabaseReference vacationRef = database.child("users").child(userId).child("vacationTimes");
+
+        // Push the vacation time data to the database
+        vacationRef.push().setValue(vacationTime)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(this, "Vacation time saved successfully", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Failed to save vacation time", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                });
+    }
+
+
+//    private void saveVacationToDatabase() {
+//        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+////
+//        // Reference to the user's vacationTimes collection
+//        CollectionReference vacationTimesRef = db.collection("users")
+//                .document(userId)
+//                .collection("vacationTimes");
+//
+//        // Add the vacationTime object to the collection
+//        vacationTimesRef.add(vacationTime)
+//                .addOnSuccessListener(documentReference -> {
+//                    // Set the vacationId (document ID) in the object (optional)
+//                    vacationTime.setVacationId(documentReference.getId());
+//                    // Optionally update the document to include the vacationId
+//                    documentReference.update("vacationId", vacationTime.getVacationId());
+//
+//                    showAlert("Success", "Vacation time saved successfully.");
+//                })
+//                .addOnFailureListener(e -> {
+//                    showAlert("Database Error", "Failed to save vacation time.");
+//                    e.printStackTrace();
+//                });
+//    }
+
+    private void showAlert(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void resetView() {
+        // Show main buttons and views
+        findViewById(R.id.logTravelButton).setVisibility(View.VISIBLE);
+        findViewById(R.id.calculateVacationTime).setVisibility(View.VISIBLE);
+        destinationList.setVisibility(View.VISIBLE);
+
+        // Hide form layouts
+        formLayout3.setVisibility(View.GONE);
+        formLayout2.setVisibility(View.VISIBLE);
+
+        // Clear the input fields
+        startDateCalc.setText("");
+        endDateCalc.setText("");
+        durationCalc.setText("");
+
+        // Clear the result text
+        resultText.setText("XX days");
     }
 
 }
