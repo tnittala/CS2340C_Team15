@@ -166,16 +166,6 @@ public class Destination extends AppCompatActivity {
         rowLayout.addView(daysView);
 
         destinationList.addView(rowLayout);
-        View divider = new View(this);
-        LinearLayout.LayoutParams dividerParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                8
-        );
-        dividerParams.setMargins(0, 16, 0, 16);
-        divider.setLayoutParams(dividerParams);
-        divider.setBackgroundColor(Color.BLACK);
-
-        destinationList.addView(divider);
     }
 
     private void toggleFormVisibility() {
