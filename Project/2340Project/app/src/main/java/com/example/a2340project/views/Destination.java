@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -111,9 +112,6 @@ public class Destination extends AppCompatActivity {
             finish();
             return;
         }
-
-        //displayVacationTimes();
-
         displayTravelLogs();
         setupNavigationButtons();
     }
@@ -158,7 +156,6 @@ public class Destination extends AppCompatActivity {
 
         destinationList.addView(rowLayout);
     }
-
 
     private void toggleFormVisibility() {
         if (formLayout.getVisibility() == View.GONE) {
@@ -205,7 +202,6 @@ public class Destination extends AppCompatActivity {
         }
     }
 
-
     private long calculateDaysBetween(String startDate, String endDate, SimpleDateFormat sdf) {
         try {
             long startMillis = sdf.parse(startDate).getTime();
@@ -230,15 +226,19 @@ public class Destination extends AppCompatActivity {
     }
 
     private void saveTravelLog() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String userId = currentUser.getUid();
         String location = locationInput.getText().toString();
         String startDate = startDateInput.getText().toString();
         String endDate = endDateInput.getText().toString();
-
+        if (currentUser == null) {
+            Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (location.isEmpty() || startDate.isEmpty() || endDate.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
-
         if (startDate.compareTo(endDate) > 0) {
             Toast.makeText(this, "Start date must be before end date",
                     Toast.LENGTH_SHORT).show();
@@ -250,9 +250,17 @@ public class Destination extends AppCompatActivity {
             return;
         }
         TravelLog log = new TravelLog(location, startDate, endDate);
+        DatabaseReference travelLog = database.child("users").child(userId).child("logTravel");
         TravelLogStorage.getInstance().addTravelLog(log);
         addLogToGrid(log);
-        Toast.makeText(this, "Travel log saved!", Toast.LENGTH_SHORT).show();
+        travelLog.push().setValue(log)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(this, "Travel log saved successfully", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Failed to save travel log", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                });
         clearForm();
         formLayout.setVisibility(View.GONE);
     }
@@ -391,7 +399,6 @@ public class Destination extends AppCompatActivity {
         }
     }
 
-
     private void toggleResultVisibility(boolean showResult) {
         if (showResult) {
             findViewById(R.id.logTravelButton).setVisibility(View.VISIBLE);
@@ -406,7 +413,6 @@ public class Destination extends AppCompatActivity {
             formLayout3.setVisibility(View.GONE);
         }
     }
-
 
     private void saveVacationToDatabase() {
         // Get the current user ID
