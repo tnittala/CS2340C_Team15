@@ -174,6 +174,8 @@ public class Logistics extends AppCompatActivity {
             String content = input.getText().toString().trim();
             if (!content.isEmpty()) {
                 //write code for adding their name to the screen
+
+                Toast.makeText(this, "Collaborator invited", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Please enter a username", Toast.LENGTH_SHORT).show();
             }
