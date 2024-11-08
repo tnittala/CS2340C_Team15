@@ -159,7 +159,7 @@ public class Accommodations extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 (view, selectedYear, selectedMonth, selectedDay) -> {
                     // Format the date to MM/DD/YY
-                    String formattedDate = String.format("%d/%d/%02d",
+                    String formattedDate = String.format("%d/%02d/%02d",
                             selectedMonth + 1, selectedDay, selectedYear % 100);
                     dateInput.setText(formattedDate);
                 }, year, month, day);
@@ -181,7 +181,7 @@ public class Accommodations extends AppCompatActivity {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (checkIn.compareTo(checkOut) < 0) {
+        if (checkIn.compareTo(checkOut) > 0) {
             Toast.makeText(this, "Check in date must be before check out date",
                     Toast.LENGTH_SHORT).show();
             return;
