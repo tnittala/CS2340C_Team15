@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">2340Project</string>
+    <string-array name="accomRoomTypes">
+        <item>King Room</item>
+        <item>Queen Room</item>
+        <item>Double Room</item>
+        <item>Single Room</item>
+        <item>Family Room</item>
+    </string-array>
 </resources>

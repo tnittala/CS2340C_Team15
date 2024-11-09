@@ -103,6 +103,9 @@ public class Logistics extends AppCompatActivity {
         Button addNoteButton = findViewById(R.id.addNoteButton);
         addNoteButton.setOnClickListener(view -> openAddNoteDialog());
 
+        Button addCollabButton = findViewById(R.id.inviteButton);
+        addCollabButton.setOnClickListener((view -> openAddCollabDialog()));
+
         // Original button listeners remain unchanged
         ImageButton homeBtn = findViewById(R.id.homeButton);
         homeBtn.setOnClickListener(new View.OnClickListener() {
@@ -157,6 +160,29 @@ public class Logistics extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void openAddCollabDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Invite Collaborators");
+
+        final EditText input = new EditText(this);
+        input.setHint("Enter collaborator username");
+        builder.setView(input);
+
+        builder.setPositiveButton("Invite", (dialog, which) -> {
+            String content = input.getText().toString().trim();
+            if (!content.isEmpty()) {
+                //write code for adding their name to the screen
+
+                Toast.makeText(this, "Collaborator invited", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Please enter a username", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+        builder.show();
     }
 
     // Method to open the Add Note dialog
