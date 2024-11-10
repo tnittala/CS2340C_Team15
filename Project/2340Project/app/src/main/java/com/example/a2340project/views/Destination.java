@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.Date;
@@ -53,6 +54,7 @@ public class Destination extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseFirestore db;
     private String userId;
+    private Spinner dropdownRoomType;
 
 
     private DatabaseReference database;
@@ -75,6 +77,8 @@ public class Destination extends AppCompatActivity {
         durationCalc = findViewById(R.id.duration);
         formLayout3 = findViewById(R.id.formLayout3);
         resultText = findViewById(R.id.resultText);
+
+        dropdownRoomType = findViewById(R.id.dropdown_roomTypes);
 
         database = FirebaseDatabase.getInstance().getReference();
 
@@ -232,6 +236,7 @@ public class Destination extends AppCompatActivity {
         String location = locationInput.getText().toString();
         String startDate = startDateInput.getText().toString();
         String endDate = endDateInput.getText().toString();
+        String roomType = dropdownRoomType.getSelectedItem().toString();
         if (currentUser == null) {
             Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show();
             return;
@@ -250,7 +255,7 @@ public class Destination extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
             return;
         }
-        TravelLog log = new TravelLog(location, startDate, endDate);
+        TravelLog log = new TravelLog(location, startDate, endDate, roomType);
         DatabaseReference travelLog = database.child("users").child(userId).child("logTravel");
         TravelLogStorage.getInstance().addTravelLog(log);
         addLogToGrid(log);
