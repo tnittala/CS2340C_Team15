@@ -14,18 +14,24 @@ import android.view.View;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.core.content.ContextCompat;
 import androidx.core.app.NotificationCompat;
+
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.a2340project.R;
 import com.example.a2340project.model.DiningReservation;
+import com.example.a2340project.model.DiningReservationStorage;
 import com.example.a2340project.model.TravelLog;
 import com.example.a2340project.model.TravelLogStorage;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,7 +42,28 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Locale;
+
+import android.os.Bundle;
+import android.graphics.Color;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class DiningEstablishment extends AppCompatActivity {
     private DatabaseReference database;
@@ -45,6 +72,8 @@ public class DiningEstablishment extends AppCompatActivity {
     private EditText locationEditText;
     private EditText websiteEditText;
     private EditText timeEditText;
+    //private LinearLayout FormLayout;
+    private GridLayout reservationList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +87,7 @@ public class DiningEstablishment extends AppCompatActivity {
         websiteEditText = findViewById(R.id.websiteInput);
         timeEditText = findViewById(R.id.reservationTimeInput);
         Button saveButton = findViewById(R.id.saveButton);
+        reservationList = findViewById(R.id.reservationList);
 
         database = FirebaseDatabase.getInstance().getReference();
 
@@ -100,6 +130,63 @@ public class DiningEstablishment extends AppCompatActivity {
         }
         setupNavigationButtons();
     }
+    private void loadReservations() {
+        List<DiningReservation> reservations = DiningReservationStorage.getInstance().getDiningReservations();
+        // Sort logs by start date
+        Collections.sort(reservations, (res1, res2) -> res1.getTime().compareTo(res2.getTime()));
+        reservationList.removeAllViews();
+        for (int i = 0; i < reservations.size(); i++) {
+            DiningReservation log = reservations.get(i);
+            View resView = createResView(log);
+
+            //if (isPastDate(log.getEndDate())) {
+           //     logView.setBackgroundColor(ContextCompat.getColor(this, R.color.past_date_background));
+           // }
+
+            reservationList.addView(resView);
+            // Add a divider line between entries
+            if (i < reservations.size() - 1) { // Avoid adding a divider after the last item
+                View divider = new View(this);
+                divider.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        2  // Height of the divider line
+                ));
+                divider.setBackgroundColor(ContextCompat.getColor(this, R.color.divider_color)); // Set divider color
+                reservationList.addView(divider);
+            }
+        }
+    }
+    private View createResView(DiningReservation reservation) {
+        LinearLayout resLayout = new LinearLayout(this);
+        resLayout.setOrientation(LinearLayout.VERTICAL);
+        resLayout.setPadding(10, 10, 10, 10);
+
+        TextView locationText = new TextView(this);
+        locationText.setText(reservation.getLocation());
+        resLayout.addView(locationText);
+
+        TextView websiteText = new TextView(this);
+        websiteText.setText("Website: " + reservation.getWebsite());
+        resLayout.addView(websiteText);
+
+
+        TextView timeText = new TextView(this);
+        timeText.setText(reservation.getTime());
+        resLayout.addView(timeText);
+        return resLayout;
+    }
+    /**
+    private boolean isPastDate(String date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
+        try {
+            Date checkOutDate = sdf.parse(date);
+            return checkOutDate.before(new Date());
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+**/
 
     private void saveDiningToDatabase() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -114,7 +201,7 @@ public class DiningEstablishment extends AppCompatActivity {
         String date = timeEditText.getText().toString();
 
         DiningReservation diningPlace = new DiningReservation(location, website, date);
-
+        DiningReservationStorage.getInstance().addDiningReservation(diningPlace);
         DatabaseReference diningRef =
                 database.child("users").child(userId).child("diningReservations");
 
@@ -122,6 +209,7 @@ public class DiningEstablishment extends AppCompatActivity {
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(this, "Dining reservation saved successfully",
                             Toast.LENGTH_SHORT).show();
+                    loadReservations();
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Failed to save dining reservation",
@@ -212,5 +300,6 @@ public class DiningEstablishment extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
 
 }
