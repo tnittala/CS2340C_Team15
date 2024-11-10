@@ -18,6 +18,8 @@ import android.widget.Spinner;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 import androidx.activity.EdgeToEdge;
@@ -32,10 +34,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.List;
+import androidx.core.content.ContextCompat;
+
 
 public class Accommodations extends AppCompatActivity {
 
@@ -53,7 +59,6 @@ public class Accommodations extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_accommodations);
 
         checkInInput = findViewById(R.id.checkIn);
@@ -66,6 +71,8 @@ public class Accommodations extends AppCompatActivity {
         accommodationList = findViewById(R.id.accommodationList);
 
         database = FirebaseDatabase.getInstance().getReference();
+
+//        loadReservations(); //NEWWW
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -150,6 +157,75 @@ public class Accommodations extends AppCompatActivity {
         }
     }
 
+    private void loadReservations() {
+        List<TravelLog> logs = TravelLogStorage.getInstance().getTravelLogs();
+
+        // Sort logs by start date
+        Collections.sort(logs, (log1, log2) -> log1.getStartDate().compareTo(log2.getStartDate()));
+        accommodationList.removeAllViews();
+
+        for (int i = 0; i < logs.size(); i++) {
+            TravelLog log = logs.get(i);
+            View logView = createLogView(log);
+
+            if (isPastDate(log.getEndDate())) {
+                logView.setBackgroundColor(ContextCompat.getColor(this, R.color.past_date_background));
+            }
+
+            accommodationList.addView(logView);
+
+            // Add a divider line between entries
+            if (i < logs.size() - 1) { // Avoid adding a divider after the last item
+                View divider = new View(this);
+                divider.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        2  // Height of the divider line
+                ));
+                divider.setBackgroundColor(ContextCompat.getColor(this, R.color.divider_color)); // Set divider color
+                accommodationList.addView(divider);
+            }
+        }
+    }
+
+
+    private View createLogView(TravelLog log) {
+        LinearLayout logLayout = new LinearLayout(this);
+        logLayout.setOrientation(LinearLayout.VERTICAL);
+        logLayout.setPadding(10, 10, 10, 10);
+
+        TextView locationText = new TextView(this);
+        locationText.setText(log.getLocation());
+        logLayout.addView(locationText);
+
+        TextView checkInText = new TextView(this);
+        checkInText.setText("Check-in: " + log.getStartDate());
+        logLayout.addView(checkInText);
+
+        TextView checkOutText = new TextView(this);
+        checkOutText.setText("Check-out: " + log.getEndDate());
+        logLayout.addView(checkOutText);
+
+        TextView roomTypeText = new TextView(this);
+        roomTypeText.setText(log.getRoomType());
+        logLayout.addView(roomTypeText);
+
+        return logLayout;
+    }
+
+    private boolean isPastDate(String date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
+        try {
+            Date checkOutDate = sdf.parse(date);
+            return checkOutDate.before(new Date());
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
+
     private void showDatePicker(EditText dateInput) {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -169,43 +245,48 @@ public class Accommodations extends AppCompatActivity {
 
     private void saveTravelLog() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        String userId = currentUser.getUid();
-        String location = accomLocInput.getText().toString();
-        String checkIn = checkInInput.getText().toString();
-        String checkOut = checkOutInput.getText().toString();
         if (currentUser == null) {
             Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show();
             return;
         }
+        String userId = currentUser.getUid();
+        String location = accomLocInput.getText().toString();
+        String checkIn = checkInInput.getText().toString();
+        String checkOut = checkOutInput.getText().toString();
+        String roomType = dropdownRoomType.getSelectedItem().toString();
+
         if (location.isEmpty() || checkIn.isEmpty() || checkOut.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
         if (checkIn.compareTo(checkOut) > 0) {
-            Toast.makeText(this, "Check in date must be before check out date",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Check-in date must be before check-out date", Toast.LENGTH_SHORT).show();
             return;
         }
         if (!isValidDate(checkIn) || !isValidDate(checkOut)) {
-            Toast.makeText(this, "Invalid date format! Use MM/DD/YYYY",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Invalid date format! Use MM/DD/YY", Toast.LENGTH_SHORT).show();
             return;
         }
-        TravelLog log = new TravelLog(location, checkIn, checkOut);
+
+        TravelLog log = new TravelLog(location, checkIn, checkOut, roomType);
         DatabaseReference accommodation = database.child("users").child(userId).child("accommodation");
         TravelLogStorage.getInstance().addTravelLog(log);
-        addLogToGrid(log);
+//        addLogToGrid(log);
         accommodation.push().setValue(log)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(this, "Accommodation saved successfully", Toast.LENGTH_SHORT).show();
+                    // Call loadReservations() here to refresh the list
+                    loadReservations();
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Failed to save accommodation", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 });
+
         clearForm();
         accomFormLayout.setVisibility(View.GONE);
     }
+
 
     private void clearForm() {
         checkInInput.setText("");
@@ -213,44 +294,6 @@ public class Accommodations extends AppCompatActivity {
         accomLocInput.setText("");
         numRoomsInput.setText("");
         roomTypeInput.setText("");
-    }
-
-    private void addLogToGrid(TravelLog log) {
-        LinearLayout rowLayout = new LinearLayout(this);
-        rowLayout.setOrientation(LinearLayout.HORIZONTAL);
-        rowLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-
-        LinearLayout.LayoutParams locationParams = new LinearLayout.LayoutParams(
-                0,
-                LinearLayout.LayoutParams.WRAP_CONTENT, 1f
-        );
-        locationParams.setMargins(0, 0, 16, 16);
-
-        LinearLayout.LayoutParams daysParams = new LinearLayout.LayoutParams(
-                0,
-                LinearLayout.LayoutParams.WRAP_CONTENT, 1f
-        );
-
-        TextView locationView = new TextView(this);
-        locationView.setText(log.getLocation());
-        locationView.setPadding(8, 8, 8, 8);
-        locationView.setTextSize(16);
-        locationView.setGravity(Gravity.START);
-        locationView.setLayoutParams(locationParams);
-
-        TextView daysView = new TextView(this);
-        daysView.setPadding(8, 8, 8, 8);
-        daysView.setTextSize(16);
-        daysView.setGravity(Gravity.END);
-        daysView.setLayoutParams(daysParams);
-
-        rowLayout.addView(locationView);
-        rowLayout.addView(daysView);
-
-        accommodationList.addView(rowLayout);
     }
 
     private boolean isValidDate(String date) {
