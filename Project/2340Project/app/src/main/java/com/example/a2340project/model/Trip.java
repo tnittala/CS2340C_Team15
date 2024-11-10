@@ -3,16 +3,47 @@ package com.example.a2340project.model;
 import java.util.List;
 
 public class Trip {
-    private String tripId;
     private String destination;
-    private List<User> contributors;
-    private List<Note> notes;
+    private String startDate;
+    private String endDate;
+    private String tripId;
+    private String createdBy;
+    private boolean isCollaborative;
 
-    public Trip() {} // Default constructor for Firebase
+    public Trip() {}
 
-    public Trip(String tripId, String destination) {
-        this.tripId = tripId;
+    public Trip(String destination, String startDate, String endDate, String tripId, String createdBy, boolean isCollaborative) {
         this.destination = destination;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.tripId = tripId;
+        this.createdBy = createdBy;
+        this.isCollaborative = isCollaborative;
+    }
+
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public String getTripId() {
@@ -23,19 +54,19 @@ public class Trip {
         this.tripId = tripId;
     }
 
-    public List<User> getContributors() {
-        return contributors;
+    public String getCreatedBy() {
+        return createdBy;
     }
 
-    public void setContributors(List<User> contributors) {
-        this.contributors = contributors;
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 
-    public List<Note> getNotes() {
-        return notes;
+    public boolean isCollaborative() {
+        return isCollaborative;
     }
 
-    public void setNotes(List<Note> notes) {
-        this.notes = notes;
+    public void setCollaborative(boolean collaborative) {
+        isCollaborative = collaborative;
     }
 }
