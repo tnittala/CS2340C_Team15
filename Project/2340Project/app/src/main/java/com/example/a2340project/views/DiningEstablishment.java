@@ -1,8 +1,12 @@
 package com.example.a2340project.views;
 
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,6 +14,7 @@ import android.view.View;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -123,7 +128,41 @@ public class DiningEstablishment extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 });
+
+        // also adding to dining database
+        diningRef =
+                database.child("Dining");
+        diningRef.push().setValue(diningPlace)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(this, "Dining reservation saved successfully",
+                            Toast.LENGTH_SHORT).show();
+                    //sendNotification("New Reservation", "A new reservation for " + location + " at " + date + " has been added.");
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Failed to save dining reservation",
+                            Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                });
     }
+
+
+    /*private void sendNotification(String title, String messageBody){
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "ReservationChannel")
+                .setContentTitle(title)
+                .setContentText(messageBody)
+                .setAutoCancel(true);
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("ReservationChannel",
+                    "Reservation Notifications",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        notificationManager.notify(0, notificationBuilder.build());
+    }*/
 
     private void setupNavigationButtons() {
         findViewById(R.id.homeButton).setOnClickListener(view ->
