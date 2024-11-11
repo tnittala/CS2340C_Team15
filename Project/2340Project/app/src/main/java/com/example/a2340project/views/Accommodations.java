@@ -16,9 +16,6 @@ import android.widget.Spinner;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Date;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -75,7 +72,8 @@ public class Accommodations extends AppCompatActivity {
         checkOutInput.setOnClickListener(v -> showDatePicker(checkOutInput));
         findViewById(R.id.addNewAccommodation).setOnClickListener(v -> toggleAccomFormVisibility());
         findViewById(R.id.saveAccommodation).setOnClickListener(v -> saveTravelLog());
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.accomRoomTypes, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.accomRoomTypes, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         dropdownRoomType.setAdapter(adapter);
 
@@ -114,7 +112,8 @@ public class Accommodations extends AppCompatActivity {
         diningBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Accommodations.this, DiningEstablishment.class);
+                Intent intent = new Intent(Accommodations.this,
+                        DiningEstablishment.class);
                 startActivity(intent);
             }
         });
@@ -258,19 +257,21 @@ public class Accommodations extends AppCompatActivity {
             Toast.makeText(this, "Invalid date format! Use MM/DD/YY", Toast.LENGTH_SHORT).show();
             return;
         }
-
         TravelLog log = new TravelLog(location, checkIn, checkOut, roomType);
         DatabaseReference accommodation = database.child("users").child(userId).child("accommodation");
+
         TravelLogStorage.getInstance().addTravelLog(log);
 //        addLogToGrid(log);
         accommodation.push().setValue(log)
                 .addOnSuccessListener(aVoid -> {
+
                     Toast.makeText(this, "Accommodation saved successfully", Toast.LENGTH_SHORT).show();
                     // Call loadReservations() here to refresh the list
                     loadReservations();
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Failed to save accommodation", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Failed to save accommodation",
+                            Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 });
 
