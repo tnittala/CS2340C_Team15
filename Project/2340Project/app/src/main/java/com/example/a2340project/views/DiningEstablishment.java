@@ -168,18 +168,6 @@ public class DiningEstablishment extends AppCompatActivity {
         resLayout.addView(timeText);
         return resLayout;
     }
-    /**
-    private boolean isPastDate(String date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
-        try {
-            Date checkOutDate = sdf.parse(date);
-            return checkOutDate.before(new Date());
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-**/
 
     private void saveDiningToDatabase() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
