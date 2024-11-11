@@ -268,7 +268,6 @@ public class Accommodations extends AppCompatActivity {
                 .addOnSuccessListener(aVoid -> {
 
                     Toast.makeText(this, "Accommodation saved successfully", Toast.LENGTH_SHORT).show();
-                    // Call loadReservations() here to refresh the list
                     loadReservations();
                 })
                 .addOnFailureListener(e -> {
