@@ -31,7 +31,11 @@ import com.example.a2340project.model.User;
 import com.example.a2340project.viewmodels.TripViewModel;
 import com.example.a2340project.views.NotesAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -52,7 +56,7 @@ public class Logistics extends AppCompatActivity {
         barChart.invalidate(); //this refreshes the chart
 
     }
-    private TripViewModel tripViewModel;  // New ViewModel field for handling Firebase interactions
+    private TripViewModel tripViewModel;
     private String tripId = "exampleTripId"; // Placeholder for the actual trip ID
 
 
@@ -99,14 +103,12 @@ public class Logistics extends AppCompatActivity {
 
         tripViewModel.fetchNotes(tripId);
 
-        // Set up Add Note button listener
         Button addNoteButton = findViewById(R.id.addNoteButton);
         addNoteButton.setOnClickListener(view -> openAddNoteDialog());
 
         Button addCollabButton = findViewById(R.id.inviteButton);
         addCollabButton.setOnClickListener((view -> openAddCollabDialog()));
 
-        // Original button listeners remain unchanged
         ImageButton homeBtn = findViewById(R.id.homeButton);
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,7 +175,6 @@ public class Logistics extends AppCompatActivity {
         builder.setPositiveButton("Invite", (dialog, which) -> {
             String content = input.getText().toString().trim();
             if (!content.isEmpty()) {
-                //write code for adding their name to the screen
 
                 Toast.makeText(this, "Collaborator invited", Toast.LENGTH_SHORT).show();
             } else {
@@ -185,7 +186,6 @@ public class Logistics extends AppCompatActivity {
         builder.show();
     }
 
-    // Method to open the Add Note dialog
     private void openAddNoteDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Add Note");
@@ -197,11 +197,8 @@ public class Logistics extends AppCompatActivity {
         builder.setPositiveButton("Add", (dialog, which) -> {
             String content = input.getText().toString().trim();
             if (!content.isEmpty()) {
-                // Retrieve the current user ID (ensure user is authenticated)
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                // Create a new Note object
                 Note note = new Note(null, userId, content, System.currentTimeMillis());
-                // Add the note to the trip
                 tripViewModel.addNoteToTrip(tripId, note);
                 Toast.makeText(this, "Note added", Toast.LENGTH_SHORT).show();
             } else {
@@ -212,4 +209,67 @@ public class Logistics extends AppCompatActivity {
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
         builder.show();
     }
+
+    //use to allow collaborators to modify plans
+    private void openModifyTripDialog() {
+        tripViewModel.isUserCollaboratorWithEditPermissions(tripId, FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .observe(this, canEdit -> {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Trip Details");
+
+                    View dialogView = getLayoutInflater().inflate(R.layout.dialog_modify_trip, null);
+                    builder.setView(dialogView);
+
+                    EditText destinationField = dialogView.findViewById(R.id.editDestination);
+                    EditText startDateField = dialogView.findViewById(R.id.editStartDate);
+                    EditText endDateField = dialogView.findViewById(R.id.editEndDate);
+
+                    tripViewModel.getTripDetails(tripId).observe(this, trip -> {
+                        if (trip != null) {
+                            destinationField.setText(trip.getDestination());
+                            startDateField.setText(trip.getStartDate());
+                            endDateField.setText(trip.getEndDate());
+                        }
+                    });
+
+                    destinationField.setEnabled(canEdit);
+                    startDateField.setEnabled(canEdit);
+                    endDateField.setEnabled(canEdit);
+
+                    builder.setPositiveButton("Save", (dialog, which) -> {
+                        if (canEdit) {
+                            String newDestination = destinationField.getText().toString().trim();
+                            String newStartDate = startDateField.getText().toString().trim();
+                            String newEndDate = endDateField.getText().toString().trim();
+
+                            if (validateDates(newStartDate, newEndDate)) {
+                                tripViewModel.updateTripDetails(tripId, newDestination, newStartDate, newEndDate);
+                                Toast.makeText(this, "Trip details updated", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(this, "Invalid date range", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(this, "You do not have permission to edit this trip.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+                    builder.show();
+                });
+    }
+    private boolean validateDates(String startDate, String endDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Adjust format if necessary
+        try {
+            Date start = dateFormat.parse(startDate);
+            Date end = dateFormat.parse(endDate);
+            if (start != null && end != null) {
+                return start.before(end);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
 }
