@@ -11,8 +11,15 @@ public class ReservationManager {
         this.sortStrategy = sortStrategy;
     }
 
+    public SortStrategy getSortStrategy() {
+        return sortStrategy;
+    }
+
     public List<DiningReservation> sortReservations(List<DiningReservation> reservations) {
-        return sortStrategy.sort(reservations);
+        if (sortStrategy != null) {
+            return sortStrategy.sort(reservations);
+        }
+        return reservations;
     }
 
     public void addObserver(ReservationObserver observer) {
