@@ -225,7 +225,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="#c0c0c0"
-        android:columnCount="2"
+        android:columnCount="1"
         android:orientation="horizontal"
         android:padding="16dp"
         android:textAlignment="center"
