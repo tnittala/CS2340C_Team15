@@ -1,4 +1,5 @@
-package com.example.a2340project.views;
+package com.example.a2340project.model;
+
 import java.util.ArrayList;
 import java.util.List;
 

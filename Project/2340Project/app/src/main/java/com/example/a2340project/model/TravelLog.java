@@ -1,4 +1,4 @@
-package com.example.a2340project.views;
+package com.example.a2340project.model;
 
 public class TravelLog {
     private final String location;
