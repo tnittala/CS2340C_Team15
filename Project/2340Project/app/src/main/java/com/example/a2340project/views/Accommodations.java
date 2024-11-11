@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.GridLayout;
@@ -12,24 +11,19 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.a2340project.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -77,7 +71,8 @@ public class Accommodations extends AppCompatActivity {
         checkOutInput.setOnClickListener(v -> showDatePicker(checkOutInput));
         findViewById(R.id.addNewAccommodation).setOnClickListener(v -> toggleAccomFormVisibility());
         findViewById(R.id.saveAccommodation).setOnClickListener(v -> saveTravelLog());
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.accomRoomTypes, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.accomRoomTypes, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         dropdownRoomType.setAdapter(adapter);
 
@@ -116,7 +111,8 @@ public class Accommodations extends AppCompatActivity {
         diningBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Accommodations.this, DiningEstablishment.class);
+                Intent intent = new Intent(Accommodations.this,
+                        DiningEstablishment.class);
                 startActivity(intent);
             }
         });
@@ -192,15 +188,18 @@ public class Accommodations extends AppCompatActivity {
             return;
         }
         TravelLog log = new TravelLog(location, checkIn, checkOut);
-        DatabaseReference accommodation = database.child("users").child(userId).child("accommodation");
+        DatabaseReference accommodation = database.child("users").child(userId).child(
+                "accommodation");
         TravelLogStorage.getInstance().addTravelLog(log);
         addLogToGrid(log);
         accommodation.push().setValue(log)
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(this, "Accommodation saved successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Accommodation saved successfully",
+                            Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Failed to save accommodation", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Failed to save accommodation",
+                            Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 });
         clearForm();
