@@ -3,11 +3,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#808080</color>
-
-
     <color name="divider_color">#000000</color>
-
-   
-
-
+    <color name="past_date_background">#FFCCCC</color>
 </resources>
