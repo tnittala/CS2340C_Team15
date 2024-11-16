@@ -31,6 +31,11 @@ import android.widget.Toast;
 
 import com.example.a2340project.R;
 import com.example.a2340project.model.DiningReservation;
+
+import com.example.a2340project.model.ReservationManager;
+import com.example.a2340project.model.ReservationObserver;
+import com.example.a2340project.model.SortStrategy;
+
 import com.example.a2340project.model.DiningReservationStorage;
 import com.example.a2340project.model.TravelLog;
 import com.example.a2340project.model.TravelLogStorage;
@@ -42,8 +47,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import java.util.List;
+
 import java.util.Collections;
 import java.util.Locale;
+import com.example.a2340project.model.ReservationManager;
+import com.example.a2340project.model.SortByDate;
+
 
 import android.os.Bundle;
 import android.graphics.Color;
@@ -65,21 +76,34 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class DiningEstablishment extends AppCompatActivity {
+public class DiningEstablishment extends AppCompatActivity implements ReservationObserver {
+  
+
     private DatabaseReference database;
     private FirebaseAuth auth;
     private FirebaseFirestore db;
     private EditText locationEditText;
     private EditText websiteEditText;
     private EditText timeEditText;
+
+    private ReservationManager reservationManager;
+    private List<DiningReservation> reservations; // this is the sorted list to display
+
     //private LinearLayout FormLayout;
     private GridLayout reservationList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_dining_establishment);
+
+        reservationManager = new ReservationManager();
+        //reservationManager.addObserver(this);
+
+        // Set default sorting strategy
+        reservationManager.setSortStrategy(new SortByDate());
 
         Button addReservationButton = findViewById(R.id.addReservationButton);
         LinearLayout reservationForm = findViewById(R.id.addReservationOverlay);
@@ -174,6 +198,20 @@ public class DiningEstablishment extends AppCompatActivity {
         timeText.setText(reservation.getTime());
         resLayout.addView(timeText);
         return resLayout;
+    }
+
+    private void applySort(SortStrategy sortStrategy) {
+        reservationManager.setSortStrategy(sortStrategy);
+        reservations = reservationManager.sortReservations(reservations);
+        // Refresh the UI with sorted data
+    }
+
+    // Called when a new reservation is added
+    @Override
+    public void onReservationAdded(DiningReservation reservation) {
+        reservations.add(reservation);
+        applySort(reservationManager.getSortStrategy());  // Apply current sorting strategy
+        // Update UI
     }
 
     private void saveDiningToDatabase() {

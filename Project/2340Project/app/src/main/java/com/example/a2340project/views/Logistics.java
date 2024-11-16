@@ -210,6 +210,7 @@ public class Logistics extends AppCompatActivity {
         builder.show();
     }
 
+    //use to allow collaborators to modify plans
     private void openModifyTripDialog() {
         tripViewModel.isUserCollaboratorWithEditPermissions(tripId, FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .observe(this, canEdit -> {
