@@ -37,7 +37,7 @@ public class Trip {
     public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
-
+    //getting the end date of travel plan
     public String getEndDate() {
         return endDate;
     }
