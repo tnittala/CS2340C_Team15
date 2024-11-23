@@ -1,12 +1,8 @@
 package com.example.a2340project.views;
 
 import android.app.DatePickerDialog;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,12 +12,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.core.content.ContextCompat;
-import androidx.core.app.NotificationCompat;
 
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,44 +31,22 @@ import com.example.a2340project.model.ReservationObserver;
 import com.example.a2340project.model.SortStrategy;
 
 import com.example.a2340project.model.DiningReservationStorage;
-import com.example.a2340project.model.TravelLog;
-import com.example.a2340project.model.TravelLogStorage;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import java.util.List;
 
 import java.util.Collections;
 import java.util.Locale;
-import com.example.a2340project.model.ReservationManager;
 import com.example.a2340project.model.SortByDate;
 
 
-import android.os.Bundle;
-import android.graphics.Color;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class DiningEstablishment extends AppCompatActivity implements ReservationObserver {
   
@@ -130,15 +102,18 @@ public class DiningEstablishment extends AppCompatActivity implements Reservatio
             String location = locationEditText.getText().toString().trim();
             String website = websiteEditText.getText().toString().trim();
             String time = timeEditText.getText().toString().trim();
-            if (!TextUtils.isEmpty(location) && !TextUtils.isEmpty(website) && !TextUtils.isEmpty(time)) {
+            if (!TextUtils.isEmpty(location) && !TextUtils.isEmpty(website)
+                    && !TextUtils.isEmpty(time)) {
                 saveDiningToDatabase();
-                Toast.makeText(this, "Reservation saved for " + time, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Reservation saved for " + time,
+                        Toast.LENGTH_SHORT).show();
                 locationEditText.setText("");
                 websiteEditText.setText("");
                 timeEditText.setText("");
                 reservationForm.setVisibility(View.GONE);
             } else {
-                Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please fill out all fields",
+                        Toast.LENGTH_SHORT).show();
             }
         });
         auth = FirebaseAuth.getInstance();
@@ -155,17 +130,14 @@ public class DiningEstablishment extends AppCompatActivity implements Reservatio
         setupNavigationButtons();
     }
     private void loadReservations() {
-        List<DiningReservation> reservations = DiningReservationStorage.getInstance().getDiningReservations();
+        List<DiningReservation> reservations = DiningReservationStorage.getInstance().
+                getDiningReservations();
         // Sort logs by start date
         Collections.sort(reservations, (res1, res2) -> res1.getTime().compareTo(res2.getTime()));
         reservationList.removeAllViews();
         for (int i = 0; i < reservations.size(); i++) {
             DiningReservation log = reservations.get(i);
             View resView = createResView(log);
-
-            //if (isPastDate(log.getEndDate())) {
-           //     logView.setBackgroundColor(ContextCompat.getColor(this, R.color.past_date_background));
-           // }
 
             reservationList.addView(resView);
             // Add a divider line between entries
@@ -175,7 +147,8 @@ public class DiningEstablishment extends AppCompatActivity implements Reservatio
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         2  // Height of the divider line
                 ));
-                divider.setBackgroundColor(ContextCompat.getColor(this, R.color.divider_color)); // Set divider color
+                divider.setBackgroundColor(ContextCompat.getColor(this,
+                        R.color.divider_color)); // Set divider color
                 reservationList.addView(divider);
             }
         }
@@ -199,18 +172,6 @@ public class DiningEstablishment extends AppCompatActivity implements Reservatio
         resLayout.addView(timeText);
         return resLayout;
     }
-    /**
-    private boolean isPastDate(String date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
-        try {
-            Date checkOutDate = sdf.parse(date);
-            return checkOutDate.before(new Date());
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-**/
 
     private void applySort(SortStrategy sortStrategy) {
         reservationManager.setSortStrategy(sortStrategy);
@@ -241,7 +202,8 @@ public class DiningEstablishment extends AppCompatActivity implements Reservatio
         DiningReservation diningPlace = new DiningReservation(location, website, date);
         DiningReservationStorage.getInstance().addDiningReservation(diningPlace);
         DatabaseReference diningRef =
-                database.child("users").child(userId).child("diningReservations");
+                database.child("users").child(userId).child(
+                        "diningReservations");
 
         diningRef.push().setValue(diningPlace)
                 .addOnSuccessListener(aVoid -> {
@@ -262,7 +224,6 @@ public class DiningEstablishment extends AppCompatActivity implements Reservatio
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(this, "Dining reservation saved successfully",
                             Toast.LENGTH_SHORT).show();
-                    //sendNotification("New Reservation", "A new reservation for " + location + " at " + date + " has been added.");
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Failed to save dining reservation",
@@ -270,25 +231,6 @@ public class DiningEstablishment extends AppCompatActivity implements Reservatio
                     e.printStackTrace();
                 });
     }
-
-
-    /*private void sendNotification(String title, String messageBody){
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "ReservationChannel")
-                .setContentTitle(title)
-                .setContentText(messageBody)
-                .setAutoCancel(true);
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("ReservationChannel",
-                    "Reservation Notifications",
-                    NotificationManager.IMPORTANCE_DEFAULT);
-            notificationManager.createNotificationChannel(channel);
-        }
-
-        notificationManager.notify(0, notificationBuilder.build());
-    }*/
 
     private void setupNavigationButtons() {
         findViewById(R.id.homeButton).setOnClickListener(view ->
@@ -323,7 +265,8 @@ public class DiningEstablishment extends AppCompatActivity implements Reservatio
         int minute = calendar.get(Calendar.MINUTE);
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
                 (view, selectedHour, selectedMinute) -> {
-                    String formattedDateTime = String.format(Locale.US, "%02d/%02d/%d %02d:%02d",
+                    String formattedDateTime = String.format(Locale.US,
+                            "%02d/%02d/%d %02d:%02d",
                             month + 1, day, year, selectedHour, selectedMinute);
                     dateInput.setText(formattedDateTime);
                 }, hour, minute, true); // 'true' for 24-hour format
@@ -331,7 +274,8 @@ public class DiningEstablishment extends AppCompatActivity implements Reservatio
     }
 
     private void showAlert(String title, String message) {
-        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.
+                app.AlertDialog.Builder(this);
         builder.setTitle(title)
                 .setMessage(message)
                 .setPositiveButton("OK", null);
