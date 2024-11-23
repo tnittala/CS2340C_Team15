@@ -8,31 +8,19 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import com.example.a2340project.model.TravelLogStorage;
 import android.widget.Toast;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import com.example.a2340project.model.TravelLog;
 
 import com.example.a2340project.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import androidx.core.content.ContextCompat;
 
 public class TravelCommunity extends AppCompatActivity {
     private EditText startDate;
@@ -109,7 +97,8 @@ public class TravelCommunity extends AppCompatActivity {
         diningBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TravelCommunity.this, DiningEstablishment.class);
+                Intent intent = new Intent(TravelCommunity.this,
+                        DiningEstablishment.class);
                 startActivity(intent);
             }
         });
@@ -119,7 +108,8 @@ public class TravelCommunity extends AppCompatActivity {
         accommodationsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TravelCommunity.this, Accommodations.class);
+                Intent intent = new Intent(TravelCommunity.this,
+                        Accommodations.class);
                 startActivity(intent);
             }
         });
@@ -129,7 +119,8 @@ public class TravelCommunity extends AppCompatActivity {
         communityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TravelCommunity.this, TravelCommunity.class);
+                Intent intent = new Intent(TravelCommunity.this,
+                        TravelCommunity.class);
                 startActivity(intent);
             }
         });
@@ -169,7 +160,8 @@ public class TravelCommunity extends AppCompatActivity {
             Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (location.isEmpty() || dining.isEmpty() || accomodation.isEmpty() || startDateInput.isEmpty() || endDateInput.isEmpty()) {
+        if (location.isEmpty() || dining.isEmpty() || accomodation.isEmpty()
+                || startDateInput.isEmpty() || endDateInput.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
