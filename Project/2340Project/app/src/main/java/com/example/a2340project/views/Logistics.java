@@ -3,13 +3,13 @@ package com.example.a2340project.views;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -21,28 +21,60 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.a2340project.R;
 import com.example.a2340project.model.Note;
+import com.example.a2340project.viewmodels.TripViewModel;
+import com.example.a2340project.views.NotesAdapter;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
-import com.example.a2340project.model.User;
-import com.example.a2340project.viewmodels.TripViewModel;
-import com.example.a2340project.views.NotesAdapter;
 import com.google.firebase.auth.FirebaseAuth;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.ArrayList;
 
 public class Logistics extends AppCompatActivity {
 
+    private BarChart barChart;
+    private TripViewModel tripViewModel;
+    private String tripId = "exampleTripId"; // Placeholder for the actual trip ID
 
-    public BarChart barChart;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_logistics);
+
+        setupEdgeToEdge();
+        setupGraphButton();
+        setupRecyclerView();
+        setupNoteButtons();
+        setupNavigationButtons();
+
+        tripViewModel = new ViewModelProvider(this).get(TripViewModel.class);
+        tripViewModel.fetchNotes(tripId);
+        if (tripViewModel == null) {
+            Log.e("Logistics", "TripViewModel is null");
+            return;
+        }
+
+        setupRecyclerView();
+    }
+
+    private void setupEdgeToEdge() {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+    }
+
+    private void setupGraphButton() {
+        barChart = findViewById(R.id.barChart);
+        Button graphButton = findViewById(R.id.button_tripgraph);
+        graphButton.setOnClickListener(v -> graphTrips());
+    }
 
     public void graphTrips() {
         ArrayList<BarEntry> entries = new ArrayList<>();
@@ -53,114 +85,45 @@ public class Logistics extends AppCompatActivity {
         dataSet.setColors(Color.RED, Color.BLUE);
         BarData barData = new BarData(dataSet);
         barChart.setData(barData);
-        barChart.invalidate(); //this refreshes the chart
-
+        barChart.invalidate(); // Refresh the chart
     }
-    private TripViewModel tripViewModel;
-    private String tripId = "exampleTripId"; // Placeholder for the actual trip ID
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_logistics);
-
-        // Set up window insets for edge-to-edge display
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
-
-        Button graphButton = findViewById(R.id.button_tripgraph);
-        barChart = findViewById(R.id.barChart);
-
-        graphButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                graphTrips();
-            }
-        });
-
-        // home button
-
-        tripViewModel = new ViewModelProvider(this).get(TripViewModel.class);
-
-        // Set up RecyclerView for displaying notes
+    private void setupRecyclerView() {
+        if (tripViewModel == null) {
+            Log.e("Logistics", "TripViewModel is null during setupRecyclerView");
+            return;
+        }
         RecyclerView notesRecyclerView = findViewById(R.id.notesRecyclerView);
         notesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         NotesAdapter notesAdapter = new NotesAdapter(new ArrayList<>());
         notesRecyclerView.setAdapter(notesAdapter);
 
-        tripViewModel.getNotes().observe(this, new Observer<List<Note>>() {
-            @Override
-            public void onChanged(List<Note> notes) {
-                notesAdapter.setNotes(notes);
-            }
-        });
+        tripViewModel.getNotes().observe(this, notesAdapter::setNotes);
+    }
 
-        tripViewModel.fetchNotes(tripId);
-
+    private void setupNoteButtons() {
         Button addNoteButton = findViewById(R.id.addNoteButton);
         addNoteButton.setOnClickListener(view -> openAddNoteDialog());
 
         Button addCollabButton = findViewById(R.id.inviteButton);
-        addCollabButton.setOnClickListener((view -> openAddCollabDialog()));
+        addCollabButton.setOnClickListener(view -> openAddCollabDialog());
+    }
 
-        ImageButton homeBtn = findViewById(R.id.homeButton);
-        homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Logistics.this, HomeScreen.class);
-                startActivity(intent);
-            }
-        });
+    private void setupNavigationButtons() {
+        setupNavigationButton(R.id.homeButton, HomeScreen.class);
+        setupNavigationButton(R.id.destinationsButton, Destination.class);
+        setupNavigationButton(R.id.logisticsButton, Logistics.class);
+        setupNavigationButton(R.id.diningButton, DiningEstablishment.class);
+        setupNavigationButton(R.id.accommodationsButton, Accommodations.class);
+        setupNavigationButton(R.id.communityButton, TravelCommunity.class);
+    }
 
-        ImageButton destinationsBtn = findViewById(R.id.destinationsButton);
-        destinationsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Logistics.this, Destination.class);
-                startActivity(intent);
-            }
-        });
-
-        ImageButton logisticsBtn = findViewById(R.id.logisticsButton);
-        logisticsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Logistics.this, Logistics.class);
-                startActivity(intent);
-            }
-        });
-
-        ImageButton diningBtn = findViewById(R.id.diningButton);
-        diningBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Logistics.this, DiningEstablishment.class);
-                startActivity(intent);
-            }
-        });
-
-        ImageButton accommodationsBtn = findViewById(R.id.accommodationsButton);
-        accommodationsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Logistics.this, Accommodations.class);
-                startActivity(intent);
-            }
-        });
-
-        ImageButton communityBtn = findViewById(R.id.communityButton);
-        communityBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Logistics.this, TravelCommunity.class);
-                startActivity(intent);
-            }
+    private void setupNavigationButton(int buttonId, Class<?> targetActivity) {
+        ImageButton button = findViewById(buttonId);
+        button.setOnClickListener(view -> {
+            Intent intent = new Intent(Logistics.this, targetActivity);
+            startActivity(intent);
         });
     }
 
@@ -175,8 +138,7 @@ public class Logistics extends AppCompatActivity {
         builder.setPositiveButton("Invite", (dialog, which) -> {
             String content = input.getText().toString().trim();
             if (!content.isEmpty()) {
-
-                Toast.makeText(this, "Collaborator invited", Toast.LENGTH_SHORT).show();
+                inviteCollaborator(content);
             } else {
                 Toast.makeText(this, "Please enter a username", Toast.LENGTH_SHORT).show();
             }
@@ -184,6 +146,16 @@ public class Logistics extends AppCompatActivity {
 
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
         builder.show();
+    }
+
+    private void inviteCollaborator(String username) {
+        tripViewModel.inviteCollaboratorToTrip(tripId, username).observe(this, success -> {
+            if (success) {
+                Toast.makeText(this, "Collaborator invited", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Failed to invite collaborator", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void openAddNoteDialog() {
@@ -197,10 +169,7 @@ public class Logistics extends AppCompatActivity {
         builder.setPositiveButton("Add", (dialog, which) -> {
             String content = input.getText().toString().trim();
             if (!content.isEmpty()) {
-                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                Note note = new Note(null, userId, content, System.currentTimeMillis());
-                tripViewModel.addNoteToTrip(tripId, note);
-                Toast.makeText(this, "Note added", Toast.LENGTH_SHORT).show();
+                addNoteToTrip(content);
             } else {
                 Toast.makeText(this, "Please enter a note", Toast.LENGTH_SHORT).show();
             }
@@ -210,66 +179,17 @@ public class Logistics extends AppCompatActivity {
         builder.show();
     }
 
-    //use to allow collaborators to modify plans
-    private void openModifyTripDialog() {
-        tripViewModel.isUserCollaboratorWithEditPermissions(tripId, FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .observe(this, canEdit -> {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Trip Details");
+    private void addNoteToTrip(String content) {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Note note = new Note(null, userId, content, System.currentTimeMillis());
 
-                    View dialogView = getLayoutInflater().inflate(R.layout.dialog_modify_trip, null);
-                    builder.setView(dialogView);
-
-                    EditText destinationField = dialogView.findViewById(R.id.editDestination);
-                    EditText startDateField = dialogView.findViewById(R.id.editStartDate);
-                    EditText endDateField = dialogView.findViewById(R.id.editEndDate);
-
-                    tripViewModel.getTripDetails(tripId).observe(this, trip -> {
-                        if (trip != null) {
-                            destinationField.setText(trip.getDestination());
-                            startDateField.setText(trip.getStartDate());
-                            endDateField.setText(trip.getEndDate());
-                        }
-                    });
-
-                    destinationField.setEnabled(canEdit);
-                    startDateField.setEnabled(canEdit);
-                    endDateField.setEnabled(canEdit);
-
-                    builder.setPositiveButton("Save", (dialog, which) -> {
-                        if (canEdit) {
-                            String newDestination = destinationField.getText().toString().trim();
-                            String newStartDate = startDateField.getText().toString().trim();
-                            String newEndDate = endDateField.getText().toString().trim();
-
-                            if (validateDates(newStartDate, newEndDate)) {
-                                tripViewModel.updateTripDetails(tripId, newDestination, newStartDate, newEndDate);
-                                Toast.makeText(this, "Trip details updated", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(this, "Invalid date range", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(this, "You do not have permission to edit this trip.", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                    builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
-                    builder.show();
-                });
-    }
-    private boolean validateDates(String startDate, String endDate) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Adjust format if necessary
-        try {
-            Date start = dateFormat.parse(startDate);
-            Date end = dateFormat.parse(endDate);
-            if (start != null && end != null) {
-                return start.before(end);
+        tripViewModel.addNoteToTrip(tripId, note).observe(this, isSuccessful -> {
+            if (Boolean.TRUE.equals(isSuccessful)) {
+                Toast.makeText(this, "Note added", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Failed to add note", Toast.LENGTH_SHORT).show();
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return false;
+        });
     }
-
 
 }

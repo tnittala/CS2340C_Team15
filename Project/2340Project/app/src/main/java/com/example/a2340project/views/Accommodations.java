@@ -23,6 +23,10 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.a2340project.model.TravelLog;
 
 import com.example.a2340project.R;
+import com.example.a2340project.model.TravelLog;
+import com.example.a2340project.model.TravelLogStorage;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -206,7 +210,7 @@ public class Accommodations extends AppCompatActivity {
         return logLayout;
     }
 
-    private boolean isPastDate(String date) {
+    public static boolean isPastDate(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
         try {
             Date checkOutDate = sdf.parse(date);
@@ -216,9 +220,6 @@ public class Accommodations extends AppCompatActivity {
             return false;
         }
     }
-
-
-
 
     private void showDatePicker(EditText dateInput) {
         Calendar calendar = Calendar.getInstance();
@@ -294,7 +295,7 @@ public class Accommodations extends AppCompatActivity {
         roomTypeInput.setText("");
     }
 
-    private boolean isValidDate(String date) {
+    public static boolean isValidDate(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
         sdf.setLenient(false);
         try {
