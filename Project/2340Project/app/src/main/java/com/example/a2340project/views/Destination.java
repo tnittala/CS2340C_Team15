@@ -256,15 +256,18 @@ public class Destination extends AppCompatActivity {
             return;
         }
         TravelLog log = new TravelLog(location, startDate, endDate, roomType);
-        DatabaseReference travelLog = database.child("users").child(userId).child("logTravel");
+        DatabaseReference travelLog = database.child("users").child(userId).child(
+                "logTravel");
         TravelLogStorage.getInstance().addTravelLog(log);
         addLogToGrid(log);
         travelLog.push().setValue(log)
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(this, "Travel log saved successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Travel log saved successfully",
+                            Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Failed to save travel log", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Failed to save travel log",
+                            Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 });
         clearForm();
