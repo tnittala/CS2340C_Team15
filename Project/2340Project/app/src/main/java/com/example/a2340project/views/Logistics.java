@@ -6,12 +6,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -20,7 +24,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.a2340project.R;
+import com.example.a2340project.model.DiningReservation;
+import com.example.a2340project.model.DiningReservationStorage;
 import com.example.a2340project.model.Note;
+import com.example.a2340project.model.NotesStorage;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -37,6 +44,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
@@ -46,6 +54,8 @@ public class Logistics extends AppCompatActivity {
 
     public BarChart barChart;
     private DatabaseReference database;
+    private List<Note> notes;
+    private GridLayout notesList; // might need to create this in XML
 
     public void graphTrips() {
         ArrayList<BarEntry> entries = new ArrayList<>();
@@ -79,6 +89,7 @@ public class Logistics extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference();
         Button graphButton = findViewById(R.id.button_tripgraph);
         barChart = findViewById(R.id.barChart);
+        notesList = findViewById(R.id.notesList);
 
         graphButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,22 +100,50 @@ public class Logistics extends AppCompatActivity {
 
         // home button
 
-        tripViewModel = new ViewModelProvider(this).get(TripViewModel.class);
+        //tripViewModel = new ViewModelProvider(this).get(TripViewModel.class);
 
         // Set up RecyclerView for displaying notes
-        RecyclerView notesRecyclerView = findViewById(R.id.notesRecyclerView);
+        /*RecyclerView notesRecyclerView = findViewById(R.id.notesRecyclerView);
         notesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        NotesAdapter notesAdapter = new NotesAdapter(new ArrayList<>());
-        notesRecyclerView.setAdapter(notesAdapter);
+        NotesAdapter notesAdapter = new NotesAdapter(notes);
+        notesRecyclerView.setAdapter(notesAdapter);*/
 
-        tripViewModel.getNotes().observe(this, new Observer<List<Note>>() {
+        /*tripViewModel.getNotes().observe(this, new Observer<List<Note>>() {
             @Override
             public void onChanged(List<Note> notes) {
                 notesAdapter.setNotes(notes);
             }
-        });
+        });*/
 
-        tripViewModel.fetchNotes(tripId);
+        //tripViewModel.fetchNotes(tripId);
+
+        private void loadNotes() {
+            List<Note> n = NotesStorage.getInstance().getNotesList();
+            // Sort logs by start date
+            //Collections.sort(n, (res1, res2) -> res1.getTime().compareTo(res2.getTime()));
+            notesList.removeAllViews();
+            for (int i = 0; i < n.size(); i++) {
+                Note log = n.get(i);
+                View resView = createResView(log);
+
+                //if (isPastDate(log.getEndDate())) {
+                //     logView.setBackgroundColor(ContextCompat.getColor(this, R.color.past_date_background));
+                // }
+
+                notesList.addView(resView);
+                // Add a divider line between entries
+                if (i < n.size() - 1) { // Avoid adding a divider after the last item
+                    View divider = new View(this);
+                    divider.setLayoutParams(new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            2  // Height of the divider line
+                    ));
+                    divider.setBackgroundColor(ContextCompat.getColor(this, R.color.divider_color)); // Set divider color
+                    notesList.addView(divider);
+                }
+            }
+        }
+
 
         Button addNoteButton = findViewById(R.id.addNoteButton);
         addNoteButton.setOnClickListener(view -> openAddNoteDialog());
@@ -165,6 +204,26 @@ public class Logistics extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private View createResView(Note log) {
+        LinearLayout resLayout = new LinearLayout(this);
+        resLayout.setOrientation(LinearLayout.VERTICAL);
+        resLayout.setPadding(10, 10, 10, 10);
+
+        TextView contentText = new TextView(this);
+        contentText.setText(log.getContent());
+        resLayout.addView(contentText);
+
+        TextView authorText = new TextView(this);
+        authorText.setText("Author: " + log.getAuthorId());
+        resLayout.addView(authorText);
+
+
+        //TextView timeText = new TextView(this);
+        //timeText.setText(log.getTime());
+        //resLayout.addView(timeText);
+        return resLayout;
     }
 
     private void openAddCollabDialog() {
