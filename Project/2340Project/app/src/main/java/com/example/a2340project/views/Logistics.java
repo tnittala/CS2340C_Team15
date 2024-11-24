@@ -31,6 +31,8 @@ import com.example.a2340project.model.User;
 import com.example.a2340project.viewmodels.TripViewModel;
 import com.example.a2340project.views.NotesAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,6 +45,7 @@ public class Logistics extends AppCompatActivity {
 
 
     public BarChart barChart;
+    private DatabaseReference database;
 
     public void graphTrips() {
         ArrayList<BarEntry> entries = new ArrayList<>();
@@ -73,7 +76,7 @@ public class Logistics extends AppCompatActivity {
             return insets;
         });
 
-
+        database = FirebaseDatabase.getInstance().getReference();
         Button graphButton = findViewById(R.id.button_tripgraph);
         barChart = findViewById(R.id.barChart);
 
@@ -198,8 +201,10 @@ public class Logistics extends AppCompatActivity {
             String content = input.getText().toString().trim();
             if (!content.isEmpty()) {
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                Note note = new Note(null, userId, content, System.currentTimeMillis());
-                tripViewModel.addNoteToTrip(tripId, note);
+                Note newNote = new Note(null, userId, content, System.currentTimeMillis());
+                DatabaseReference notesRef = database.child("Notes");
+                notesRef.push().setValue(newNote);
+                //tripViewModel.addNoteToTrip(tripId, note);
                 Toast.makeText(this, "Note added", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Please enter a note", Toast.LENGTH_SHORT).show();
