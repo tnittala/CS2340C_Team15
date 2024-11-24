@@ -161,7 +161,8 @@ public class Accommodations extends AppCompatActivity {
             View logView = createLogView(log);
 
             if (isPastDate(log.getEndDate())) {
-                logView.setBackgroundColor(ContextCompat.getColor(this, R.color.past_date_background));
+                logView.setBackgroundColor(ContextCompat.getColor(this,
+                        R.color.past_date_background));
             }
 
             accommodationList.addView(logView);
@@ -173,7 +174,8 @@ public class Accommodations extends AppCompatActivity {
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         2  // Height of the divider line
                 ));
-                divider.setBackgroundColor(ContextCompat.getColor(this, R.color.divider_color)); // Set divider color
+                divider.setBackgroundColor(ContextCompat.getColor(this,
+                        R.color.divider_color));
                 accommodationList.addView(divider);
             }
         }
@@ -252,22 +254,25 @@ public class Accommodations extends AppCompatActivity {
             return;
         }
         if (checkIn.compareTo(checkOut) > 0) {
-            Toast.makeText(this, "Check-in date must be before check-out date", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Check-in date must be before check-out date",
+                    Toast.LENGTH_SHORT).show();
             return;
         }
         if (!isValidDate(checkIn) || !isValidDate(checkOut)) {
-            Toast.makeText(this, "Invalid date format! Use MM/DD/YY", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Invalid date format! Use MM/DD/YY",
+                    Toast.LENGTH_SHORT).show();
             return;
         }
         TravelLog log = new TravelLog(location, checkIn, checkOut, roomType);
-        DatabaseReference accommodation = database.child("users").child(userId).child("accommodation");
+        DatabaseReference accommodation = database.child("users").child(userId).child(
+                "accommodation");
 
         TravelLogStorage.getInstance().addTravelLog(log);
-//        addLogToGrid(log);
         accommodation.push().setValue(log)
                 .addOnSuccessListener(aVoid -> {
 
-                    Toast.makeText(this, "Accommodation saved successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Accommodation saved successfully",
+                            Toast.LENGTH_SHORT).show();
                     loadReservations();
                 })
                 .addOnFailureListener(e -> {
