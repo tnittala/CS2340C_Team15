@@ -23,6 +23,6 @@ public class NotesStorage {
     }
 
     public void addNote(Note r) {
-        notes.add(r);
+        notes.add(0, r);
     }
 }

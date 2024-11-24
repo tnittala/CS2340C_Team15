@@ -120,7 +120,7 @@ public class Logistics extends AppCompatActivity {
         private void loadNotes() {
             List<Note> n = NotesStorage.getInstance().getNotesList();
             // Sort logs by start date
-            //Collections.sort(n, (res1, res2) -> res1.getTime().compareTo(res2.getTime()));
+            //Collections.sort(n, (res1, res2) -> res1.getTimestamp().compareTo(res2.getTimestamp()));
             notesList.removeAllViews();
             for (int i = 0; i < n.size(); i++) {
                 Note log = n.get(i);
@@ -220,9 +220,9 @@ public class Logistics extends AppCompatActivity {
         resLayout.addView(authorText);
 
 
-        //TextView timeText = new TextView(this);
-        //timeText.setText(log.getTime());
-        //resLayout.addView(timeText);
+        TextView timeText = new TextView(this);
+        timeText.setText(String.format("%f", log.getTimestamp()));
+        resLayout.addView(timeText);
         return resLayout;
     }
 
