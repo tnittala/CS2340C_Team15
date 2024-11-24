@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.Date;
@@ -26,8 +27,9 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import com.example.a2340project.model.TravelLog;
+import com.example.a2340project.model.TravelLogStorage;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -52,6 +54,7 @@ public class Destination extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseFirestore db;
     private String userId;
+    private Spinner dropdownRoomType;
 
 
     private DatabaseReference database;
@@ -74,6 +77,8 @@ public class Destination extends AppCompatActivity {
         durationCalc = findViewById(R.id.duration);
         formLayout3 = findViewById(R.id.formLayout3);
         resultText = findViewById(R.id.resultText);
+
+        dropdownRoomType = findViewById(R.id.dropdown_roomTypes);
 
         database = FirebaseDatabase.getInstance().getReference();
 
@@ -202,7 +207,7 @@ public class Destination extends AppCompatActivity {
         }
     }
 
-    private long calculateDaysBetween(String startDate, String endDate, SimpleDateFormat sdf) {
+    public long calculateDaysBetween(String startDate, String endDate, SimpleDateFormat sdf) {
         try {
             long startMillis = sdf.parse(startDate).getTime();
             long endMillis = sdf.parse(endDate).getTime();
@@ -214,7 +219,7 @@ public class Destination extends AppCompatActivity {
         }
     }
 
-    private boolean isValidDate(String date) {
+    public boolean isValidDate(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
         sdf.setLenient(false);
         try {
@@ -231,6 +236,7 @@ public class Destination extends AppCompatActivity {
         String location = locationInput.getText().toString();
         String startDate = startDateInput.getText().toString();
         String endDate = endDateInput.getText().toString();
+        String roomType = dropdownRoomType.getSelectedItem().toString();
         if (currentUser == null) {
             Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show();
             return;
@@ -249,16 +255,19 @@ public class Destination extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
             return;
         }
-        TravelLog log = new TravelLog(location, startDate, endDate);
-        DatabaseReference travelLog = database.child("users").child(userId).child("logTravel");
+        TravelLog log = new TravelLog(location, startDate, endDate, roomType);
+        DatabaseReference travelLog = database.child("users").child(userId).child(
+                "logTravel");
         TravelLogStorage.getInstance().addTravelLog(log);
         addLogToGrid(log);
         travelLog.push().setValue(log)
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(this, "Travel log saved successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Travel log saved successfully",
+                            Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Failed to save travel log", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Failed to save travel log",
+                            Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 });
         clearForm();
@@ -303,7 +312,7 @@ public class Destination extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    private void calculateVacationTime() {
+    public void calculateVacationTime() {
         // Get the user input from EditTexts
         String startDateStr = startDateCalc.getText().toString();
         String endDateStr = endDateCalc.getText().toString();
