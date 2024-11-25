@@ -1,7 +1,5 @@
 package com.example.a2340project.model;
 
-import java.util.List;
-
 public class Trip {
     private String destination;
     private String startDate;
@@ -10,9 +8,12 @@ public class Trip {
     private String createdBy;
     private boolean isCollaborative;
 
-    public Trip() {}
+    public Trip() {
 
-    public Trip(String destination, String startDate, String endDate, String tripId, String createdBy, boolean isCollaborative) {
+    }
+
+    public Trip(String destination, String startDate, String endDate, String tripId,
+                String createdBy, boolean isCollaborative) {
         this.destination = destination;
         this.startDate = startDate;
         this.endDate = endDate;

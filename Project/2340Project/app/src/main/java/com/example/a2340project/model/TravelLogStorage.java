@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TravelLogStorage {
- private static TravelLogStorage instance;
+    private static TravelLogStorage instance;
     private final List<TravelLog> travelLogs;
 
     private TravelLogStorage() {

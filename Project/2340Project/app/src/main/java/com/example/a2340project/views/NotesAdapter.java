@@ -32,7 +32,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
     @NonNull
     @Override
     public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_note, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_note,
+                parent, false);
         return new NoteViewHolder(view);
     }
 
@@ -42,7 +43,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
         holder.noteContent.setText(note.getContent());
 
         // Format the timestamp into a readable date format
-        String formattedDate = new SimpleDateFormat("MMM dd, yyyy, HH:mm", Locale.getDefault()).format(new Date(note.getTimestamp()));
+        String formattedDate = new SimpleDateFormat("MMM dd, yyyy, HH:mm",
+                Locale.getDefault()).format(new Date(note.getTimestamp()));
         holder.noteTimestamp.setText(formattedDate);
     }
 
@@ -52,8 +54,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
     }
 
     static class NoteViewHolder extends RecyclerView.ViewHolder {
-        TextView noteContent;
-        TextView noteTimestamp;
+        private TextView noteContent;
+        private TextView noteTimestamp;
 
         public NoteViewHolder(View itemView) {
             super(itemView);

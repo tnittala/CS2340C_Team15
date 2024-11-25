@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //open a new activity or main functionality
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class); //Intent directs this activity to the next activity
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });

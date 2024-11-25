@@ -7,7 +7,7 @@ public class Note {
     private long timestamp;
 
     // Default constructor for Firebase
-    public Note() {}
+    public Note() { }
 
     public Note(String noteId, String authorId, String content, long timestamp) {
         this.noteId = noteId;
@@ -17,15 +17,34 @@ public class Note {
     }
 
     // Getters and Setters
-    public String getNoteId() { return noteId; }
-    public void setNoteId(String noteId) { this.noteId = noteId; }
+    public String getNoteId() {
+        return noteId;
+    }
 
-    public String getAuthorId() { return authorId; }
-    public void setAuthorId(String authorId) { this.authorId = authorId; }
+    public void setNoteId(String noteId) {
+        this.noteId = noteId;
+    }
 
-    public String getContent() { return content; }
-    public void setContent(String content) { this.content = content; }
+    public String getAuthorId() {
+        return authorId;
+    }
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
+    }
 
-    public long getTimestamp() { return timestamp; }
-    public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
 }

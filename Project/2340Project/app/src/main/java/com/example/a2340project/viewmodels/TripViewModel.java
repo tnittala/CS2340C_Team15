@@ -78,7 +78,8 @@ public class TripViewModel extends ViewModel {
         return tripData;
     }
 
-    public void updateTripDetails(String tripId, String destination, String startDate, String endDate) {
+    public void updateTripDetails(String tripId, String destination,
+                                  String startDate, String endDate) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference tripRef = db.collection("trips").document(tripId);
 

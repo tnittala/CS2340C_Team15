@@ -5,7 +5,9 @@ public class User {
     private String email;
     private String role;
 
-    public User() {} // Default constructor for Firebase
+    public User() {
+
+    } // Default constructor for Firebase
 
     public User(String userId, String email, String role) {
         this.userId = userId;

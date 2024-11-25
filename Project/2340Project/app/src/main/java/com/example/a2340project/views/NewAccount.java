@@ -23,10 +23,10 @@ import com.example.a2340project.R;
 import com.google.firebase.auth.FirebaseUser;
 
 public class NewAccount extends AppCompatActivity {
-    FirebaseAuth mAuth;
-    Button createButton;
-    TextInputEditText email_view;
-    TextInputEditText password_view;
+    private FirebaseAuth mAuth;
+    private Button createButton;
+    private TextInputEditText emailView;
+    private TextInputEditText passwordView;
 
 
     @Override
@@ -44,19 +44,21 @@ public class NewAccount extends AppCompatActivity {
         });
 
         createButton = findViewById(R.id.create_button);
-        email_view = findViewById(R.id.create_email);
-        password_view = findViewById(R.id.create_password);
+        emailView = findViewById(R.id.create_email);
+        passwordView = findViewById(R.id.create_password);
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = email_view.getText().toString();
-                String password = password_view.getText().toString();
+                String email = emailView.getText().toString();
+                String password = passwordView.getText().toString();
                 if (email.isEmpty()) {
-                    Toast.makeText(NewAccount.this, "Enter email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewAccount.this, "Enter email",
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (password.isEmpty()) {
-                    Toast.makeText(NewAccount.this, "Enter password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewAccount.this, "Enter password",
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
                 mAuth.createUserWithEmailAndPassword(email, password)
@@ -64,17 +66,19 @@ public class NewAccount extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
                                     //Log.d(TAG, "createUserWithEmail:success");
-                                    Toast.makeText(NewAccount.this, "Authentication success.",
+                                    Toast.makeText(NewAccount.this,
+                                            "Authentication success.",
                                             Toast.LENGTH_SHORT).show();
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    Intent intent = new Intent(NewAccount.this, Logistics.class);
+                                    Intent intent = new Intent(NewAccount.this,
+                                            Logistics.class);
                                     startActivity(intent);
                                 } else {
                                     // If sign in fails, display a message to the user.
-                                    //Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(NewAccount.this, "Authentication failed.",
+                                    //Log.w(TAG, "createUserWithEmail:failure", task.getException())
+                                    Toast.makeText(NewAccount.this,
+                                            "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }

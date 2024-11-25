@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -25,11 +24,7 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
-import com.example.a2340project.model.User;
 import com.example.a2340project.viewmodels.TripViewModel;
-import com.example.a2340project.views.NotesAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.ParseException;
@@ -37,12 +32,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.ArrayList;
 
 public class Logistics extends AppCompatActivity {
 
 
-    public BarChart barChart;
+    private BarChart barChart;
 
     public void graphTrips() {
         ArrayList<BarEntry> entries = new ArrayList<>();
@@ -176,9 +170,11 @@ public class Logistics extends AppCompatActivity {
             String content = input.getText().toString().trim();
             if (!content.isEmpty()) {
 
-                Toast.makeText(this, "Collaborator invited", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Collaborator invited",
+                        Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Please enter a username", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please enter a username",
+                        Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -212,12 +208,14 @@ public class Logistics extends AppCompatActivity {
 
     //use to allow collaborators to modify plans
     private void openModifyTripDialog() {
-        tripViewModel.isUserCollaboratorWithEditPermissions(tripId, FirebaseAuth.getInstance().getCurrentUser().getUid())
+        tripViewModel.isUserCollaboratorWithEditPermissions(tripId, FirebaseAuth.getInstance().
+                        getCurrentUser().getUid())
                 .observe(this, canEdit -> {
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     builder.setTitle("Trip Details");
 
-                    View dialogView = getLayoutInflater().inflate(R.layout.dialog_modify_trip, null);
+                    View dialogView = getLayoutInflater().inflate(R.layout.dialog_modify_trip,
+                            null);
                     builder.setView(dialogView);
 
                     EditText destinationField = dialogView.findViewById(R.id.editDestination);
@@ -243,13 +241,17 @@ public class Logistics extends AppCompatActivity {
                             String newEndDate = endDateField.getText().toString().trim();
 
                             if (validateDates(newStartDate, newEndDate)) {
-                                tripViewModel.updateTripDetails(tripId, newDestination, newStartDate, newEndDate);
-                                Toast.makeText(this, "Trip details updated", Toast.LENGTH_SHORT).show();
+                                tripViewModel.updateTripDetails(tripId, newDestination,
+                                        newStartDate, newEndDate);
+                                Toast.makeText(this, "Trip details updated",
+                                        Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(this, "Invalid date range", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, "Invalid date range",
+                                        Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(this, "You do not have permission to edit this trip.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "You do not have permission to "
+                                    + "edit this trip.", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -258,7 +260,7 @@ public class Logistics extends AppCompatActivity {
                 });
     }
     private boolean validateDates(String startDate, String endDate) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Adjust format if necessary
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date start = dateFormat.parse(startDate);
             Date end = dateFormat.parse(endDate);
