@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.a2340project.R;
+import com.example.a2340project.model.CollaboratorAdapter;
 import com.example.a2340project.model.Note;
 import com.example.a2340project.viewmodels.TripViewModel;
 import com.example.a2340project.views.NotesAdapter;
@@ -58,6 +59,16 @@ public class Logistics extends AppCompatActivity {
             Log.e("Logistics", "TripViewModel is null");
             return;
         }
+
+        RecyclerView collaboratorsRecyclerView = findViewById(R.id.collaboratorsRecyclerView);
+        collaboratorsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+// Example list of collaborators
+        List<String> collaborators = new ArrayList<>();
+
+// Set the adapter
+        CollaboratorAdapter adapter = new CollaboratorAdapter(this, collaborators);
+        collaboratorsRecyclerView.setAdapter(adapter);
 
         setupRecyclerView();
     }
