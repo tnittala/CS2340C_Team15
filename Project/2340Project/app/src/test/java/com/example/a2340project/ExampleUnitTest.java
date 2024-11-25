@@ -33,79 +33,79 @@ import com.example.a2340project.model.FirebaseDatabaseSingleton;
 //@RunWith(AndroidJUnit4.class)
 
 public class ExampleUnitTest {
-        private Destination destinationActivity;
-        private MockEditText startDateCalc;
-        private MockEditText endDateCalc;
-        private MockEditText durationCalc;
-        private MockTextView resultText;
-        private Destination destination;
-        private SimpleDateFormat sdf;
-  
-        @Before
-        public void setUp() throws NoSuchFieldException, IllegalAccessException {
-            destinationActivity = new Destination();
-
-            // Initialize mock fields
-            startDateCalc = new MockEditText();
-            endDateCalc = new MockEditText();
-            durationCalc = new MockEditText();
-            resultText = new MockTextView();
-
-            // Use reflection to set private fields
-            setPrivateField(destinationActivity, "startDateCalc", startDateCalc);
-            setPrivateField(destinationActivity, "endDateCalc", endDateCalc);
-            setPrivateField(destinationActivity, "durationCalc", durationCalc);
-            setPrivateField(destinationActivity, "resultText", resultText);
-
-            destination = new Destination();
-            sdf = new SimpleDateFormat("MM/dd/yy");
-        }
-
-        @Test
-        public void testCalculateVacationTimeWithStartAndEndDate() {
-            // Arrange
-            startDateCalc.setText("10/01/24");
-            endDateCalc.setText("10/10/24");
-            durationCalc.setText("");  // Leave duration empty
-            durationCalc.setText("");
-
-
-    private Logistics logisticsActivity =  new Logistics();
-
-
-    @Test
-    public void testGraphTripsEntries() {
-        logisticsActivity.graphTrips();
-
-        BarData barData = logisticsActivity.barChart.getData();
-        BarDataSet dataSet = (BarDataSet) barData.getDataSetByIndex(0);
-
-        // Verify the number of entries
-        assertEquals(2, dataSet.getEntryCount());
-
-        // Verify the values of the entries
-        assertEquals(4, dataSet.getEntryForIndex(0).getY(), 0);
-        assertEquals(3, dataSet.getEntryForIndex(1).getY(), 0);
-
-        // Verify the colors
-        assertEquals(Color.RED, dataSet.getColor(0));
-        assertEquals(Color.BLUE, dataSet.getColor(1));
-    }
-
-
     private Destination destinationActivity;
     private MockEditText startDateCalc;
     private MockEditText endDateCalc;
     private MockEditText durationCalc;
     private MockTextView resultText;
+    private Destination destination;
+    private SimpleDateFormat sdf;
 
-            // Act
-            destinationActivity.calculateVacationTime();
+    @Before
+    public void setUp() throws NoSuchFieldException, IllegalAccessException {
+        destinationActivity = new Destination();
 
-            // Assert
-            assertEquals("9", durationCalc.getText());
-            assertEquals("9 days", resultText.getText());
+        // Initialize mock fields
+        startDateCalc = new MockEditText();
+        endDateCalc = new MockEditText();
+        durationCalc = new MockEditText();
+        resultText = new MockTextView();
+
+        // Use reflection to set private fields
+        setPrivateField(destinationActivity, "startDateCalc", startDateCalc);
+        setPrivateField(destinationActivity, "endDateCalc", endDateCalc);
+        setPrivateField(destinationActivity, "durationCalc", durationCalc);
+        setPrivateField(destinationActivity, "resultText", resultText);
+
+        destination = new Destination();
+        sdf = new SimpleDateFormat("MM/dd/yy");
+    }
+
+    @Test
+    public void testCalculateVacationTimeWithStartAndEndDate() {
+        // Arrange
+        startDateCalc.setText("10/01/24");
+        endDateCalc.setText("10/10/24");
+        durationCalc.setText("");  // Leave duration empty
+        durationCalc.setText("");
+
+
+        private Logistics logisticsActivity = new Logistics();
+
+
+        @Test
+        public void testGraphTripsEntries () {
+            logisticsActivity.graphTrips();
+
+            BarData barData = logisticsActivity.barChart.getData();
+            BarDataSet dataSet = (BarDataSet) barData.getDataSetByIndex(0);
+
+            // Verify the number of entries
+            assertEquals(2, dataSet.getEntryCount());
+
+            // Verify the values of the entries
+            assertEquals(4, dataSet.getEntryForIndex(0).getY(), 0);
+            assertEquals(3, dataSet.getEntryForIndex(1).getY(), 0);
+
+            // Verify the colors
+            assertEquals(Color.RED, dataSet.getColor(0));
+            assertEquals(Color.BLUE, dataSet.getColor(1));
         }
+
+
+        private Destination destinationActivity;
+        private MockEditText startDateCalc;
+        private MockEditText endDateCalc;
+        private MockEditText durationCalc;
+        private MockTextView resultText;
+
+        // Act
+        destinationActivity.calculateVacationTime();
+
+        // Assert
+        assertEquals("9", durationCalc.getText());
+        assertEquals("9 days", resultText.getText());
+    }
 
 
     @Before
@@ -220,11 +220,12 @@ public class ExampleUnitTest {
             String startDate = "10/01/24";
             String endDate = "10/10/24";
         }
-    
-          private static class MockTextView {
+
+        private static class MockTextView {
             private String text = "";
             long daysBetween = destination.calculateDaysBetween(startDate, endDate, sdf);
-            assertEquals(9, daysBetween);
+
+            assertEquals(9,daysBetween);
         }
 
         @Test
@@ -263,10 +264,6 @@ public class ExampleUnitTest {
         private static class MockEditText {
             private String text = "";
 
-            }
         }
-
-        // Mock class for TextView to simulate getText() and setText()
-        private static class MockTextView {
-            private String text = "";
-
+    }
+}
