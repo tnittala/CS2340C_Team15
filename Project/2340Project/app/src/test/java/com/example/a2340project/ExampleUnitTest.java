@@ -223,6 +223,109 @@ public class ExampleUnitTest {
         assertFalse(trip.isCollaborative());
     }
 
+    @Test
+    public void testSortReservationsByDate() {
+        ReservationManager reservationManager = new ReservationManager();
+        List<DiningReservation> reservations = new ArrayList<>();
+        reservations.add(new DiningReservation("Location B", "Website B", "11/01/23"));
+        reservations.add(new DiningReservation("Location C", "Website C", "10/01/23"));
+        reservations.add(new DiningReservation("Location A", "Website A", "12/01/23"));
+
+        reservationManager.setSortStrategy(new SortByDate());
+        List<DiningReservation> sortedReservations = reservationManager.sortReservations(reservations);
+
+        assertEquals("10/01/23", sortedReservations.get(0).getTime());
+        assertEquals("11/01/23", sortedReservations.get(1).getTime());
+        assertEquals("12/01/23", sortedReservations.get(2).getTime());
+    }
+
+
+    @Test
+    public void testTripConstructorWithObservers() {
+        Trip trip = new Trip("Paris", "12/01/24", "12/10/24", "trip123", "user1", true);
+        assertNotNull(trip);
+        assertEquals("Paris", trip.getDestination());
+        assertTrue(trip.isCollaborative());
+    }
+
+
+    @Test
+    public void testSortStrategyChange() {
+        ReservationManager reservationManager = new ReservationManager();
+        reservationManager.setSortStrategy(new SortByDate());
+        assertTrue(reservationManager.getSortStrategy() instanceof SortByDate);
+
+        //reservationManager.setSortStrategy(new SortByTypeStrategy());
+        //assertTrue(reservationManager.getSortStrategy() instanceof SortByTypeStrategy);
+    }
+
+    @Test
+    public void testReservationConstructor() {
+        DiningReservation reservation = new DiningReservation("Location A", "Website A", "12/01/23");
+        assertEquals("Location A", reservation.getLocation());
+        assertEquals("Website A", reservation.getWebsite());
+        assertEquals("12/01/23", reservation.getTime());
+    }
+
+    @Test
+    public void testSetAndGetReservationLocation() {
+        DiningReservation reservation = new DiningReservation();
+        reservation.setLocation("New Location");
+        assertEquals("New Location", reservation.getLocation());
+    }
+
+    @Test
+    public void testSetAndGetReservationWebsite() {
+        DiningReservation reservation = new DiningReservation();
+        reservation.setWebsite("new.website.com");
+        assertEquals("new.website.com", reservation.getWebsite());
+    }
+
+    @Test
+    public void testSetAndGetReservationDate() {
+        DiningReservation reservation = new DiningReservation();
+        reservation.setDate("01/01/25");
+        assertEquals("01/01/25", reservation.getTime());
+    }
+
+    @Test
+    public void testReservationEquality() {
+        DiningReservation reservation1 = new DiningReservation("Location A", "Website A", "12/01/23");
+        DiningReservation reservation2 = new DiningReservation("Location A", "Website A", "12/01/23");
+        assertEquals(reservation1, reservation2);
+    }
+
+    @Test
+    public void testTripDefaultConstructor() {
+        Trip trip = new Trip();
+        assertNull(trip.getDestination());
+        assertNull(trip.getStartDate());
+        assertNull(trip.getEndDate());
+    }
+
+    @Test
+    public void testSetAndGetTripDestination() {
+        Trip trip = new Trip();
+        trip.setDestination("Paris");
+        assertEquals("Paris", trip.getDestination());
+    }
+
+    @Test
+    public void testSetAndGetTripEndDate() {
+        Trip trip = new Trip();
+        trip.setEndDate("12/10/24");
+        assertEquals("12/10/24", trip.getEndDate());
+    }
+
+    @Test
+    public void testIsCollaborativeDefault() {
+        Trip trip = new Trip();
+        assertFalse(trip.isCollaborative());
+    }
+
+
+
+
 
 
 
