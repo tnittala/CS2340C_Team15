@@ -72,7 +72,6 @@ public class Logistics extends AppCompatActivity {
     private TripViewModel tripViewModel;
     private String tripId = "exampleTripId"; // Placeholder for the actual trip ID
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
