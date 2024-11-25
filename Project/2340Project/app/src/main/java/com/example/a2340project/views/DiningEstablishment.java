@@ -37,8 +37,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import java.util.Date;
 import java.util.List;
 
 import java.util.Collections;
@@ -128,7 +131,59 @@ public class DiningEstablishment extends AppCompatActivity implements Reservatio
             return;
         }
         setupNavigationButtons();
+
+        Button sortButton = findViewById(R.id.sortButton);
+        sortButton.setOnClickListener(view -> showSortDialog());
+
     }
+
+    private void showSortDialog() {
+        String[] options = {"Sort by Date", "Sort by Time"};
+
+        new AlertDialog.Builder(this)
+                .setTitle("Sort Reservations")
+                .setItems(options, (dialog, which) -> {
+                    if (which == 0) {
+                        sortByDate();
+                    } else {
+                        sortByTime();
+                    }
+                    // Refresh the UI
+                    loadReservations();
+                })
+                .show();
+    }
+
+    private void sortByDate() {
+        Collections.sort(reservations, (r1, r2) -> {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.US);
+                Date date1 = sdf.parse(r1.getTime());
+                Date date2 = sdf.parse(r2.getTime());
+                return date1.compareTo(date2);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return 0;
+            }
+        });
+    }
+
+    private void sortByTime() {
+        Collections.sort(reservations, (r1, r2) -> {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.US);
+                String time1 = r1.getTime().split(" ")[1]; // Extract time portion
+                String time2 = r2.getTime().split(" ")[1]; // Extract time portion
+                Date t1 = sdf.parse(time1);
+                Date t2 = sdf.parse(time2);
+                return t1.compareTo(t2);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return 0;
+            }
+        });
+    }
+
     private void loadReservations() {
         List<DiningReservation> reservations = DiningReservationStorage.getInstance().
                 getDiningReservations();
@@ -138,6 +193,11 @@ public class DiningEstablishment extends AppCompatActivity implements Reservatio
         for (int i = 0; i < reservations.size(); i++) {
             DiningReservation log = reservations.get(i);
             View resView = createResView(log);
+
+            if (isPastDate(log.getTime())) {
+                resView.setBackgroundColor(ContextCompat.getColor(this,
+                        R.color.past_date_background));
+            }
 
             reservationList.addView(resView);
             // Add a divider line between entries
@@ -282,6 +342,17 @@ public class DiningEstablishment extends AppCompatActivity implements Reservatio
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+    private boolean isPastDate(String date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
+        try {
+            Date checkOutDate = sdf.parse(date);
+            return checkOutDate.before(new Date());
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
 
 }

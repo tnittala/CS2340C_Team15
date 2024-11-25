@@ -1,272 +1,339 @@
 package com.example.a2340project;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
-import android.graphics.Color;
+import static com.example.a2340project.views.Accommodations.*;
+import static org.junit.Assert.*;
 
-import org.junit.Before;
+import com.example.a2340project.model.DiningReservation;
+import com.example.a2340project.model.ReservationManager;
+import com.example.a2340project.model.SortByDate;
+import com.example.a2340project.model.SortStrategy;
+import com.example.a2340project.model.TravelLog;
+import com.example.a2340project.model.Trip;
+import com.example.a2340project.views.Accommodations;
+
 import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import java.lang.reflect.Field;
-import java.text.SimpleDateFormat;
-
-import com.example.a2340project.views.Destination;
-import com.example.a2340project.views.Logistics;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.example.a2340project.views.LoginActivity;
-
-
-import java.text.SimpleDateFormat;
-
-import com.example.a2340project.views.Destination;
-import com.example.a2340project.views.LoginActivity;
-import com.example.a2340project.model.FirebaseDatabaseSingleton;
-
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
-//@RunWith(AndroidJUnit4.class)
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class ExampleUnitTest {
-        private Destination destinationActivity;
-        private MockEditText startDateCalc;
-        private MockEditText endDateCalc;
-        private MockEditText durationCalc;
-        private MockTextView resultText;
-        private Destination destination;
-        private SimpleDateFormat sdf;
-  
-        @Before
-        public void setUp() throws NoSuchFieldException, IllegalAccessException {
-            destinationActivity = new Destination();
-
-            // Initialize mock fields
-            startDateCalc = new MockEditText();
-            endDateCalc = new MockEditText();
-            durationCalc = new MockEditText();
-            resultText = new MockTextView();
-
-            // Use reflection to set private fields
-            setPrivateField(destinationActivity, "startDateCalc", startDateCalc);
-            setPrivateField(destinationActivity, "endDateCalc", endDateCalc);
-            setPrivateField(destinationActivity, "durationCalc", durationCalc);
-            setPrivateField(destinationActivity, "resultText", resultText);
-
-            destination = new Destination();
-            sdf = new SimpleDateFormat("MM/dd/yy");
-        }
-
-        @Test
-        public void testCalculateVacationTimeWithStartAndEndDate() {
-            // Arrange
-            startDateCalc.setText("10/01/24");
-            endDateCalc.setText("10/10/24");
-            durationCalc.setText("");  // Leave duration empty
-            durationCalc.setText("");
-
-
-    private Logistics logisticsActivity =  new Logistics();
-
 
     @Test
-    public void testGraphTripsEntries() {
-        logisticsActivity.graphTrips();
-
-        BarData barData = logisticsActivity.barChart.getData();
-        BarDataSet dataSet = (BarDataSet) barData.getDataSetByIndex(0);
-
-        // Verify the number of entries
-        assertEquals(2, dataSet.getEntryCount());
-
-        // Verify the values of the entries
-        assertEquals(4, dataSet.getEntryForIndex(0).getY(), 0);
-        assertEquals(3, dataSet.getEntryForIndex(1).getY(), 0);
-
-        // Verify the colors
-        assertEquals(Color.RED, dataSet.getColor(0));
-        assertEquals(Color.BLUE, dataSet.getColor(1));
-    }
-
-
-    private Destination destinationActivity;
-    private MockEditText startDateCalc;
-    private MockEditText endDateCalc;
-    private MockEditText durationCalc;
-    private MockTextView resultText;
-
-            // Act
-            destinationActivity.calculateVacationTime();
-
-            // Assert
-            assertEquals("9", durationCalc.getText());
-            assertEquals("9 days", resultText.getText());
-        }
-
-
-    @Before
-    public void setUp() throws NoSuchFieldException, IllegalAccessException {
-        destinationActivity = new Destination();
-
-        startDateCalc = new MockEditText();
-        endDateCalc = new MockEditText();
-        durationCalc = new MockEditText();
-        resultText = new MockTextView();
-
-        setPrivateField(destinationActivity, "startDateCalc", startDateCalc);
-        setPrivateField(destinationActivity, "endDateCalc", endDateCalc);
-        setPrivateField(destinationActivity, "durationCalc", durationCalc);
-        setPrivateField(destinationActivity, "resultText", resultText);
-
-        destination = new Destination();
-        sdf = new SimpleDateFormat("MM/dd/yy");
+    public void testIsPastDate_withPastDate() {
+        String pastDate = "01/01/22"; // Assuming today's date is after this
+        assertTrue(Accommodations.isPastDate(pastDate));
     }
 
     @Test
-    public void testCalculateVacationTimeWithStartAndEndDate() {
-        startDateCalc.setText("10/01/24");
-        endDateCalc.setText("10/10/24");
-        durationCalc.setText("");
-
-        destinationActivity.calculateVacationTime();
-
-        assertEquals("9", durationCalc.getText());
-        assertEquals("9 days", resultText.getText());
+    public void testIsPastDate_withFutureDate() {
+        String futureDate = "12/31/30"; // Assuming today's date is before this
+        assertFalse(Accommodations.isPastDate(futureDate));
     }
 
     @Test
-    public void singleton_isCorrect() {
-
-        FirebaseDatabaseSingleton instance1 = FirebaseDatabaseSingleton.getInstance();
-        FirebaseDatabaseSingleton instance2 = FirebaseDatabaseSingleton.getInstance();
-
-        // Check if both instances are the same
-        assertEquals(instance1, instance2);
+    public void testIsPastDate_withInvalidDate() {
+        String invalidDate = "invalid-date";
+        assertFalse(Accommodations.isPastDate(invalidDate));
     }
 
     @Test
-    public void testCalculateVacationTimeWithEndDateAndDuration() {
-        startDateCalc.setText("");
-        endDateCalc.setText("10/10/24");
-        durationCalc.setText("5");
-
-        destinationActivity.calculateVacationTime();
-
-        assertEquals("10/05/24", startDateCalc.getText());
-        assertEquals("5 days", resultText.getText());
+    public void testIsValidDate_withValidDate() {
+        String validDate = "12/25/23";
+        assertTrue(isValidDate(validDate));
     }
 
     @Test
-    public void testCalculateDaysBetweenValidDates() {
-        String startDate = "10/01/24";
-        String endDate = "10/10/24";
-
-        long daysBetween = destination.calculateDaysBetween(startDate, endDate, sdf);
-
-        assertEquals(9, daysBetween);
+    public void testIsValidDate_withInvalidDate() {
+        String invalidDate = "99/99/99";
+        assertFalse(isValidDate(invalidDate));
     }
 
     @Test
-    public void testIsValidDateWithValidDate() {
-        String validDate = "12/31/24";
-
-        assertTrue(destination.isValidDate(validDate));
+    public void testIsValidDate_withEmptyDate() {
+        String emptyDate = "";
+        assertFalse(isValidDate(emptyDate));
     }
 
     @Test
-    public void testIsValidDateWithInvalidDate() {
-        String invalidDate = "13/01/24";  // Invalid month
+    public void testParsedCheckInDate_withValidDate() {
+        TravelLog travelLog = new TravelLog("New York", "12/12/23", "12/15/23", "Deluxe");
 
-        assertFalse(destination.isValidDate(invalidDate));
+        Date parsedDate = travelLog.getParsedCheckInDate();
+        assertNotNull("Check-in date should be parsed correctly", parsedDate);
+        assertEquals("Check-in date should match expected value", "Tue Dec 12 00:00:00 EST 2023", parsedDate.toString());
     }
 
-    private void setPrivateField(Object object, String fieldName, Object value)
-            throws NoSuchFieldException, IllegalAccessException {
-        Field field = object.getClass().getDeclaredField(fieldName);
-        field.setAccessible(true);
-        field.set(object, value);
+    @Test
+    public void testParsedCheckInDate_withInvalidDate() {
+        TravelLog travelLog = new TravelLog("New York", "invalid-date", "12/15/23", "Deluxe");
+
+        Date parsedDate = travelLog.getParsedCheckInDate();
+        assertNull("Check-in date parsing should return null for invalid format", parsedDate);
     }
 
-    private static class MockEditText {
-        private String text = "";
+    @Test
+    public void testParsedCheckOutDate_withValidDate() {
+        TravelLog travelLog = new TravelLog("New York", "12/12/23", "12/15/23", "Deluxe");
 
-        public void setText(String text) {
-            this.text = text;
-        }
+        Date parsedDate = travelLog.getParsedCheckOutDate();
+        assertNotNull("Check-out date should be parsed correctly", parsedDate);
+        assertEquals("Check-out date should match expected value", "Fri Dec 15 00:00:00 EST 2023", parsedDate.toString());
+    }
 
-        @Test
-        public void testCalculateVacationTimeWithEndDateAndDuration() {
-            // Arrange
-            startDateCalc.setText("");  // Leave start date empty
-            startDateCalc.setText("");
-            endDateCalc.setText("10/10/24");
-            durationCalc.setText("5");
+    @Test
+    public void testParsedCheckOutDate_withInvalidDate() {
+        TravelLog travelLog = new TravelLog("New York", "12/12/23", "invalid-date", "Deluxe");
 
-            // Act
-            destinationActivity.calculateVacationTime();
+        Date parsedDate = travelLog.getParsedCheckOutDate();
+        assertNull("Check-out date parsing should return null for invalid format", parsedDate);
+    }
 
-            // Assert
-            assertEquals("10/05/24", startDateCalc.getText());
-            assertEquals("5 days", resultText.getText());
-        }
+    @Test
+    public void testCheckInBeforeCheckOut() {
+        TravelLog travelLog = new TravelLog("New York", "12/12/23", "12/15/23", "Deluxe");
 
-        // Helper method to set private fields using reflection
-        @Test
-        public void testCalculateDaysBetweenValidDates() {
-            String startDate = "10/01/24";
-            String endDate = "10/10/24";
-        }
-    
-          private static class MockTextView {
-            private String text = "";
-            long daysBetween = destination.calculateDaysBetween(startDate, endDate, sdf);
-            assertEquals(9, daysBetween);
-        }
+        Date checkInDate = travelLog.getParsedCheckInDate();
+        Date checkOutDate = travelLog.getParsedCheckOutDate();
 
-        @Test
-        public void testCalculateDaysBetweenSameDates() {
-            String startDate = "10/01/24";
-            String endDate = "10/01/24";
+        assertNotNull("Check-in date should be parsed", checkInDate);
+        assertNotNull("Check-out date should be parsed", checkOutDate);
+        assertTrue("Check-in date should be before check-out date", checkInDate.before(checkOutDate));
+    }
 
-            long daysBetween = destination.calculateDaysBetween(startDate, endDate, sdf);
+    @Test
+    public void testCheckInAfterCheckOut() {
+        TravelLog travelLog = new TravelLog("New York", "12/12/23", "12/15/23", "Deluxe");
 
-            assertEquals(0, daysBetween);
-        }
+        Date checkInDate = travelLog.getParsedCheckInDate();
+        Date checkOutDate = travelLog.getParsedCheckOutDate();
 
-        @Test
-        public void testIsValidDateWithValidDate() {
-            String validDate = "12/31/24";
+        assertNotNull("Check-in date should be parsed", checkInDate);
+        assertNotNull("Check-out date should be parsed", checkOutDate);
+        assertFalse("Check-in date should not be after check-out date", checkInDate.after(checkOutDate));
+    }
 
-            assertTrue(destination.isValidDate(validDate));
-        }
+    @Test
+    public void testSetAndGetSortStrategy() {
+        ReservationManager reservationManager = new ReservationManager();
+        SortStrategy sortByDate = new SortByDate();
+        reservationManager.setSortStrategy(sortByDate);
+        assertEquals(sortByDate, reservationManager.getSortStrategy());
+    }
+
+    @Test
+    public void testSortReservations() {
+        ReservationManager reservationManager = new ReservationManager();
+        SortStrategy sortByDate = new SortByDate();  // Assuming you have a SortByDate strategy
+        reservationManager.setSortStrategy(sortByDate);
+
+        List<DiningReservation> reservations = new ArrayList<>();
+        reservations.add(new DiningReservation("Location A", "Website A", "12/01/23"));
+        reservations.add(new DiningReservation("Location B", "Website B", "11/01/23"));
+        reservations.add(new DiningReservation("Location C", "Website C", "10/01/23"));
+
+        List<DiningReservation> sortedReservations = reservationManager.sortReservations(reservations);
+        assertEquals("Location C", sortedReservations.get(0).getLocation());
+        assertEquals("Location B", sortedReservations.get(1).getLocation());
+        assertEquals("Location A", sortedReservations.get(2).getLocation());
+    }
+
+    @Test
+    public void testSortReservationsWithNoSortStrategy() {
+        ReservationManager reservationManager = new ReservationManager();
+        List<DiningReservation> reservations = new ArrayList<>();
+        reservations.add(new DiningReservation("Location A", "Website A", "12/01/23"));
+        reservations.add(new DiningReservation("Location B", "Website B", "11/01/23"));
+        reservations.add(new DiningReservation("Location C", "Website C", "10/01/23"));
+        List<DiningReservation> sortedReservations = reservationManager.sortReservations(reservations);
+        assertEquals(reservations, sortedReservations);
+    }
+
+    @Test
+    public void testAddReservationNoObservers() {
+        ReservationManager reservationManager = new ReservationManager();
+        DiningReservation reservation = new DiningReservation("Location A", "Website A", "12/01/23");
+        reservationManager.addReservation(reservation);
+    }
+
+    @Test
+    public void testTripConstructor_default() {
+        Trip trip = new Trip();
+        assertNotNull(trip);  // Ensure the trip object is not null
+        assertNull(trip.getDestination());
+        assertNull(trip.getStartDate());
+        assertNull(trip.getEndDate());
+        assertNull(trip.getTripId());
+        assertNull(trip.getCreatedBy());
+        assertFalse(trip.isCollaborative());
+    }
+
+    @Test
+    public void testTripConstructor_parameterized() {
+        Trip trip = new Trip("Paris", "12/01/24", "12/10/24", "trip123", "user1", true);
+        assertEquals("Paris", trip.getDestination());
+        assertEquals("12/01/24", trip.getStartDate());
+        assertEquals("12/10/24", trip.getEndDate());
+        assertEquals("trip123", trip.getTripId());
+        assertEquals("user1", trip.getCreatedBy());
+        assertTrue(trip.isCollaborative());
+    }
+
+    @Test
+    public void testSetAndGetDestination() {
+        Trip trip = new Trip();
+        trip.setDestination("New York");
+        assertEquals("New York", trip.getDestination());
+    }
+
+    @Test
+    public void testSetAndGetStartDate() {
+        Trip trip = new Trip();
+        trip.setStartDate("01/01/25");
+        assertEquals("01/01/25", trip.getStartDate());
+    }
+
+    @Test
+    public void testSetAndGetEndDate() {
+        Trip trip = new Trip();
+        trip.setEndDate("01/10/25");
+        assertEquals("01/10/25", trip.getEndDate());
+    }
+
+    @Test
+    public void testSetAndGetTripId() {
+        Trip trip = new Trip();
+        trip.setTripId("trip456");
+        assertEquals("trip456", trip.getTripId());
+    }
+
+    @Test
+    public void testSetAndGetCreatedBy() {
+        Trip trip = new Trip();
+        trip.setCreatedBy("user2");
+        assertEquals("user2", trip.getCreatedBy());
+    }
+
+    @Test
+    public void testSetAndIsCollaborative() {
+        Trip trip = new Trip();
+        trip.setCollaborative(true);
+        assertTrue(trip.isCollaborative());
+
+        trip.setCollaborative(false);
+        assertFalse(trip.isCollaborative());
+    }
+
+    @Test
+    public void testSortReservationsByDate() {
+        ReservationManager reservationManager = new ReservationManager();
+        List<DiningReservation> reservations = new ArrayList<>();
+        reservations.add(new DiningReservation("Location B", "Website B", "11/01/23"));
+        reservations.add(new DiningReservation("Location C", "Website C", "10/01/23"));
+        reservations.add(new DiningReservation("Location A", "Website A", "12/01/23"));
+
+        reservationManager.setSortStrategy(new SortByDate());
+        List<DiningReservation> sortedReservations = reservationManager.sortReservations(reservations);
+
+        assertEquals("10/01/23", sortedReservations.get(0).getTime());
+        assertEquals("11/01/23", sortedReservations.get(1).getTime());
+        assertEquals("12/01/23", sortedReservations.get(2).getTime());
+    }
 
 
-        @Test
-        public void testIsValidDateWithInvalidDate() {
-            String invalidDate = "13/01/24";  // Invalid month
+    @Test
+    public void testTripConstructorWithObservers() {
+        Trip trip = new Trip("Paris", "12/01/24", "12/10/24", "trip123", "user1", true);
+        assertNotNull(trip);
+        assertEquals("Paris", trip.getDestination());
+        assertTrue(trip.isCollaborative());
+    }
 
-            assertFalse(destination.isValidDate(invalidDate));
-        }
 
-        private void setPrivateField(Object object, String fieldName, Object value)
-                throws NoSuchFieldException, IllegalAccessException {
-            Field field = object.getClass().getDeclaredField(fieldName);
-            field.setAccessible(true);
-            field.set(object, value);
-        }
+    @Test
+    public void testSortStrategyChange() {
+        ReservationManager reservationManager = new ReservationManager();
+        reservationManager.setSortStrategy(new SortByDate());
+        assertTrue(reservationManager.getSortStrategy() instanceof SortByDate);
 
-        // Mock class for EditText to simulate getText() and setText()
-        private static class MockEditText {
-            private String text = "";
+        //reservationManager.setSortStrategy(new SortByTypeStrategy());
+        //assertTrue(reservationManager.getSortStrategy() instanceof SortByTypeStrategy);
+    }
 
-            }
-        }
+    @Test
+    public void testReservationConstructor() {
+        DiningReservation reservation = new DiningReservation("Location A", "Website A", "12/01/23");
+        assertEquals("Location A", reservation.getLocation());
+        assertEquals("Website A", reservation.getWebsite());
+        assertEquals("12/01/23", reservation.getTime());
+    }
 
-        // Mock class for TextView to simulate getText() and setText()
-        private static class MockTextView {
-            private String text = "";
+    @Test
+    public void testSetAndGetReservationLocation() {
+        DiningReservation reservation = new DiningReservation();
+        reservation.setLocation("New Location");
+        assertEquals("New Location", reservation.getLocation());
+    }
+
+    @Test
+    public void testSetAndGetReservationWebsite() {
+        DiningReservation reservation = new DiningReservation();
+        reservation.setWebsite("new.website.com");
+        assertEquals("new.website.com", reservation.getWebsite());
+    }
+
+    @Test
+    public void testSetAndGetReservationDate() {
+        DiningReservation reservation = new DiningReservation();
+        reservation.setDate("01/01/25");
+        assertEquals("01/01/25", reservation.getTime());
+    }
+
+    @Test
+    public void testReservationEquality() {
+        DiningReservation reservation1 = new DiningReservation("Location A", "Website A", "12/01/23");
+        DiningReservation reservation2 = new DiningReservation("Location A", "Website A", "12/01/23");
+        assertEquals(reservation1, reservation2);
+    }
+
+    @Test
+    public void testTripDefaultConstructor() {
+        Trip trip = new Trip();
+        assertNull(trip.getDestination());
+        assertNull(trip.getStartDate());
+        assertNull(trip.getEndDate());
+    }
+
+    @Test
+    public void testSetAndGetTripDestination() {
+        Trip trip = new Trip();
+        trip.setDestination("Paris");
+        assertEquals("Paris", trip.getDestination());
+    }
+
+    @Test
+    public void testSetAndGetTripEndDate() {
+        Trip trip = new Trip();
+        trip.setEndDate("12/10/24");
+        assertEquals("12/10/24", trip.getEndDate());
+    }
+
+    @Test
+    public void testIsCollaborativeDefault() {
+        Trip trip = new Trip();
+        assertFalse(trip.isCollaborative());
+    }
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
 

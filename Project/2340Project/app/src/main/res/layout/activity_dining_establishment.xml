@@ -24,6 +24,19 @@
         app:layout_constraintVertical_bias="0.0"
         android:id="@+id/diningTitle" />
 
+    <Button
+        android:id="@+id/sortButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sort"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/diningTitle"
+        app:layout_constraintVertical_bias="0.958"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp" />
+
     <TextView
         android:id="@+id/dashboard"
         android:layout_width="match_parent"
@@ -37,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/diningTitle"
+        app:layout_constraintTop_toBottomOf="@+id/sortButton"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -46,6 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:layout_marginTop="92dp"
         android:background="#c0c0c0"
         android:columnCount="1"
         android:orientation="horizontal"
@@ -53,7 +67,7 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addReservationOverlay" />
+        app:layout_constraintTop_toBottomOf="@+id/sortButton" />
 
     <ImageButton
         android:id="@+id/homeButton"
