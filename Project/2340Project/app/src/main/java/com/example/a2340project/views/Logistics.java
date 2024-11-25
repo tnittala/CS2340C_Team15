@@ -117,33 +117,6 @@ public class Logistics extends AppCompatActivity {
 
         //tripViewModel.fetchNotes(tripId);
 
-        private void loadNotes() {
-            List<Note> n = NotesStorage.getInstance().getNotesList();
-            // Sort logs by start date
-            //Collections.sort(n, (res1, res2) -> res1.getTimestamp().compareTo(res2.getTimestamp()));
-            notesList.removeAllViews();
-            for (int i = 0; i < n.size(); i++) {
-                Note log = n.get(i);
-                View resView = createResView(log);
-
-                //if (isPastDate(log.getEndDate())) {
-                //     logView.setBackgroundColor(ContextCompat.getColor(this, R.color.past_date_background));
-                // }
-
-                notesList.addView(resView);
-                // Add a divider line between entries
-                if (i < n.size() - 1) { // Avoid adding a divider after the last item
-                    View divider = new View(this);
-                    divider.setLayoutParams(new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            2  // Height of the divider line
-                    ));
-                    divider.setBackgroundColor(ContextCompat.getColor(this, R.color.divider_color)); // Set divider color
-                    notesList.addView(divider);
-                }
-            }
-        }
-
 
         Button addNoteButton = findViewById(R.id.addNoteButton);
         addNoteButton.setOnClickListener(view -> openAddNoteDialog());
@@ -204,6 +177,33 @@ public class Logistics extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void loadNotes() {
+        List<Note> n = NotesStorage.getInstance().getNotesList();
+        // Sort logs by start date
+        //Collections.sort(n, (res1, res2) -> res1.getTimestamp().compareTo(res2.getTimestamp()));
+        notesList.removeAllViews();
+        for (int i = 0; i < n.size(); i++) {
+            Note log = n.get(i);
+            View resView = createResView(log);
+
+            //if (isPastDate(log.getEndDate())) {
+            //     logView.setBackgroundColor(ContextCompat.getColor(this, R.color.past_date_background));
+            // }
+
+            notesList.addView(resView);
+            // Add a divider line between entries
+            if (i < n.size() - 1) { // Avoid adding a divider after the last item
+                View divider = new View(this);
+                divider.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        2  // Height of the divider line
+                ));
+                divider.setBackgroundColor(ContextCompat.getColor(this, R.color.divider_color)); // Set divider color
+                notesList.addView(divider);
+            }
+        }
     }
 
     private View createResView(Note log) {
