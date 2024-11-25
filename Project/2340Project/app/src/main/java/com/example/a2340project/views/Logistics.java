@@ -50,6 +50,7 @@ import java.util.List;
 public class Logistics extends AppCompatActivity {
 
     // creating private vars
+    // grid
     public BarChart barChart;
     private DatabaseReference database;
     private List<Note> notes;
