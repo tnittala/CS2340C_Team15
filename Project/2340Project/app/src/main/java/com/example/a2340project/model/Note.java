@@ -15,8 +15,7 @@ public class Note {
         this.content = content;
         this.timestamp = timestamp;
     }
-
-    // Getters and Setters
+    
     public String getNoteId() {
         return noteId;
     }
