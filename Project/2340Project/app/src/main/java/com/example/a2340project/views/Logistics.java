@@ -261,7 +261,9 @@ public class Logistics extends AppCompatActivity {
             if (!content.isEmpty()) {
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 Note newNote = new Note(null, userId, content, System.currentTimeMillis());
+                NotesStorage.getInstance().addNote(newNote);
                 DatabaseReference notesRef = database.child("Notes");
+
                 notesRef.push().setValue(newNote);
                 //tripViewModel.addNoteToTrip(tripId, note);
                 Toast.makeText(this, "Note added", Toast.LENGTH_SHORT).show();
