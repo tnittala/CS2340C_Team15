@@ -16,6 +16,8 @@ import android.widget.Spinner;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -23,6 +25,10 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.a2340project.model.TravelLog;
 
 import com.example.a2340project.R;
+import com.example.a2340project.model.TravelLog;
+import com.example.a2340project.model.TravelLogStorage;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +38,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
 import androidx.core.content.ContextCompat;
 
 
@@ -181,6 +189,55 @@ public class Accommodations extends AppCompatActivity {
         }
     }
 
+    private void showSortDialog() {
+        String[] options = {"Sort by Date", "Sort by Time"};
+
+        new AlertDialog.Builder(this)
+                .setTitle("Sort Reservations")
+                .setItems(options, (dialog, which) -> {
+                    if (which == 0) {
+                        sortByDate();
+                    } else {
+                        sortByTime();
+                    }
+                    // Refresh the UI
+                    loadReservations();
+                })
+                .show();
+    }
+
+
+    private void sortByDate() {
+        List<TravelLog> logs = TravelLogStorage.getInstance().getTravelLogs(); // Fetch logs
+        Collections.sort(logs, (log1, log2) -> {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy", Locale.US);
+                Date date1 = sdf.parse(log1.getStartDate());
+                Date date2 = sdf.parse(log2.getStartDate());
+                return date1.compareTo(date2); // Ascending order
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return 0;
+            }
+        });
+        loadReservations(); // Refresh UI
+    }
+
+    private void sortByTime() {
+        List<TravelLog> logs = TravelLogStorage.getInstance().getTravelLogs(); // Fetch logs
+        Collections.sort(logs, (log1, log2) -> {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy", Locale.US);
+                Date date1 = sdf.parse(log1.getEndDate());
+                Date date2 = sdf.parse(log2.getEndDate());
+                return date1.compareTo(date2); // Ascending order
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return 0;
+            }
+        });
+        loadReservations(); // Refresh UI
+    }
 
     private View createLogView(TravelLog log) {
         LinearLayout logLayout = new LinearLayout(this);
@@ -206,7 +263,7 @@ public class Accommodations extends AppCompatActivity {
         return logLayout;
     }
 
-    private boolean isPastDate(String date) {
+    public static boolean isPastDate(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
         try {
             Date checkOutDate = sdf.parse(date);
@@ -216,9 +273,6 @@ public class Accommodations extends AppCompatActivity {
             return false;
         }
     }
-
-
-
 
     private void showDatePicker(EditText dateInput) {
         Calendar calendar = Calendar.getInstance();
@@ -294,7 +348,7 @@ public class Accommodations extends AppCompatActivity {
         roomTypeInput.setText("");
     }
 
-    private boolean isValidDate(String date) {
+    public static boolean isValidDate(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
         sdf.setLenient(false);
         try {

@@ -207,7 +207,7 @@ public class Destination extends AppCompatActivity {
         }
     }
 
-    private long calculateDaysBetween(String startDate, String endDate, SimpleDateFormat sdf) {
+    public long calculateDaysBetween(String startDate, String endDate, SimpleDateFormat sdf) {
         try {
             long startMillis = sdf.parse(startDate).getTime();
             long endMillis = sdf.parse(endDate).getTime();
@@ -219,7 +219,7 @@ public class Destination extends AppCompatActivity {
         }
     }
 
-    private boolean isValidDate(String date) {
+    public boolean isValidDate(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
         sdf.setLenient(false);
         try {
@@ -312,7 +312,7 @@ public class Destination extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    private void calculateVacationTime() {
+    public void calculateVacationTime() {
         // Get the user input from EditTexts
         String startDateStr = startDateCalc.getText().toString();
         String endDateStr = endDateCalc.getText().toString();
