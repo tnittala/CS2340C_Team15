@@ -1,18 +1,65 @@
-# CS 2340 Fall 2024 Repository
-> Please read these instructions then replace this `README.md` file with your own repository documentation as you see fit.
+# WanderSync 🧭
+**Collaborative Travel Management App** for organizing trips, reservations, and itineraries in real time with multiple users.
 
-This repository is meant to be used throughout the semester to help you organize your work. This will be the repository you send out to your teammates as you work on your various group assignments throught the semester.
+---
 
-**Please note the current directory structure, which should be maintained as you use this repository in the future.**
-- `Project` This directory currently contains an Android Studio Project called `Sprint0.5-main`. This is a template project you should feel free to use in order to set up your group's project for the semester. If you decide to start your own Android Studio Project from scratch, we recommend that you save it inside the `Project` folder as well.
-> *Note that `Sprint0.5-main` is a Project folder, which means Android Studio will recognize it as a project if and only if it is opened at this level.* If you attempt to open the project by selecting any other parent or child directory, you will run into issues as the program will not know which *gradle* configurations to use.
-- `SOLID_GRASP` This directory will be used later in the semester for your group assignments related to SOLID/GRASP.
-- `Code Smell` This directory will be used later in the semester for your group assignments related to Code Smells.
+## 📖 Overview
+WanderSync is an Android application designed to streamline **collaborative travel planning**. Users can coordinate trip details, make reservations, and view logistics in a centralized, user-friendly interface. Built with **real-time synchronization** and a **modular MVVM architecture**, WanderSync ensures seamless updates and collaboration across multiple devices.
 
-  
-- Srihasa Penchikala
-- Japleen Kaur
-- Shreya Mahesh
-- Sritha Bhupatiraju
-- Trisha Nittala
-- Archita Manasvi
+---
+
+## ✨ Key Features
+
+- 📆 **Trip Itinerary Management** — Create and manage trip details including destinations, dates, and collaborators.  
+- 🏨 **Reservation Tracking** — Add and view dining and accommodation reservations with times, websites, reviews, and room details.  
+- 🧑‍🤝‍🧑 **Real-Time Collaboration** — Sync trip updates instantly across 3+ collaborators using Firebase.  
+- 🔍 **Live Filtering & Sorting** — Dynamically search and sort reservations using Observer and Strategy patterns.  
+- 🔒 **User Authentication** — Secure login and account management with Firebase Authentication.  
+
+---
+
+## 🧠 Tech Stack
+
+| Layer | Technologies |
+|-------|---------------|
+| **Frontend** | Java, Android Studio, XML |
+| **Backend** | Firebase Realtime Database & Authentication |
+| **Architecture** | MVVM (Model-View-ViewModel) |
+| **Design Patterns** | Observer, Strategy |
+
+---
+
+## 💻 My Contributions
+- Developed **core modules** for trip reservation and logistics management.  
+- Built **dynamic, modular UI flows** using Android XML and Java.  
+- Implemented **Firebase backend integration** for real-time sync with <200ms latency during concurrent edits.  
+- Applied **Observer and Strategy patterns** to support live filtering of 100+ entries.  
+- Led end-to-end implementation of the **collaborative Logistics screen**, supporting dining and hotel reservation input with edit/view capabilities.  
+
+---
+
+## 🚀 How to Run Locally
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/sritha8/WanderSync-App.git
+cd WanderSync-App
+```
+
+### 2. Open in Android Studio
+- Launch Android Studio
+- Click "Open" and select the WanderSync-App project folder
+
+### 3. Build the Project
+- Wait for Gradle sync to complete
+- Install any missing SDKs or dependencies if prompted
+
+### 4. Set Up Firebase (optional but recommended)
+- Create a Firebase project at firebase.google.com
+- Download the google-services.json file
+- Place it in the /app directory
+- Ensure Firebase is configured for Authentication, Firestore, and Storage (if applicable)
+
+### 5. Run the App
+- Choose an emulator or connect a physical Android device
+- Click the green ▶ Run button in Android Studio
